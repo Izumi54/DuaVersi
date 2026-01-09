@@ -1,0 +1,338 @@
+[
+    {
+        "id": "topik-cs101-01",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 1,
+        "judul": "Pengenalan Ilmu Komputer",
+        "deskripsi": "Sejarah komputer, arsitektur dasar, dan komponen utama sistem komputer",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-1",
+                "ukuran": "2.5 MB",
+                "jumlahHalaman": 45
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-1",
+                "ukuran": "1.8 MB",
+                "jumlahHalaman": 30
+            }
+        },
+        "tags": [
+            "komputer",
+            "sejarah",
+            "arsitektur"
+        ]
+    },
+    {
+        "id": "topik-cs101-02",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 2,
+        "judul": "Sistem Bilangan dan Representasi Data",
+        "deskripsi": "Binary, octal, hexadecimal, dan konversi antar sistem bilangan",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-2",
+                "ukuran": "3.2 MB",
+                "jumlahHalaman": 52
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-2",
+                "ukuran": "2.1 MB",
+                "jumlahHalaman": 35
+            }
+        },
+        "tags": [
+            "binary",
+            "konversi",
+            "representasi data"
+        ]
+    },
+    {
+        "id": "topik-cs101-03",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 3,
+        "judul": "Pengenalan Algoritma",
+        "deskripsi": "Konsep algoritma, flowchart, dan pseudocode",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-3",
+                "ukuran": "2.8 MB",
+                "jumlahHalaman": 48
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-3",
+                "ukuran": "1.9 MB",
+                "jumlahHalaman": 32
+            }
+        },
+        "tags": [
+            "algoritma",
+            "flowchart",
+            "pseudocode"
+        ]
+    },
+    {
+        "id": "topik-cs101-04",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 4,
+        "judul": "Pengenalan Pemrograman",
+        "deskripsi": "Konsep dasar pemrograman, variabel, dan tipe data",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-4",
+                "ukuran": "3.5 MB",
+                "jumlahHalaman": 60
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-4",
+                "ukuran": "2.3 MB",
+                "jumlahHalaman": 40
+            }
+        },
+        "tags": [
+            "pemrograman",
+            "variabel",
+            "tipe data"
+        ]
+    },
+    {
+        "id": "topik-cs101-05",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 5,
+        "judul": "Struktur Kontrol - Percabangan",
+        "deskripsi": "If-else, switch-case, dan nested conditions",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-5",
+                "ukuran": "2.9 MB",
+                "jumlahHalaman": 50
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-5",
+                "ukuran": "2.0 MB",
+                "jumlahHalaman": 34
+            }
+        },
+        "tags": [
+            "percabangan",
+            "if-else",
+            "kontrol"
+        ]
+    },
+    {
+        "id": "topik-cs101-06",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 6,
+        "judul": "Struktur Kontrol - Perulangan",
+        "deskripsi": "For, while, do-while loops dan aplikasinya",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-6",
+                "ukuran": "3.1 MB",
+                "jumlahHalaman": 55
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-6",
+                "ukuran": "2.2 MB",
+                "jumlahHalaman": 38
+            }
+        },
+        "tags": [
+            "perulangan",
+            "loop",
+            "iterasi"
+        ]
+    },
+    {
+        "id": "topik-cs101-07",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 7,
+        "judul": "Array dan String",
+        "deskripsi": "Konsep array, manipulasi string, dan aplikasi",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-7",
+                "ukuran": "3.3 MB",
+                "jumlahHalaman": 58
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-7",
+                "ukuran": "2.4 MB",
+                "jumlahHalaman": 42
+            }
+        },
+        "tags": [
+            "array",
+            "string",
+            "manipulasi data"
+        ]
+    },
+    {
+        "id": "topik-cs101-08",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 8,
+        "judul": "Fungsi dan Prosedur",
+        "deskripsi": "Modularitas, parameter passing, dan rekursi dasar",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-8",
+                "ukuran": "2.7 MB",
+                "jumlahHalaman": 46
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-8",
+                "ukuran": "1.9 MB",
+                "jumlahHalaman": 32
+            }
+        },
+        "tags": [
+            "fungsi",
+            "prosedur",
+            "modularitas"
+        ]
+    },
+    {
+        "id": "topik-cs101-09",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 9,
+        "judul": "Pointer dan Referensi",
+        "deskripsi": "Konsep pointer, memory address, dan dynamic memory",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-9",
+                "ukuran": "3.6 MB",
+                "jumlahHalaman": 62
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-9",
+                "ukuran": "2.5 MB",
+                "jumlahHalaman": 44
+            }
+        },
+        "tags": [
+            "pointer",
+            "memory",
+            "referensi"
+        ]
+    },
+    {
+        "id": "topik-cs101-10",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 10,
+        "judul": "File Handling",
+        "deskripsi": "Membaca dan menulis file, stream I/O",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-10",
+                "ukuran": "2.6 MB",
+                "jumlahHalaman": 44
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-10",
+                "ukuran": "1.8 MB",
+                "jumlahHalaman": 30
+            }
+        },
+        "tags": [
+            "file",
+            "I/O",
+            "stream"
+        ]
+    },
+    {
+        "id": "topik-cs101-11",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 11,
+        "judul": "Debugging dan Error Handling",
+        "deskripsi": "Teknik debugging, exception handling, dan testing dasar",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-11",
+                "ukuran": "2.4 MB",
+                "jumlahHalaman": 42
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-11",
+                "ukuran": "1.7 MB",
+                "jumlahHalaman": 28
+            }
+        },
+        "tags": [
+            "debugging",
+            "error",
+            "testing"
+        ]
+    },
+    {
+        "id": "topik-cs101-12",
+        "mataKuliahId": "matkul-cs101",
+        "urutan": 12,
+        "judul": "Mini Project dan Best Practices",
+        "deskripsi": "Implementasi project sederhana dan coding standards",
+        "materi": {
+            "mentah": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-mentah-12",
+                "ukuran": "4.2 MB",
+                "jumlahHalaman": 70
+            },
+            "simplified": {
+                "tersedia": true,
+                "tipe": "pdf",
+                "url": "https://drive.google.com/file/d/1example-simplified-12",
+                "ukuran": "3.0 MB",
+                "jumlahHalaman": 50
+            }
+        },
+        "tags": [
+            "project",
+            "best practices",
+            "coding standards"
+        ]
+    }
+]

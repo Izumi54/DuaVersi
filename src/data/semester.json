@@ -1,0 +1,66 @@
+[
+  {
+    "id": "sem-1",
+    "nomor": 1,
+    "nama": "Semester 1",
+    "deskripsi": "Mata kuliah dasar semester pertama",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2025/2026"
+  },
+  {
+    "id": "sem-2",
+    "nomor": 2,
+    "nama": "Semester 2",
+    "deskripsi": "Mata kuliah lanjutan semester dua",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2025/2026"
+  },
+  {
+    "id": "sem-3",
+    "nomor": 3,
+    "nama": "Semester 3",
+    "deskripsi": "Mata kuliah semester tiga",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2026/2027"
+  },
+  {
+    "id": "sem-4",
+    "nomor": 4,
+    "nama": "Semester 4",
+    "deskripsi": "Mata kuliah semester empat",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2026/2027"
+  },
+  {
+    "id": "sem-5",
+    "nomor": 5,
+    "nama": "Semester 5",
+    "deskripsi": "Mata kuliah semester lima",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2027/2028"
+  },
+  {
+    "id": "sem-6",
+    "nomor": 6,
+    "nama": "Semester 6",
+    "deskripsi": "Mata kuliah semester enam",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2027/2028"
+  },
+  {
+    "id": "sem-7",
+    "nomor": 7,
+    "nama": "Semester 7",
+    "deskripsi": "Mata kuliah semester tujuh",
+    "jumlahMataKuliah": 5,
+    "tahunAkademik": "2028/2029"
+  },
+  {
+    "id": "sem-8",
+    "nomor": 8,
+    "nama": "Semester 8",
+    "deskripsi": "Semester akhir dan skripsi",
+    "jumlahMataKuliah": 3,
+    "tahunAkademik": "2028/2029"
+  }
+]

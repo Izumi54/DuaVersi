@@ -1,0 +1,62 @@
+[
+    {
+        "id": "matkul-cs101",
+        "kode": "CS101",
+        "nama": "Pengantar Ilmu Komputer",
+        "namaInggris": "Introduction to Computer Science",
+        "sks": 3,
+        "semesterId": "sem-1",
+        "dosen": "Dr. Budi Santoso, M.Kom",
+        "deskripsi": "Mata kuliah pengenalan dasar-dasar ilmu komputer, algoritma, dan pemrograman",
+        "prasyarat": null,
+        "jumlahTopik": 12
+    },
+    {
+        "id": "matkul-mat101",
+        "kode": "MAT101",
+        "nama": "Kalkulus I",
+        "namaInggris": "Calculus I",
+        "sks": 4,
+        "semesterId": "sem-1",
+        "dosen": "Prof. Dr. Siti Nurhaliza, M.Si",
+        "deskripsi": "Konsep dasar kalkulus diferensial dan integral untuk sains dan teknik",
+        "prasyarat": null,
+        "jumlahTopik": 14
+    },
+    {
+        "id": "matkul-eng101",
+        "kode": "ENG101",
+        "nama": "Bahasa Inggris Teknik",
+        "namaInggris": "Technical English",
+        "sks": 2,
+        "semesterId": "sem-1",
+        "dosen": "Dra. Fatimah Zahra, M.Pd",
+        "deskripsi": "Bahasa Inggris untuk komunikasi teknis dan akademik",
+        "prasyarat": null,
+        "jumlahTopik": 10
+    },
+    {
+        "id": "matkul-cs102",
+        "kode": "CS102",
+        "nama": "Struktur Data",
+        "namaInggris": "Data Structures",
+        "sks": 3,
+        "semesterId": "sem-1",
+        "dosen": "Ahmad Dahlan, S.Kom, M.T",
+        "deskripsi": "Implementasi dan aplikasi struktur data fundamental dalam pemrograman",
+        "prasyarat": "CS101",
+        "jumlahTopik": 13
+    },
+    {
+        "id": "matkul-cs103",
+        "kode": "CS103",
+        "nama": "Basis Data",
+        "namaInggris": "Database Systems",
+        "sks": 3,
+        "semesterId": "sem-1",
+        "dosen": "Dr. Rizki Pratama, M.Kom",
+        "deskripsi": "Konsep database relasional, SQL, dan desain database",
+        "prasyarat": null,
+        "jumlahTopik": 12
+    }
+]
