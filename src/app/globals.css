@@ -1,26 +1,55 @@
+/* Import Google Fonts - HARUS PALING ATAS! */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* Import Tailwind CSS */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tailwind v4 Theme Configuration */
+@theme {
+  /* Custom Colors - Eye-Friendly */
+  --color-primary: #4f46e5;
+  --color-secondary: #059669;
+  --color-accent: #0891b2;
+
+  /* Light Mode */
+  --color-bg-light: #f9fafb;
+  --color-surface-light: #ffffff;
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+
+  /* Dark Mode */
+  --color-primary-dark: #818cf8;
+  --color-secondary-dark: #34d399;
+  --color-accent-dark: #22d3ee;
+  --color-bg-dark: #0f172a;
+  --color-surface-dark: #1e293b;
+  --color-text-primary-dark: #f1f5f9;
+  --color-text-secondary-dark: #94a3b8;
+
+  /* Font Families */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base Styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom utility classes bisa ditambahkan nanti */
