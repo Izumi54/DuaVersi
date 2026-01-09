@@ -62,7 +62,7 @@ export default function Footer() {
                             Informasi
                         </h4>
                         <p className="text-sm mb-2" style={{ color: 'var(--color-text-secondary)' }}>
-                            📧 Email: info@duaversi.id
+                            📧 Email: duaversi01@gmail.com
                         </p>
                         <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                             Made with ❤️ for Indonesian Students

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, use } from 'react'
+import { useState, use, useEffect } from 'react'
 import Link from 'next/link'
 import Kontainer from '@/components/layout/kontainer'
 import Kartu from '@/components/ui/kartu'
@@ -13,9 +13,39 @@ export default function MateriDetailPage({ params }) {
     // Unwrap params dengan React.use() di client component
     const resolvedParams = use(params)
     const [versiAktif, setVersiAktif] = useState('mentah') // 'mentah' atau 'simplified'
+    const [isBookmarked, setIsBookmarked] = useState(false)
 
     // Get data (harus sinkron karena client component)
     const topik = ambilTopikById(resolvedParams.id)
+
+    // Check bookmark status on mount
+    useEffect(() => {
+        if (topik) {
+            const savedBookmarks = localStorage.getItem('duaversi_bookmarks')
+            if (savedBookmarks) {
+                const bookmarkIds = JSON.parse(savedBookmarks)
+                setIsBookmarked(bookmarkIds.includes(topik.id))
+            }
+        }
+    }, [topik])
+
+    // Toggle bookmark
+    const handleToggleBookmark = () => {
+        const savedBookmarks = localStorage.getItem('duaversi_bookmarks')
+        let bookmarkIds = savedBookmarks ? JSON.parse(savedBookmarks) : []
+
+        if (isBookmarked) {
+            // Remove bookmark
+            bookmarkIds = bookmarkIds.filter(id => id !== topik.id)
+            setIsBookmarked(false)
+        } else {
+            // Add bookmark
+            bookmarkIds.push(topik.id)
+            setIsBookmarked(true)
+        }
+
+        localStorage.setItem('duaversi_bookmarks', JSON.stringify(bookmarkIds))
+    }
 
     if (!topik) {
         return (
@@ -80,8 +110,12 @@ export default function MateriDetailPage({ params }) {
                         </div>
 
                         {/* Bookmark Button */}
-                        <Tombol variant="outline" ukuran="large">
-                            ❤️ Bookmark
+                        <Tombol
+                            variant={isBookmarked ? "primary" : "outline"}
+                            ukuran="large"
+                            onClick={handleToggleBookmark}
+                        >
+                            {isBookmarked ? '❤️ Tersimpan' : '🤍 Bookmark'}
                         </Tombol>
                     </div>
 
