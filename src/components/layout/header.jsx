@@ -3,13 +3,11 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import Kontainer from './kontainer'
-import Tombol from '../ui/tombol'
 import { useTheme } from '@/hooks/useTheme'
 
 /**
  * Component: Header
- * Navigation bar untuk seluruh website
+ * Navigation bar - Minimal & Professional (Wix Style)
  */
 export default function Header() {
     const pathname = usePathname()
@@ -22,52 +20,63 @@ export default function Header() {
 
     return (
         <header
-            className="sticky top-0 z-50 shadow-sm border-b"
+            className="sticky top-0 z-50"
             style={{
-                backgroundColor: 'var(--color-surface-light)',
-                borderColor: 'var(--color-border-light)'
+                backgroundColor: 'var(--color-bg-light)',
+                borderBottom: '1px solid var(--color-border-light)',
             }}
         >
-            <nav className="container mx-auto px-4 py-4">
+            <nav className="container mx-auto px-8 py-5">
                 <div className="flex items-center justify-between">
-                    {/* Logo & Brand */}
-                    <Link href="/" className="flex items-center space-x-2">
-                        <div className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-primary)' }}>
+                    {/* Logo - Left (Circle + Text) */}
+                    <Link href="/" className="flex items-center gap-3">
+                        {/* Circle with "D" */}
+                        <div
+                            className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                            style={{ backgroundColor: 'var(--color-text-primary)' }}
+                        >
+                            D
+                        </div>
+                        {/* Text Logo */}
+                        <div
+                            className="text-xl font-semibold"
+                            style={{
+                                fontFamily: 'var(--font-heading)',
+                                color: 'var(--color-text-primary)'
+                            }}
+                        >
                             DuaVersi
                         </div>
                     </Link>
 
-                    {/* Navigation Links - Desktop */}
-                    <div className="hidden md:flex items-center space-x-6">
+                    {/* Navigation Links + Actions - Right (Desktop) */}
+                    <div className="hidden md:flex items-center gap-8">
                         <Link
                             href="/"
-                            className="text-sm font-medium hover:opacity-70 transition-opacity"
+                            className="text-sm font-normal transition-colors hover:opacity-70"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            Home
+                            Beranda
                         </Link>
                         <Link
                             href="/tentang"
-                            className="text-sm font-medium hover:opacity-70 transition-opacity"
+                            className="text-sm font-normal transition-colors hover:opacity-70"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            About
+                            Tentang
                         </Link>
                         <Link
                             href="/bookmark"
-                            className="text-sm font-medium hover:opacity-70 transition-opacity"
+                            className="text-sm font-normal transition-colors hover:opacity-70"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            Bookmarks
+                            Bookmark
                         </Link>
-                    </div>
 
-                    {/* Action Buttons - Desktop */}
-                    <div className="hidden md:flex items-center gap-3">
                         {/* Dark Mode Toggle */}
                         <button
                             onClick={toggleTheme}
-                            className="p-2 rounded-md transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+                            className="p-2 rounded-lg transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
                             style={{ color: 'var(--color-text-secondary)' }}
                             title={isDark ? 'Light Mode' : 'Dark Mode'}
                         >
@@ -82,11 +91,16 @@ export default function Header() {
                             )}
                         </button>
 
-                        {/* Search Button */}
+                        {/* CTA Button - Dark (Wix Style) */}
                         <Link href="/cari">
-                            <Tombol variant="primary" ukuran="medium">
-                                Search
-                            </Tombol>
+                            <button
+                                className="px-6 py-2.5 rounded-lg font-medium text-sm text-white transition-all hover:opacity-90"
+                                style={{
+                                    backgroundColor: 'var(--color-text-primary)',
+                                }}
+                            >
+                                Cari Materi
+                            </button>
                         </Link>
                     </div>
 
@@ -111,39 +125,41 @@ export default function Header() {
 
                 {/* Mobile Menu Dropdown */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden mt-4 pb-4 space-y-3">
+                    <div className="md:hidden mt-6 pb-4 space-y-3">
                         <Link
                             href="/"
-                            className="block py-2 px-4 rounded-lg hover:opacity-70 transition"
+                            className="block py-2 px-4 rounded-lg text-sm font-normal hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            Home
+                            Beranda
                         </Link>
                         <Link
                             href="/tentang"
-                            className="block py-2 px-4 rounded-lg hover:opacity-70 transition"
+                            className="block py-2 px-4 rounded-lg text-sm font-normal hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            About
+                            Tentang
                         </Link>
                         <Link
                             href="/bookmark"
-                            className="block py-2 px-4 rounded-lg hover:opacity-70 transition"
+                            className="block py-2 px-4 rounded-lg text-sm font-normal hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            Bookmarks
+                            Bookmark
                         </Link>
-                        <Link
-                            href="/cari"
-                            className="block py-2 px-4 rounded-lg hover:opacity-70 transition"
-                            style={{ color: 'var(--color-text-primary)' }}
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            Search
-                        </Link>
+
+                        <div className="pt-3 border-t" style={{ borderColor: 'var(--color-border-light)' }}>
+                            <Link
+                                href="/cari"
+                                className="block py-2.5 px-4 rounded-lg text-sm font-medium bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:opacity-90 transition text-center"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Cari Materi
+                            </Link>
+                        </div>
 
                         {/* Dark Mode Toggle - Mobile */}
                         <button
@@ -151,7 +167,7 @@ export default function Header() {
                                 toggleTheme()
                                 setMobileMenuOpen(false)
                             }}
-                            className="w-full text-left py-2 px-4 rounded-lg hover:opacity-70 transition"
+                            className="w-full text-left py-2 px-4 rounded-lg text-sm font-normal hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
                             {isDark ? 'Light Mode' : 'Dark Mode'}
