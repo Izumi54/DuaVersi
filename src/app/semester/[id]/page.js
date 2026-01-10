@@ -159,7 +159,7 @@ export default async function SemesterDetailPage({ params }) {
 
                                                 {matkul.prasyarat && (
                                                     <Badge variant="warning" ukuran="small">
-                                                        ⚠️ Prasyarat: {matkul.prasyarat}
+                                                        Prerequisite: {matkul.prasyarat}
                                                     </Badge>
                                                 )}
                                             </div>

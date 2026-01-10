@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 /**
  * Component: Tombol (Button)
- * Tombol reusable dengan berbagai variant dan ukuran
+ * Reusable button - Modern & Professional
  */
 export default function Tombol({
     children,
@@ -13,7 +13,7 @@ export default function Tombol({
     type = 'button',
     className = ''
 }) {
-    const kelasBase = 'font-semibold rounded-lg transition-all duration-200 inline-flex items-center justify-center'
+    const kelasBase = 'font-medium rounded-md transition-all duration-200 inline-flex items-center justify-center'
 
     const kelasVariant = {
         primary: 'text-white hover:opacity-90',
@@ -24,8 +24,8 @@ export default function Tombol({
 
     const kelasUkuran = {
         small: 'px-3 py-1.5 text-sm',
-        medium: 'px-4 py-2 text-base',
-        large: 'px-6 py-3 text-lg'
+        medium: 'px-5 py-2.5 text-sm',
+        large: 'px-6 py-3 text-base'
     }
 
     const kelasDisabled = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'

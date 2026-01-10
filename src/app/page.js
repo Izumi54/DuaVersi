@@ -1,57 +1,80 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import Tombol from '@/components/ui/tombol'
 import Kartu from '@/components/ui/kartu'
-import Badge from '@/components/ui/badge'
 import Kontainer from '@/components/layout/kontainer'
 import { ambilSemuaSemester } from '@/lib/data'
 
 export default function Home() {
   const daftarSemester = ambilSemuaSemester()
+  const [isVisible, setIsVisible] = useState({})
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible((prev) => ({
+              ...prev,
+              [entry.target.id]: true,
+            }))
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    // Observe all sections
+    const sections = document.querySelectorAll('[data-animate]')
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <div>
-      {/* Hero Section */}
-      <section
-        className="py-16 md:py-24"
-        style={{ backgroundColor: 'var(--color-bg-light)' }}
-      >
+      {/* Hero Section - Minimal & Modern */}
+      <section className="py-20 md:py-32">
         <Kontainer>
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Logo/Brand */}
+          <div
+            id="hero"
+            data-animate
+            className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${isVisible.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+          >
+            {/* Main Headline */}
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+              className="text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
               style={{
                 fontFamily: 'var(--font-heading)',
-                color: 'var(--color-primary)'
+                color: 'var(--color-text-primary)'
               }}
             >
-              DuaVersi
+              Belajar Ilmu Komputer,
+              <span style={{ color: 'var(--color-primary)' }}> Sesuai Gayamu</span>
             </h1>
 
-            {/* Tagline */}
+            {/* Subtitle */}
             <p
-              className="text-xl md:text-2xl mb-4"
-              style={{ color: 'var(--color-text-primary)' }}
-            >
-              Satu Materi, Dua Versi
-            </p>
-            <p
-              className="text-lg mb-8"
+              className="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              Belajar Sesuai Gayamu - Pilih antara materi original atau versi yang mudah dipahami
+              Akses materi kuliah dalam dua format: catatan asli dosen atau versi yang disederhanakan.
+              Pilih yang paling cocok dengan gaya belajarmu.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="#semester">
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="#semesters">
                 <Tombol variant="primary" ukuran="large">
-                  📚 Lihat Semua Materi
+                  Jelajahi Materi
                 </Tombol>
               </Link>
               <Link href="/tentang">
                 <Tombol variant="outline" ukuran="large">
-                  ℹ️ Tentang DuaVersi
+                  Pelajari Lebih Lanjut
                 </Tombol>
               </Link>
             </div>
@@ -59,120 +82,187 @@ export default function Home() {
         </Kontainer>
       </section>
 
-      {/* Features Section */}
-      <section className="py-12" style={{ backgroundColor: 'var(--color-surface-light)' }}>
+      {/* Features - Clean Grid */}
+      <section className="py-16 border-t" style={{ borderColor: 'var(--color-border-light)' }}>
         <Kontainer>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Feature 1 */}
-            <Kartu padding="large" className="text-center">
-              <div className="text-5xl mb-4">📚</div>
-              <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--color-text-primary)' }}>
-                Materi Lengkap
-              </h3>
-              <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                8 semester dengan lebih dari 40 mata kuliah lengkap
-              </p>
-            </Kartu>
+          <div
+            id="features"
+            data-animate
+            className={`max-w-6xl mx-auto transition-all duration-1000 delay-200 ${isVisible.features ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            {/* Feature 2 */}
-            <Kartu padding="large" className="text-center">
-              <div className="text-5xl mb-4">🔄</div>
-              <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--color-text-primary)' }}>
-                Dual-Content System
-              </h3>
-              <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                Versi mentah dari dosen & versi simplified untuk pemahaman lebih mudah
-              </p>
-            </Kartu>
-
-            {/* Feature 3 */}
-            <Kartu padding="large" className="text-center">
-              <div className="text-5xl mb-4">⚡</div>
-              <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--color-text-primary)' }}>
-                Super Cepat
-              </h3>
-              <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                Load time &lt; 2 detik dengan teknologi Next.js terbaru
-              </p>
-            </Kartu>
-          </div>
-        </Kontainer>
-      </section>
-
-      {/* Semester Grid Section */}
-      <section id="semester" className="py-16" style={{ backgroundColor: 'var(--color-bg-light)' }}>
-        <Kontainer>
-          <div className="text-center mb-12">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
-            >
-              Pilih Semester
-            </h2>
-            <p style={{ color: 'var(--color-text-secondary)' }}>
-              Pilih semester untuk melihat mata kuliah yang tersedia
-            </p>
-          </div>
-
-          {/* Semester Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {daftarSemester.map((semester) => (
-              <Link key={semester.id} href={`/semester/${semester.nomor}`}>
-                <Kartu
-                  hover={true}
-                  padding="large"
-                  className="text-center h-full transition-transform hover:scale-105"
+              {/* Feature 1 */}
+              <div className="text-left">
+                <h3
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: 'var(--color-text-primary)' }}
                 >
-                  {/* Semester Number */}
-                  <div
-                    className="text-5xl font-bold mb-2"
-                    style={{ color: 'var(--color-primary)' }}
-                  >
-                    {semester.nomor}
-                  </div>
+                  Konten Lengkap
+                </h3>
+                <p
+                  className="text-base leading-relaxed"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  Materi lengkap untuk 8 semester mencakup 40+ mata kuliah Teknik Informatika.
+                </p>
+              </div>
 
-                  {/* Semester Name */}
-                  <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
-                    {semester.nama}
-                  </h3>
+              {/* Feature 2 */}
+              <div className="text-left">
+                <h3
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: 'var(--color-text-primary)' }}
+                >
+                  Sistem Dual Format
+                </h3>
+                <p
+                  className="text-base leading-relaxed"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  Catatan asli dosen dan versi simplified berdampingan untuk pemahaman lebih baik.
+                </p>
+              </div>
 
-                  {/* Deskripsi */}
-                  <p className="text-sm mb-3" style={{ color: 'var(--color-text-secondary)' }}>
-                    {semester.deskripsi}
-                  </p>
+              {/* Feature 3 */}
+              <div className="text-left">
+                <h3
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: 'var(--color-text-primary)' }}
+                >
+                  Cepat & Responsif
+                </h3>
+                <p
+                  className="text-base leading-relaxed"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  Dibangun dengan Next.js untuk performa super cepat dan navigasi yang mulus.
+                </p>
+              </div>
 
-                  {/* Badge */}
-                  <Badge variant="secondary" ukuran="small">
-                    {semester.jumlahMataKuliah} Mata Kuliah
-                  </Badge>
-
-                  {/* Tahun Akademik */}
-                  <p className="text-xs mt-2" style={{ color: 'var(--color-text-secondary)' }}>
-                    {semester.tahunAkademik}
-                  </p>
-                </Kartu>
-              </Link>
-            ))}
+            </div>
           </div>
         </Kontainer>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16" style={{ backgroundColor: 'var(--color-surface-light)' }}>
+      {/* Semester Grid - Professional Layout */}
+      <section id="semesters" className="py-20 border-t" style={{ borderColor: 'var(--color-border-light)' }}>
         <Kontainer>
-          <div className="text-center max-w-2xl mx-auto">
+          <div className="max-w-6xl mx-auto">
+
+            {/* Section Header */}
+            <div
+              id="semester-header"
+              data-animate
+              className={`mb-12 transition-all duration-1000 ${isVisible['semester-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+            >
+              <h2
+                className="text-3xl md:text-4xl font-semibold mb-3"
+                style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
+              >
+                Jelajahi Berdasarkan Semester
+              </h2>
+              <p
+                className="text-base"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
+                Pilih semester untuk melihat mata kuliah yang tersedia
+              </p>
+            </div>
+
+            {/* Semester Cards Grid */}
+            <div
+              id="semester-grid"
+              data-animate
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 delay-300 ${isVisible['semester-grid'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+            >
+              {daftarSemester.map((semester, index) => (
+                <Link
+                  key={semester.id}
+                  href={`/semester/${semester.nomor}`}
+                  style={{
+                    transitionDelay: `${index * 50}ms`
+                  }}
+                >
+                  <Kartu
+                    hover={true}
+                    padding="medium"
+                    className="h-full transition-all duration-300 hover:-translate-y-1"
+                  >
+                    {/* Semester Number */}
+                    <div
+                      className="text-4xl font-bold mb-3"
+                      style={{ color: 'var(--color-primary)' }}
+                    >
+                      {semester.nomor}
+                    </div>
+
+                    {/* Semester Name */}
+                    <h3
+                      className="text-lg font-semibold mb-2"
+                      style={{ color: 'var(--color-text-primary)' }}
+                    >
+                      {semester.nama}
+                    </h3>
+
+                    {/* Description */}
+                    <p
+                      className="text-sm mb-4 line-clamp-2"
+                      style={{ color: 'var(--color-text-secondary)' }}
+                    >
+                      {semester.deskripsi}
+                    </p>
+
+                    {/* Meta Info */}
+                    <div className="flex items-center justify-between pt-3 border-t" style={{ borderColor: 'var(--color-border-light)' }}>
+                      <span
+                        className="text-sm font-medium"
+                        style={{ color: 'var(--color-text-secondary)' }}
+                      >
+                        {semester.jumlahMataKuliah} mata kuliah
+                      </span>
+                      <span
+                        className="text-xs"
+                        style={{ color: 'var(--color-text-tertiary)' }}
+                      >
+                        {semester.tahunAkademik}
+                      </span>
+                    </div>
+                  </Kartu>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </Kontainer>
+      </section>
+
+      {/* Bottom CTA - Minimal */}
+      <section className="py-20 border-t" style={{ borderColor: 'var(--color-border-light)' }}>
+        <Kontainer>
+          <div
+            id="cta"
+            data-animate
+            className={`max-w-2xl mx-auto text-center transition-all duration-1000 ${isVisible.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+          >
             <h2
-              className="text-3xl font-bold mb-4"
+              className="text-3xl font-semibold mb-4"
               style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
             >
               Siap Mulai Belajar?
             </h2>
-            <p className="mb-6" style={{ color: 'var(--color-text-secondary)' }}>
-              Akses ribuan materi kuliah dengan dua versi berbeda untuk pengalaman belajar yang lebih baik
+            <p
+              className="text-base mb-8"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              Cari di antara ribuan materi kuliah dan temukan yang kamu butuhkan
             </p>
             <Link href="/cari">
               <Tombol variant="primary" ukuran="large">
-                🔍 Cari Materi Sekarang
+                Cari Materi
               </Tombol>
             </Link>
           </div>

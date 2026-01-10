@@ -184,7 +184,7 @@ export default function MateriDetailPage({ params }) {
                                     ringColor: 'var(--color-primary)'
                                 }}
                             >
-                                📄 Mentah
+                                Original
                                 {topik.materi.mentah.tersedia && (
                                     <div className="text-xs mt-1 opacity-80">
                                         {topik.materi.mentah.ukuran}
@@ -205,7 +205,7 @@ export default function MateriDetailPage({ params }) {
                                     ringColor: 'var(--color-secondary)'
                                 }}
                             >
-                                ✨ Simplified
+                                Simplified
                                 {topik.materi.simplified.tersedia && (
                                     <div className="text-xs mt-1 opacity-80">
                                         {topik.materi.simplified.ukuran}

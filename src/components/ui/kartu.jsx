@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 /**
  * Component: Kartu (Card)
- * Container card reusable untuk content
+ * Container card reusable - Modern & Professional
  */
 export default function Kartu({
     children,
@@ -11,8 +11,8 @@ export default function Kartu({
     padding = 'medium',
     onClick
 }) {
-    const kelasBase = 'rounded-lg shadow-sm transition-all duration-200'
-    const kelasHover = hover ? 'hover:shadow-md cursor-pointer' : ''
+    const kelasBase = 'rounded-md border transition-all duration-200'
+    const kelasHover = hover ? 'hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600 cursor-pointer' : ''
 
     const kelasPadding = {
         none: 'p-0',
@@ -30,7 +30,10 @@ export default function Kartu({
                 kelasPadding[padding],
                 className
             )}
-            style={{ backgroundColor: 'var(--color-surface-light)' }}
+            style={{
+                backgroundColor: 'var(--color-surface-light)',
+                borderColor: 'var(--color-border-light)'
+            }}
         >
             {children}
         </div>

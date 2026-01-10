@@ -22,8 +22,11 @@ export default function Header() {
 
     return (
         <header
-            className="sticky top-0 z-50 shadow-sm"
-            style={{ backgroundColor: 'var(--color-surface-light)' }}
+            className="sticky top-0 z-50 shadow-sm border-b"
+            style={{
+                backgroundColor: 'var(--color-surface-light)',
+                borderColor: 'var(--color-border-light)'
+            }}
         >
             <nav className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between">
@@ -38,24 +41,24 @@ export default function Header() {
                     <div className="hidden md:flex items-center space-x-6">
                         <Link
                             href="/"
-                            className="hover:opacity-70 transition"
+                            className="text-sm font-medium hover:opacity-70 transition-opacity"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            Beranda
+                            Home
                         </Link>
                         <Link
                             href="/tentang"
-                            className="hover:opacity-70 transition"
+                            className="text-sm font-medium hover:opacity-70 transition-opacity"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            Tentang
+                            About
                         </Link>
                         <Link
                             href="/bookmark"
-                            className="hover:opacity-70 transition"
+                            className="text-sm font-medium hover:opacity-70 transition-opacity"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            📚 Bookmark
+                            Bookmarks
                         </Link>
                     </div>
 
@@ -64,22 +67,25 @@ export default function Header() {
                         {/* Dark Mode Toggle */}
                         <button
                             onClick={toggleTheme}
-                            className="p-2 rounded-lg transition-all hover:opacity-70"
-                            style={{
-                                backgroundColor: 'rgba(107, 114, 128, 0.1)',
-                                color: 'var(--color-text-primary)'
-                            }}
+                            className="p-2 rounded-md transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+                            style={{ color: 'var(--color-text-secondary)' }}
                             title={isDark ? 'Light Mode' : 'Dark Mode'}
                         >
-                            <span className="text-2xl">
-                                {isDark ? '☀️' : '🌙'}
-                            </span>
+                            {isDark ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                </svg>
+                            )}
                         </button>
 
                         {/* Search Button */}
                         <Link href="/cari">
                             <Tombol variant="primary" ukuran="medium">
-                                🔍 Cari Materi
+                                Search
                             </Tombol>
                         </Link>
                     </div>
@@ -112,7 +118,7 @@ export default function Header() {
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            🏠 Beranda
+                            Home
                         </Link>
                         <Link
                             href="/tentang"
@@ -120,7 +126,7 @@ export default function Header() {
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            ℹ️ Tentang
+                            About
                         </Link>
                         <Link
                             href="/bookmark"
@@ -128,7 +134,7 @@ export default function Header() {
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            📚 Bookmark
+                            Bookmarks
                         </Link>
                         <Link
                             href="/cari"
@@ -136,7 +142,7 @@ export default function Header() {
                             style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            🔍 Cari Materi
+                            Search
                         </Link>
 
                         {/* Dark Mode Toggle - Mobile */}
@@ -148,7 +154,7 @@ export default function Header() {
                             className="w-full text-left py-2 px-4 rounded-lg hover:opacity-70 transition"
                             style={{ color: 'var(--color-text-primary)' }}
                         >
-                            {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
+                            {isDark ? 'Light Mode' : 'Dark Mode'}
                         </button>
                     </div>
                 )}

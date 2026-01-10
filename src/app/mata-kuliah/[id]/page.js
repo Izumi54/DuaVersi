@@ -90,7 +90,7 @@ export default async function MataKuliahDetailPage({ params }) {
                                     </Badge>
                                     {matkul.prasyarat && (
                                         <Badge variant="warning">
-                                            ⚠️ Prasyarat: {matkul.prasyarat}
+                                            Prerequisite: {matkul.prasyarat}
                                         </Badge>
                                     )}
                                 </div>
@@ -204,7 +204,7 @@ export default async function MataKuliahDetailPage({ params }) {
                                                         )}
                                                         {topik.materi.simplified.tersedia && (
                                                             <Badge variant="secondary" ukuran="small">
-                                                                ✨ Simplified ({topik.materi.simplified.ukuran})
+                                                                Simplified ({topik.materi.simplified.ukuran})
                                                             </Badge>
                                                         )}
                                                     </div>
