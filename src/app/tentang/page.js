@@ -254,8 +254,8 @@ export default function TentangPage() {
 
                         {[
                             { title: 'Fase 1: Pondasi', desc: 'Peluncuran platform dasar untuk Teknik Informatika dengan materi 8 semester lengkap.', icon: '🏗️', status: 'Done', color: 'bg-green-500' },
-                            { title: 'Fase 2: Ekosistem', desc: 'Integrasi sistem login, bookmark cloud, user tracking, dan analytics.', icon: '🌱', status: 'In Progress', color: 'bg-yellow-500' },
-                            { title: 'Fase 3: Ekspansi', desc: 'Kolaborasi antar kampus dan perluasan ke program studi Saintek lainnya.', icon: '🚀', status: 'Future', color: 'bg-blue-500' }
+                            { title: 'Fase 2: Ekosistem', desc: 'Integrasi sistem login & profil, bookmark cloud, ruang diskusi, sistem upload materi, dan analytics pembelajaran.', icon: '🌱', status: 'In Progress', color: 'bg-yellow-500' },
+                            { title: 'Fase 3: Ekspansi', desc: 'Kolaborasi antar kampus serta perluasan ke program studi Saintek dan fakultas lainnya.', icon: '🚀', status: 'Future', color: 'bg-blue-500' }
                         ].map((item, i) => (
                             <div
                                 key={i}
