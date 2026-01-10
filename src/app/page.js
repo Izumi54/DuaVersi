@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Tombol from '@/components/ui/tombol'
 import Kartu from '@/components/ui/kartu'
 import Kontainer from '@/components/layout/kontainer'
@@ -10,13 +10,33 @@ import { ambilSemuaSemester } from '@/lib/data'
 export default function Home() {
   const daftarSemester = ambilSemuaSemester()
   const [scrollY, setScrollY] = useState(0)
+  const [cardsVisible, setCardsVisible] = useState(false)
+  const featuresRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)
+
+      // Scroll-based detection - cards visible berdasarkan section position
+      if (featuresRef.current) {
+        const rect = featuresRef.current.getBoundingClientRect()
+        const windowHeight = window.innerHeight
+
+        // Cards visible jika section ada di viewport
+        // IN: top < 80% window AND bottom > 20% window
+        // OUT: sebaliknya
+        const isInView = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2
+
+        setCardsVisible(isInView)
+      }
     }
+
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    handleScroll() // Check initial state
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (
@@ -88,8 +108,9 @@ export default function Home() {
         </Kontainer>
       </section>
 
-      {/* Features Section dengan SLIDE ANIMATION */}
+      {/* Features Section dengan SCROLL-TRIGGERED ANIMATION */}
       <section
+        ref={featuresRef}
         id="features"
         className="relative py-32 overflow-hidden"
         style={{
@@ -144,13 +165,17 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Features Grid - SLIDE FROM LEFT */}
+            {/* Features Grid - SLIDE IN/OUT dengan SCROLL */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-              {/* Card 1 */}
+              {/* Card 1 - Animated based on scroll */}
               <div
-                className="group relative animate-slide-left"
-                style={{ animationDelay: '0.2s' }}
+                className="group relative transition-all duration-700 ease-out"
+                style={{
+                  opacity: cardsVisible ? 1 : 0,
+                  transform: cardsVisible ? 'translateX(0)' : 'translateX(-100px)',
+                  transitionDelay: '0s'
+                }}
               >
                 <div className="relative p-8 h-full rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
                   style={{
@@ -200,8 +225,12 @@ export default function Home() {
 
               {/* Card 2 */}
               <div
-                className="group relative animate-slide-left"
-                style={{ animationDelay: '0.4s' }}
+                className="group relative transition-all duration-700 ease-out"
+                style={{
+                  opacity: cardsVisible ? 1 : 0,
+                  transform: cardsVisible ? 'translateX(0)' : 'translateX(-100px)',
+                  transitionDelay: '0.15s'
+                }}
               >
                 <div className="relative p-8 h-full rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
                   style={{
@@ -251,8 +280,12 @@ export default function Home() {
 
               {/* Card 3 */}
               <div
-                className="group relative animate-slide-left"
-                style={{ animationDelay: '0.6s' }}
+                className="group relative transition-all duration-700 ease-out"
+                style={{
+                  opacity: cardsVisible ? 1 : 0,
+                  transform: cardsVisible ? 'translateX(0)' : 'translateX(-100px)',
+                  transitionDelay: '0.3s'
+                }}
               >
                 <div className="relative p-8 h-full rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
                   style={{
@@ -333,10 +366,6 @@ export default function Home() {
                 <Link
                   key={semester.id}
                   href={`/semester/${semester.nomor}`}
-                  className="animate-slide-left"
-                  style={{
-                    animationDelay: `${index * 0.1}s`
-                  }}
                 >
                   <Kartu
                     hover={true}
