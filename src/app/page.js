@@ -11,7 +11,11 @@ export default function Home() {
   const daftarSemester = ambilSemuaSemester()
   const [scrollY, setScrollY] = useState(0)
   const [cardsVisible, setCardsVisible] = useState(false)
+  const [semesterVisible, setSemesterVisible] = useState(false)
+  const [ctaVisible, setCtaVisible] = useState(false)
   const featuresRef = useRef(null)
+  const semesterRef = useRef(null)
+  const ctaRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +32,22 @@ export default function Home() {
         const isInView = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2
 
         setCardsVisible(isInView)
+      }
+
+      // Semester section detection
+      if (semesterRef.current) {
+        const rect = semesterRef.current.getBoundingClientRect()
+        const windowHeight = window.innerHeight
+        const isInView = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2
+        setSemesterVisible(isInView)
+      }
+
+      // CTA section detection
+      if (ctaRef.current) {
+        const rect = ctaRef.current.getBoundingClientRect()
+        const windowHeight = window.innerHeight
+        const isInView = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2
+        setCtaVisible(isInView)
       }
     }
 
@@ -340,6 +360,7 @@ export default function Home() {
 
       {/* Semester Grid - STUNNING REDESIGN */}
       <section
+        ref={semesterRef}
         id="semesters"
         className="py-32 relative overflow-hidden"
       >
@@ -402,10 +423,13 @@ export default function Home() {
                     className="group"
                   >
                     <div
-                      className="relative h-full p-6 rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl overflow-hidden"
+                      className="relative h-full p-6 rounded-3xl border backdrop-blur-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl overflow-hidden"
                       style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.8)',
                         borderColor: 'var(--color-border-light)',
+                        opacity: semesterVisible ? 1 : 0,
+                        transform: semesterVisible ? 'translateY(0)' : 'translateY(30px)',
+                        transitionDelay: `${index * 0.1}s`
                       }}
                     >
                       {/* Gradient Top Border on Hover */}
@@ -488,33 +512,92 @@ export default function Home() {
         </Kontainer>
       </section>
 
-      {/* Bottom CTA */}
+      {/* Bottom CTA - STUNNING FINAL IMPRESSION */}
       <section
-        className="py-32 border-t"
-        style={{
-          borderColor: 'var(--color-border-light)',
-          backgroundColor: 'var(--color-surface-light)'
-        }}
+        ref={ctaRef}
+        className="py-32 relative overflow-hidden"
       >
+        {/* Background Decorative */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              background: 'radial-gradient(circle at center, var(--color-primary) 0%, transparent 70%)',
+              filter: 'blur(100px)',
+              transform: 'scale(1.2)'
+            }}
+          />
+        </div>
+
         <Kontainer>
-          <div className="max-w-3xl mx-auto text-center">
+          <div
+            className="max-w-4xl mx-auto text-center relative z-10 p-12 rounded-3xl border backdrop-blur-md overflow-hidden transition-all duration-700"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.4)',
+              borderColor: 'var(--color-border-light)',
+              opacity: ctaVisible ? 1 : 0,
+              transform: ctaVisible ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(40px)',
+              boxShadow: ctaVisible ? '0 20px 50px -12px rgba(0, 0, 0, 0.1)' : 'none'
+            }}
+          >
+            {/* Gradient Border Line */}
+            <div
+              className="absolute top-0 left-0 w-full h-1"
+              style={{
+                background: 'linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent))'
+              }}
+            />
+
             <h2
-              className="text-4xl md:text-5xl font-bold mb-6"
-              style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
+              className="text-4xl md:text-6xl font-bold mb-8 transition-all duration-700 delay-100"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                color: 'var(--color-text-primary)',
+                opacity: ctaVisible ? 1 : 0,
+                transform: ctaVisible ? 'translateY(0)' : 'translateY(20px)'
+              }}
             >
-              Siap Mulai Belajar?
+              Siap Mulai Perjalanannmu?
             </h2>
+
             <p
-              className="text-xl mb-10 leading-relaxed"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="text-xl md:text-2xl mb-12 leading-relaxed transition-all duration-700 delay-200"
+              style={{
+                color: 'var(--color-text-secondary)',
+                opacity: ctaVisible ? 1 : 0,
+                transform: ctaVisible ? 'translateY(0)' : 'translateY(20px)'
+              }}
             >
-              Cari di antara ribuan materi kuliah dan temukan yang kamu butuhkan
+              Akses ribuan materi kuliah berkualitas tinggi sekarang juga.
+              <br className="hidden md:block" />
+              Belajar jadi lebih mudah, efektif, dan menyenangkan.
             </p>
-            <Link href="/cari">
-              <Tombol variant="primary" ukuran="large" className="px-10 py-4 text-base">
-                Cari Materi Sekarang
-              </Tombol>
-            </Link>
+
+            <div
+              className="transition-all duration-700 delay-300 transform"
+              style={{
+                opacity: ctaVisible ? 1 : 0,
+                transform: ctaVisible ? 'translateY(0)' : 'translateY(20px)'
+              }}
+            >
+              <Link href="/cari">
+                <div className="inline-block relative group">
+                  <div
+                    className="absolute -inset-1 rounded-full opacity-70 blur group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+                    style={{
+                      background: 'linear-gradient(to right, var(--color-primary), var(--color-secondary))'
+                    }}
+                  />
+                  <Tombol
+                    variant="primary"
+                    ukuran="large"
+                    className="relative px-12 py-5 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+                  >
+                    Mulai Belajar
+                  </Tombol>
+                </div>
+              </Link>
+            </div>
           </div>
         </Kontainer>
       </section>
