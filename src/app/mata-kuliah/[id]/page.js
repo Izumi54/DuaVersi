@@ -5,6 +5,7 @@ import Kartu, { KartuHeader, KartuBody } from '@/components/ui/kartu'
 import Badge from '@/components/ui/badge'
 import Tombol from '@/components/ui/tombol'
 import Breadcrumb from '@/components/layout/breadcrumb'
+import MatkulProgress from '@/components/features/matkul-progress'
 import { ambilMataKuliahById, ambilTopikByMataKuliah, ambilSemesterById } from '@/lib/data'
 
 export default async function MataKuliahDetailPage({ params }) {
@@ -27,7 +28,7 @@ export default async function MataKuliahDetailPage({ params }) {
     ]
 
     return (
-        <div style={{ backgroundColor: 'var(--color-bg-light)' }} className="min-h-screen py-8">
+        <div className="min-h-screen py-12">
             <Kontainer>
                 {/* Breadcrumb */}
                 <Breadcrumb items={breadcrumbItems} />
@@ -131,6 +132,9 @@ export default async function MataKuliahDetailPage({ params }) {
                     </Kartu>
                 </div>
 
+                {/* Progress Bar Section */}
+                <MatkulProgress daftarTopik={daftarTopik} />
+
                 {/* Daftar Topik */}
                 <div>
                     <h2
@@ -153,7 +157,7 @@ export default async function MataKuliahDetailPage({ params }) {
                         </Kartu>
                     ) : (
                         // Topik List
-                        <div className="space-y-4">
+                        <div className="space-y-8">
                             {daftarTopik.map((topik, index) => (
                                 <Link key={topik.id} href={`/materi/${topik.id}`}>
                                     <Kartu

@@ -17,7 +17,7 @@
   --color-text-primary: #1f2937;
   --color-text-secondary: #6b7280;
 
-  /* Dark Mode */
+  /* Dark Mode Colors */
   --color-primary-dark: #818cf8;
   --color-secondary-dark: #34d399;
   --color-accent-dark: #22d3ee;
@@ -31,19 +31,22 @@
   --font-body: 'Inter', sans-serif;
 }
 
-/* Base Styles */
+/* Base Styles - Light Mode */
 body {
   background-color: var(--color-bg-light);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* Dark Mode Overrides */
+.dark body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary-dark);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
 
@@ -52,4 +55,26 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom utility classes bisa ditambahkan nanti */
+/* Dark Mode Utility Classes */
+.dark [style*="--color-bg-light"] {
+  background-color: var(--color-bg-dark) !important;
+}
+
+.dark [style*="--color-text-primary"] {
+  color: var(--color-text-primary-dark) !important;
+}
+
+.dark [style*="--color-text-secondary"] {
+  color: var(--color-text-secondary-dark) !important;
+}
+
+/* Dark mode untuk komponen dengan inline styles */
+.dark {
+  /* Override CSS variables untuk dark mode */
+  --color-bg-light: #0f172a;
+  --color-surface-light: #1e293b;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-primary: #818cf8;
+  --color-secondary: #34d399;
+}

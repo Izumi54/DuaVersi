@@ -67,7 +67,7 @@ export function KartuBody({ children, className = '' }) {
  */
 export function KartuFooter({ children, className = '' }) {
     return (
-        <div className={clsx('mt-4 pt-4 border-t', className)} style={{ borderColor: 'var(--color-bg-light)' }}>
+        <div className={clsx('mt-4', className)}>
             {children}
         </div>
     )

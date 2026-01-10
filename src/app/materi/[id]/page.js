@@ -8,12 +8,17 @@ import Badge from '@/components/ui/badge'
 import Tombol from '@/components/ui/tombol'
 import Breadcrumb from '@/components/layout/breadcrumb'
 import { ambilTopikById, ambilMataKuliahById, ambilSemesterById, ambilTopikNavigation } from '@/lib/data'
+import { useProgress } from '@/hooks/useProgress'
 
 export default function MateriDetailPage({ params }) {
     // Unwrap params dengan React.use() di client component
     const resolvedParams = use(params)
     const [versiAktif, setVersiAktif] = useState('mentah') // 'mentah' atau 'simplified'
     const [isBookmarked, setIsBookmarked] = useState(false)
+
+    // Progress tracking
+    const { isTopicCompleted, toggleTopicCompletion } = useProgress()
+    const [isCompleted, setIsCompleted] = useState(false)
 
     // Get data (harus sinkron karena client component)
     const topik = ambilTopikById(resolvedParams.id)
@@ -26,8 +31,11 @@ export default function MateriDetailPage({ params }) {
                 const bookmarkIds = JSON.parse(savedBookmarks)
                 setIsBookmarked(bookmarkIds.includes(topik.id))
             }
+
+            // Check completion status
+            setIsCompleted(isTopicCompleted(topik.id))
         }
-    }, [topik])
+    }, [topik, isTopicCompleted])
 
     // Toggle bookmark
     const handleToggleBookmark = () => {
@@ -45,6 +53,12 @@ export default function MateriDetailPage({ params }) {
         }
 
         localStorage.setItem('duaversi_bookmarks', JSON.stringify(bookmarkIds))
+    }
+
+    // Toggle completion
+    const handleToggleCompletion = () => {
+        const newStatus = toggleTopicCompletion(topik.id)
+        setIsCompleted(newStatus)
     }
 
     if (!topik) {
@@ -86,7 +100,7 @@ export default function MateriDetailPage({ params }) {
     }
 
     return (
-        <div style={{ backgroundColor: 'var(--color-bg-light)' }} className="min-h-screen py-8">
+        <div className="min-h-screen py-12">
             <Kontainer>
                 {/* Breadcrumb */}
                 <Breadcrumb items={breadcrumbItems} />
@@ -109,14 +123,26 @@ export default function MateriDetailPage({ params }) {
                             </p>
                         </div>
 
-                        {/* Bookmark Button */}
-                        <Tombol
-                            variant={isBookmarked ? "primary" : "outline"}
-                            ukuran="large"
-                            onClick={handleToggleBookmark}
-                        >
-                            {isBookmarked ? '❤️ Tersimpan' : '🤍 Bookmark'}
-                        </Tombol>
+                        {/* Action Buttons */}
+                        <div className="flex gap-3">
+                            {/* Bookmark Button */}
+                            <Tombol
+                                variant={isBookmarked ? "primary" : "outline"}
+                                ukuran="large"
+                                onClick={handleToggleBookmark}
+                            >
+                                {isBookmarked ? '❤️ Tersimpan' : '🤍 Bookmark'}
+                            </Tombol>
+
+                            {/* Completion Button */}
+                            <Tombol
+                                variant={isCompleted ? "secondary" : "outline"}
+                                ukuran="large"
+                                onClick={handleToggleCompletion}
+                            >
+                                {isCompleted ? '✅ Selesai' : '☑️ Tandai Selesai'}
+                            </Tombol>
+                        </div>
                     </div>
 
                     {/* Tags */}
@@ -191,7 +217,7 @@ export default function MateriDetailPage({ params }) {
                 </Kartu>
 
                 {/* File Viewer */}
-                <Kartu padding="none" className="mb-6">
+                <Kartu padding="none" className="mb-8">
                     {materiAktif.tersedia ? (
                         <div>
                             {/* Info Bar */}
@@ -258,7 +284,7 @@ export default function MateriDetailPage({ params }) {
                 </Kartu>
 
                 {/* Navigation Prev/Next */}
-                <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row justify-between gap-6 mb-8 mt-8">
                     {/* Previous */}
                     {prev ? (
                         <Link href={`/materi/${prev.id}`} className="flex-1">

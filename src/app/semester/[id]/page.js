@@ -26,28 +26,30 @@ export default async function SemesterDetailPage({ params }) {
     ]
 
     return (
-        <div style={{ backgroundColor: 'var(--color-bg-light)' }} className="min-h-screen py-8">
+        <div className="min-h-screen py-12">
             <Kontainer>
                 {/* Breadcrumb */}
-                <Breadcrumb items={breadcrumbItems} />
+                <div className="mb-6">
+                    <Breadcrumb items={breadcrumbItems} />
+                </div>
 
                 {/* Header Section */}
-                <div className="mb-8">
-                    <div className="flex items-center gap-3 mb-3">
+                <div className="mb-10">
+                    <div className="flex items-center gap-4 mb-4">
                         <div
-                            className="text-5xl font-bold"
+                            className="text-5xl md:text-6xl font-bold"
                             style={{ color: 'var(--color-primary)' }}
                         >
                             {semester.nomor}
                         </div>
-                        <div>
+                        <div className="flex-1">
                             <h1
-                                className="text-3xl md:text-4xl font-bold"
+                                className="text-3xl md:text-4xl font-bold mb-2"
                                 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
                             >
                                 {semester.nama}
                             </h1>
-                            <p style={{ color: 'var(--color-text-secondary)' }}>
+                            <p className="text-base" style={{ color: 'var(--color-text-secondary)' }}>
                                 {semester.deskripsi}
                             </p>
                         </div>
@@ -89,7 +91,7 @@ export default async function SemesterDetailPage({ params }) {
                         </Kartu>
                     ) : (
                         // Mata Kuliah Grid
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {daftarMataKuliah.map((matkul) => (
                                 <Link key={matkul.id} href={`/mata-kuliah/${matkul.id}`}>
                                     <Kartu
@@ -178,7 +180,7 @@ export default async function SemesterDetailPage({ params }) {
                 </div>
 
                 {/* Back Button */}
-                <div className="mt-8">
+                <div className="mt-12">
                     <Link href="/">
                         <Tombol variant="outline" ukuran="medium">
                             ← Kembali ke Beranda

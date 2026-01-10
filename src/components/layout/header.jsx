@@ -1,11 +1,18 @@
+'use client'
+
 import Link from 'next/link'
-import Tombol from '@/components/ui/tombol'
+import { usePathname } from 'next/navigation'
+import Kontainer from './kontainer'
+import Tombol from '../ui/tombol'
+import { useTheme } from '@/hooks/useTheme'
 
 /**
  * Component: Header
  * Navigation bar untuk seluruh website
  */
 export default function Header() {
+    const pathname = usePathname()
+    const { isDark, toggleTheme } = useTheme()
     return (
         <header
             className="sticky top-0 z-50 shadow-sm"
@@ -45,8 +52,24 @@ export default function Header() {
                         </Link>
                     </div>
 
-                    {/* CTA Button - Desktop */}
-                    <div className="hidden md:block">
+                    {/* Action Buttons - Desktop */}
+                    <div className="hidden md:flex items-center gap-3">
+                        {/* Dark Mode Toggle */}
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-lg transition-all hover:opacity-70"
+                            style={{
+                                backgroundColor: 'rgba(107, 114, 128, 0.1)',
+                                color: 'var(--color-text-primary)'
+                            }}
+                            title={isDark ? 'Light Mode' : 'Dark Mode'}
+                        >
+                            <span className="text-2xl">
+                                {isDark ? '☀️' : '🌙'}
+                            </span>
+                        </button>
+
+                        {/* Search Button */}
                         <Link href="/cari">
                             <Tombol variant="primary" ukuran="medium">
                                 🔍 Cari Materi
