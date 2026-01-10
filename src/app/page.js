@@ -10,45 +10,18 @@ import { ambilSemuaSemester } from '@/lib/data'
 export default function Home() {
   const daftarSemester = ambilSemuaSemester()
   const [scrollY, setScrollY] = useState(0)
-  const [isVisible, setIsVisible] = useState({
-    hero: true,
-    features: true,
-    semesters: true,
-    cta: true,
-  })
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)
     }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({
-              ...prev,
-              [entry.target.id]: true,
-            }))
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-
     window.addEventListener('scroll', handleScroll)
-    const sections = document.querySelectorAll('[data-animate]')
-    sections.forEach((section) => observer.observe(section))
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      observer.disconnect()
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
     <div className="overflow-x-hidden">
-      {/* Hero Section - Full Height dengan Parallax */}
+      {/* Hero Section */}
       <section
         className="relative min-h-screen flex items-center justify-center"
         style={{
@@ -56,13 +29,7 @@ export default function Home() {
         }}
       >
         <Kontainer>
-          <div
-            id="hero"
-            data-animate
-            className={`max-w-5xl mx-auto text-center transition-all duration-1500 ${isVisible.hero !== false ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
-            {/* Main Headline - Besar dan Bold */}
+          <div className="max-w-5xl mx-auto text-center">
             <h1
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight leading-tight"
               style={{
@@ -85,7 +52,6 @@ export default function Home() {
               </span>
             </h1>
 
-            {/* Subtitle - Elegant */}
             <p
               className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed"
               style={{ color: 'var(--color-text-secondary)' }}
@@ -94,7 +60,6 @@ export default function Home() {
               Pilih yang paling cocok dengan gaya belajarmu.
             </p>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16">
               <Link href="#features">
                 <Tombol variant="primary" ukuran="large" className="px-8 py-4 text-base">
@@ -108,7 +73,6 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Scroll Indicator */}
             <div className="mt-12 animate-bounce">
               <svg
                 className="w-6 h-6 mx-auto"
@@ -124,124 +88,216 @@ export default function Home() {
         </Kontainer>
       </section>
 
-      {/* Features Section - Full Height & Centered */}
+      {/* Features Section dengan SLIDE ANIMATION */}
       <section
         id="features"
-        className="relative min-h-screen flex items-center justify-center py-20"
+        className="relative py-32 overflow-hidden"
         style={{
           backgroundColor: 'var(--color-surface-light)',
         }}
       >
-        <Kontainer>
+        {/* Background Decorative */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
-            data-animate
-            className={`max-w-6xl mx-auto transition-all duration-1500 delay-300 ${isVisible.features ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
+            className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)',
+              transform: `translateY(${scrollY * 0.15}px)`
+            }}
+          />
+          <div
+            className="absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, var(--color-secondary) 0%, transparent 70%)',
+              transform: `translateY(${-scrollY * 0.15}px)`
+            }}
+          />
+        </div>
+
+        <Kontainer>
+          <div className="max-w-7xl mx-auto">
             {/* Section Title */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-20">
+              <div
+                className="inline-block px-4 py-2 rounded-full mb-6"
+                style={{
+                  backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                  color: 'var(--color-primary)'
+                }}
+              >
+                <span className="text-sm font-medium">Keunggulan</span>
+              </div>
               <h2
-                className="text-4xl md:text-5xl font-bold mb-6"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
                 style={{
                   fontFamily: 'var(--font-heading)',
                   color: 'var(--color-text-primary)'
                 }}
               >
-                Kenapa DuaVersi?
+                Kenapa Pilih DuaVersi?
               </h2>
+              <p
+                className="text-xl max-w-3xl mx-auto"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
+                Platform belajar yang dirancang untuk memberikan pengalaman terbaik
+              </p>
             </div>
 
-            {/* Features Grid - 3 Columns */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Features Grid - SLIDE FROM LEFT */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-              {/* Feature 1 */}
+              {/* Card 1 */}
               <div
-                className="text-center transition-all duration-500 hover:-translate-y-2"
-                style={{ transitionDelay: '100ms' }}
+                className="group relative animate-slide-left"
+                style={{ animationDelay: '0.2s' }}
               >
-                <div className="mb-6">
+                <div className="relative p-8 h-full rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                    borderColor: 'var(--color-border-light)',
+                  }}
+                >
                   <div
-                    className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-2xl font-bold"
+                    className="absolute top-0 left-0 w-full h-1 rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                      color: 'var(--color-primary)'
+                      background: 'linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%)'
                     }}
-                  >
-                    01
+                  />
+
+                  <div className="mb-6">
+                    <div
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(79, 70, 229, 0.2) 100%)',
+                      }}
+                    >
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--color-primary)' }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>
+                    </div>
                   </div>
+
+                  <h3
+                    className="text-2xl font-bold mb-4"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    Konten Lengkap
+                  </h3>
+                  <p
+                    className="text-base leading-relaxed"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    Materi lengkap untuk 8 semester mencakup 40+ mata kuliah Teknik Informatika dengan topik yang terstruktur.
+                  </p>
+
+                  <div
+                    className="absolute bottom-4 right-4 w-20 h-20 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                    style={{ backgroundColor: 'var(--color-primary)' }}
+                  />
                 </div>
-                <h3
-                  className="text-2xl font-semibold mb-4"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
-                  Konten Lengkap
-                </h3>
-                <p
-                  className="text-lg leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Materi lengkap untuk 8 semester mencakup 40+ mata kuliah Teknik Informatika.
-                </p>
               </div>
 
-              {/* Feature 2 */}
+              {/* Card 2 */}
               <div
-                className="text-center transition-all duration-500 hover:-translate-y-2"
-                style={{ transitionDelay: '200ms' }}
+                className="group relative animate-slide-left"
+                style={{ animationDelay: '0.4s' }}
               >
-                <div className="mb-6">
+                <div className="relative p-8 h-full rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                    borderColor: 'var(--color-border-light)',
+                  }}
+                >
                   <div
-                    className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-2xl font-bold"
+                    className="absolute top-0 left-0 w-full h-1 rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                      color: 'var(--color-secondary)'
+                      background: 'linear-gradient(90deg, var(--color-secondary) 0%, var(--color-accent) 100%)'
                     }}
-                  >
-                    02
+                  />
+
+                  <div className="mb-6">
+                    <div
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.2) 100%)',
+                      }}
+                    >
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--color-secondary)' }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                    </div>
                   </div>
+
+                  <h3
+                    className="text-2xl font-bold mb-4"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    Dual Format System
+                  </h3>
+                  <p
+                    className="text-base leading-relaxed"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    Pilih antara materi asli dari dosen atau versi simplified. Fleksibilitas penuh sesuai gaya belajarmu.
+                  </p>
+
+                  <div
+                    className="absolute bottom-4 right-4 w-20 h-20 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                    style={{ backgroundColor: 'var(--color-secondary)' }}
+                  />
                 </div>
-                <h3
-                  className="text-2xl font-semibold mb-4"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
-                  Sistem Dual Format
-                </h3>
-                <p
-                  className="text-lg leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Catatan asli dosen dan versi simplified berdampingan untuk pemahaman lebih baik.
-                </p>
               </div>
 
-              {/* Feature 3 */}
+              {/* Card 3 */}
               <div
-                className="text-center transition-all duration-500 hover:-translate-y-2"
-                style={{ transitionDelay: '300ms' }}
+                className="group relative animate-slide-left"
+                style={{ animationDelay: '0.6s' }}
               >
-                <div className="mb-6">
+                <div className="relative p-8 h-full rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                    borderColor: 'var(--color-border-light)',
+                  }}
+                >
                   <div
-                    className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-2xl font-bold"
+                    className="absolute top-0 left-0 w-full h-1 rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      backgroundColor: 'rgba(14, 165, 233, 0.1)',
-                      color: 'var(--color-accent)'
+                      background: 'linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%)'
                     }}
-                  >
-                    03
+                  />
+
+                  <div className="mb-6">
+                    <div
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(14, 165, 233, 0.2) 100%)',
+                      }}
+                    >
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--color-accent)' }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
                   </div>
+
+                  <h3
+                    className="text-2xl font-bold mb-4"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    Cepat & Modern
+                  </h3>
+                  <p
+                    className="text-base leading-relaxed"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    Dibangun dengan Next.js 16 untuk performa super cepat, navigasi instan, dan pengalaman yang mulus.
+                  </p>
+
+                  <div
+                    className="absolute bottom-4 right-4 w-20 h-20 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                    style={{ backgroundColor: 'var(--color-accent)' }}
+                  />
                 </div>
-                <h3
-                  className="text-2xl font-semibold mb-4"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
-                  Cepat & Responsif
-                </h3>
-                <p
-                  className="text-lg leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Dibangun dengan Next.js untuk performa super cepat dan navigasi yang mulus.
-                </p>
               </div>
 
             </div>
@@ -249,7 +305,7 @@ export default function Home() {
         </Kontainer>
       </section>
 
-      {/* Semester Grid - Centered & Spacious */}
+      {/* Semester Grid */}
       <section
         id="semesters"
         className="py-24"
@@ -257,12 +313,7 @@ export default function Home() {
         <Kontainer>
           <div className="max-w-6xl mx-auto">
 
-            {/* Section Header - Centered */}
-            <div
-              data-animate
-              className={`text-center mb-16 transition-all duration-1500 ${isVisible.semesters ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-            >
+            <div className="text-center mb-16">
               <h2
                 className="text-4xl md:text-5xl font-bold mb-6"
                 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
@@ -277,20 +328,14 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Semester Cards Grid */}
-            <div
-              data-animate
-              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1500 delay-500 ${isVisible.semesters ? 'opacity-100' : 'opacity-0'
-                }`}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {daftarSemester.map((semester, index) => (
                 <Link
                   key={semester.id}
                   href={`/semester/${semester.nomor}`}
-                  className={`transition-all duration-700 ${isVisible.semesters ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                    }`}
+                  className="animate-slide-left"
                   style={{
-                    transitionDelay: `${index * 100}ms`
+                    animationDelay: `${index * 0.1}s`
                   }}
                 >
                   <Kartu
@@ -298,7 +343,6 @@ export default function Home() {
                     padding="medium"
                     className="h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
                   >
-                    {/* Semester Number */}
                     <div
                       className="text-5xl font-bold mb-4"
                       style={{ color: 'var(--color-primary)' }}
@@ -306,7 +350,6 @@ export default function Home() {
                       {semester.nomor}
                     </div>
 
-                    {/* Semester Name */}
                     <h3
                       className="text-xl font-semibold mb-3"
                       style={{ color: 'var(--color-text-primary)' }}
@@ -314,7 +357,6 @@ export default function Home() {
                       {semester.nama}
                     </h3>
 
-                    {/* Description */}
                     <p
                       className="text-sm mb-5 line-clamp-2 leading-relaxed"
                       style={{ color: 'var(--color-text-secondary)' }}
@@ -322,7 +364,6 @@ export default function Home() {
                       {semester.deskripsi}
                     </p>
 
-                    {/* Meta Info */}
                     <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--color-border-light)' }}>
                       <span
                         className="text-sm font-medium"
@@ -345,7 +386,7 @@ export default function Home() {
         </Kontainer>
       </section>
 
-      {/* Bottom CTA - Clean & Minimal */}
+      {/* Bottom CTA */}
       <section
         className="py-32 border-t"
         style={{
@@ -354,12 +395,7 @@ export default function Home() {
         }}
       >
         <Kontainer>
-          <div
-            data-animate
-            className={`max-w-3xl mx-auto text-center transition-all duration-1500 ${isVisible.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-            id="cta"
-          >
+          <div className="max-w-3xl mx-auto text-center">
             <h2
               className="text-4xl md:text-5xl font-bold mb-6"
               style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}

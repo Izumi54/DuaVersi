@@ -245,3 +245,20 @@ html {
   --color-primary: #818cf8;
   --color-secondary: #34d399;
 }
+
+/* Keyframe Animations - Slide Effects */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-left {
+  animation: slideInLeft 1s ease-out forwards;
+}
