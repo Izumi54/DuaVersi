@@ -45,46 +45,40 @@ export default function MataKuliahDetailPage({ params }) {
             <Kontainer>
                 {/* Hero Header Card */}
                 <div
-                    className={`relative mb-12 p-8 md:p-12 rounded-[2.5rem] overflow-hidden transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                    style={{
-                        background: 'rgba(255, 255, 255, 0.7)',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255, 255, 255, 0.5)',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.05)'
-                    }}
+                    className={`relative mb-12 p-8 md:p-12 rounded-[2.5rem] overflow-hidden transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
                 >
                     <div className="relative z-10 flex flex-col lg:flex-row gap-12">
                         {/* Left: Main Info */}
                         <div className="flex-1">
                             <div className="flex flex-wrap gap-3 mb-6">
-                                <span className="px-4 py-1.5 rounded-full text-sm font-bold bg-indigo-50 text-indigo-600 border border-indigo-100">
+                                <span className="px-4 py-1.5 rounded-full text-sm font-bold bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
                                     {matkul.kode}
                                 </span>
-                                <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                                <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700">
                                     {matkul.sks} SKS
                                 </span>
                                 <Link href={`/semester/${semester.nomor}`}>
-                                    <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-600 border border-gray-200 hover:bg-white hover:text-indigo-600 transition-colors cursor-pointer">
+                                    <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer">
                                         Semester {semester.nomor} ➜
                                     </span>
                                 </Link>
                             </div>
 
-                            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-gray-50 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
                                 {matkul.nama}
                             </h1>
-                            <p className="text-xl text-gray-400 italic font-serif mb-6">
+                            <p className="text-xl text-gray-400 dark:text-gray-500 italic font-serif mb-6">
                                 {matkul.namaInggris}
                             </p>
-                            <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
                                 {matkul.deskripsi}
                             </p>
 
-                            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 border border-white/60 w-fit">
+                            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-white/60 dark:border-slate-700/50 w-fit">
                                 <span className="text-3xl">👨‍🏫</span>
                                 <div>
-                                    <div className="text-xs uppercase tracking-wider text-gray-500 font-bold mb-0.5">Dosen Pengampu</div>
-                                    <div className="font-semibold text-gray-800">{matkul.dosen}</div>
+                                    <div className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-bold mb-0.5">Dosen Pengampu</div>
+                                    <div className="font-semibold text-gray-800 dark:text-gray-200">{matkul.dosen}</div>
                                 </div>
                             </div>
                         </div>
@@ -124,12 +118,12 @@ export default function MataKuliahDetailPage({ params }) {
                 {/* Timeline Topic List */}
                 <div className="relative max-w-4xl mx-auto">
                     {/* Vertical Line */}
-                    <div className="absolute left-8 md:left-1/2 top-4 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2 hidden md:block" />
+                    <div className="absolute left-8 md:left-1/2 top-4 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700 transform -translate-x-1/2 hidden md:block" />
 
                     {daftarTopik.length === 0 ? (
                         <div className="text-center py-20 opacity-50">
                             <div className="text-6xl mb-4">🚧</div>
-                            <h3 className="text-xl font-bold text-gray-600">Materi Sedang Disusun</h3>
+                            <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300">Materi Sedang Disusun</h3>
                         </div>
                     ) : (
                         <div className="space-y-12">
@@ -143,31 +137,31 @@ export default function MataKuliahDetailPage({ params }) {
                                         }}
                                     >
                                         {/* Timeline Dot (Center) */}
-                                        <div className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-white border-4 border-indigo-500 shadow-lg transform -translate-x-1/2 z-10 transition-transform duration-300 group-hover:scale-150 hidden md:block" />
+                                        <div className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-white dark:bg-slate-700 border-4 border-indigo-500 shadow-lg transform -translate-x-1/2 z-10 transition-transform duration-300 group-hover:scale-150 hidden md:block" />
 
                                         {/* Card Side */}
                                         <div className="flex-1 ml-20 md:ml-0 md:w-1/2">
-                                            <div className="relative bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group-hover:border-indigo-200">
+                                            <div className="relative bg-white/60 dark:bg-slate-800/60 backdrop-blur-md p-6 rounded-2xl border border-white/60 dark:border-slate-700/50 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group-hover:border-indigo-200 dark:group-hover:border-indigo-500">
                                                 {/* Number Badge */}
                                                 <div className="absolute -left-12 md:-left-4 md:-top-4 w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold shadow-lg shadow-indigo-500/30 text-lg md:text-base">
                                                     {topik.urutan}
                                                 </div>
 
-                                                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-indigo-600 transition-colors">
+                                                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                                                     {topik.judul}
                                                 </h3>
-                                                <p className="text-sm text-gray-500 line-clamp-2 mb-4">
+                                                <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4">
                                                     {topik.deskripsi}
                                                 </p>
 
                                                 <div className="flex flex-wrap gap-2">
                                                     {topik.materi.mentah.tersedia && (
-                                                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded bg-gray-50 text-gray-600 text-xs font-medium border border-gray-200 group-hover:bg-indigo-50 group-hover:border-indigo-100 group-hover:text-indigo-600 transition-colors">
+                                                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded bg-gray-50 dark:bg-slate-700 text-gray-600 dark:text-gray-300 text-xs font-medium border border-gray-200 dark:border-slate-600 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900 group-hover:border-indigo-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                                                             📄 {topik.materi.mentah.ukuran}
                                                         </span>
                                                     )}
                                                     {topik.materi.simplified.tersedia && (
-                                                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded bg-teal-50 text-teal-600 text-xs font-medium border border-teal-100 group-hover:bg-teal-100 transition-colors">
+                                                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 text-xs font-medium border border-teal-100 dark:border-teal-800 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/50 transition-colors">
                                                             ✨ Simplified
                                                         </span>
                                                     )}
@@ -186,7 +180,7 @@ export default function MataKuliahDetailPage({ params }) {
 
                 <div className="mt-20 text-center">
                     <Link href={`/semester/${semester.nomor}`}>
-                        <button className="px-8 py-3 rounded-full font-medium text-gray-500 hover:text-indigo-600 hover:bg-white/50 transition-all border border-transparent hover:border-indigo-100">
+                        <button className="px-8 py-3 rounded-full font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-indigo-100 dark:hover:border-indigo-800">
                             ← Kembali ke Semester {semester.nomor}
                         </button>
                     </Link>

@@ -22,15 +22,16 @@ export default function HomePage() {
   const demoRef = useRef(null)
 
   // Soft Pastel Gradients for Cards (Visible but Calm)
+  // UPDATED: Added dark mode classes for proper contrast
   const softSemesterColors = [
-    'from-indigo-100 to-blue-200 border-indigo-200',   // Sem 1
-    'from-emerald-100 to-teal-200 border-emerald-200', // Sem 2
-    'from-purple-100 to-fuchsia-200 border-purple-200',// Sem 3
-    'from-amber-100 to-orange-200 border-amber-200',   // Sem 4
-    'from-rose-100 to-pink-200 border-rose-200',       // Sem 5
-    'from-cyan-100 to-sky-200 border-cyan-200',        // Sem 6
-    'from-lime-100 to-green-200 border-lime-200',      // Sem 7
-    'from-slate-100 to-gray-200 border-slate-200',     // Sem 8
+    'from-indigo-100 to-blue-200 border-indigo-200 dark:from-indigo-950/50 dark:to-blue-900/50 dark:border-indigo-800',   // Sem 1
+    'from-emerald-100 to-teal-200 border-emerald-200 dark:from-emerald-950/50 dark:to-teal-900/50 dark:border-emerald-800', // Sem 2
+    'from-purple-100 to-fuchsia-200 border-purple-200 dark:from-purple-950/50 dark:to-fuchsia-900/50 dark:border-purple-800',// Sem 3
+    'from-amber-100 to-orange-200 border-amber-200 dark:from-amber-950/50 dark:to-orange-900/50 dark:border-amber-800',   // Sem 4
+    'from-rose-100 to-pink-200 border-rose-200 dark:from-rose-950/50 dark:to-pink-900/50 dark:border-rose-800',       // Sem 5
+    'from-cyan-100 to-sky-200 border-cyan-200 dark:from-cyan-950/50 dark:to-sky-900/50 dark:border-cyan-800',        // Sem 6
+    'from-lime-100 to-green-200 border-lime-200 dark:from-lime-950/50 dark:to-green-900/50 dark:border-lime-800',      // Sem 7
+    'from-slate-100 to-gray-200 border-slate-200 dark:from-slate-950/50 dark:to-gray-800/50 dark:border-slate-700',     // Sem 8
   ]
 
   const semestersWithSoftColors = ambilSemuaSemester().map((sem, i) => ({
@@ -289,11 +290,11 @@ export default function HomePage() {
                     </div>
 
                     <div>
-                      <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1 block">Semester</span>
-                      <h3 className="text-xl font-bold text-gray-900 leading-tight mb-1 group-hover:text-indigo-700 transition-colors">
+                      <span className="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-bold mb-1 block">Semester</span>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight mb-1 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">
                         {sem.nama}
                       </h3>
-                      <p className="text-xs text-gray-600 line-clamp-1 font-medium">
+                      <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-1 font-medium">
                         {sem.deskripsi}
                       </p>
                     </div>

@@ -6,194 +6,41 @@
 
 /* Tailwind v4 Theme Configuration */
 @theme {
-  /* Primary Colors - Refined & Professional */
-  --color-primary: #4F46E5;
-  /* Indigo - keep */
-  --color-secondary: #10B981;
-  /* Emerald - more muted */
-  --color-accent: #0EA5E9;
-  /* Sky blue */
-
-  /* Light Mode - Clean & Minimal */
-  --color-bg-light: #FFFFFF;
-  /* Pure white */
-  --color-surface-light: #F9FAFB;
-  /* Light gray surface */
-  --color-border-light: #E5E7EB;
-  /* Border gray */
-
-  --color-text-primary: #111827;
-  /* Almost black */
-  --color-text-secondary: #6B7280;
-  /* Medium gray */
-  --color-text-tertiary: #9CA3AF;
-  /* Light gray */
-
-  /* Dark Mode - Sophisticated */
-  --color-bg-dark: #111827;
-  /* Darker slate */
-  --color-surface-dark: #1F2937;
-  /* Dark gray */
-  --color-border-dark: #374151;
-  /* Border */
-
-  --color-text-primary-dark: #F9FAFB;
-  /* Almost white */
-  --color-text-secondary-dark: #D1D5DB;
-  /* Light gray */
-  --color-text-tertiary-dark: #9CA3AF;
-  /* Medium gray */
-
-  /* Font Families */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
-
-  /* Font Sizes - Better hierarchy */
-  --text-xs: 0.75rem;
-  /* 12px */
-  --text-sm: 0.875rem;
-  /* 14px */
-  --text-base: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 1.875rem;
-  /* 30px */
-  --text-4xl: 2.25rem;
-  /* 36px */
-}
-
-/* Base Styles - Light Mode */
-body {
-  background-color: var(--color-bg-light);
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Dark Mode */
-.dark body {
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-primary-dark);
-}
-
-/* Dark mode variable overrides */
-.dark {
-  --color-bg-light: #111827;
-  --color-surface-light: #1F2937;
-  --color-border-light: #374151;
-  --color-text-primary: #F9FAFB;
-  --color-text-secondary: #D1D5DB;
-  --color-text-tertiary: #9CA3AF;
-  --color-primary: #6366F1;
-  --color-secondary: #34D399;
-}
-
-/* Typography - Refined */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--color-text-primary);
-}
-
-h1 {
-  font-size: var(--text-4xl);
-}
-
-h2 {
-  font-size: var(--text-3xl);
-}
-
-h3 {
-  font-size: var(--text-2xl);
-}
-
-h4 {
-  font-size: var(--text-xl);
-}
-
-p {
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Link styles - Professional */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.2s ease, opacity 0.2s ease;
-}
-
-a:hover {
-  opacity: 0.8;
-}
-
-/* Focus states - Accessibility */
-button:focus,
-a:focus,
-input:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* Selection */
-::selection {
-  background-color: var(--color-primary);
-  color: white;
-}
-
-
-/* Import Tailwind CSS */
-@import "tailwindcss";
-
-/* Tailwind v4 Theme Configuration */
-@theme {
   /* Custom Colors - Eye-Friendly */
   --color-primary: #4f46e5;
   --color-secondary: #059669;
   --color-accent: #0891b2;
 
-  /* Light Mode */
+  /* Light Mode Palette */
   --color-bg-light: #f9fafb;
   --color-surface-light: #ffffff;
   --color-text-primary: #1f2937;
-  --color-text-secondary: #6b7280;
+  --color-text-secondary: #4b5563;
+  --color-border-light: #e5e7eb;
 
-  /* Dark Mode Colors */
+  /* Dark Mode Palette - Deep & Clean */
+  --color-bg-dark: #0f172a;
+  /* Slate 900 */
+  --color-surface-dark: #1e293b;
+  /* Slate 800 */
+  --color-text-primary-dark: #f8fafc;
+  /* Slate 50 */
+  --color-text-secondary-dark: #cbd5e1;
+  /* Slate 300 */
+  --color-border-dark: #334155;
+  /* Slate 700 */
+
+  /* Dark Mode Accents */
   --color-primary-dark: #818cf8;
   --color-secondary-dark: #34d399;
   --color-accent-dark: #22d3ee;
-  --color-bg-dark: #0f172a;
-  --color-surface-dark: #1e293b;
-  --color-text-primary-dark: #f1f5f9;
-  --color-text-secondary-dark: #94a3b8;
 
   /* Font Families */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
 
-/* Base Styles - Light Mode */
+/* Base Styles */
 body {
   background-color: var(--color-bg-light);
   color: var(--color-text-primary);
@@ -207,7 +54,7 @@ body {
   color: var(--color-text-primary-dark);
 }
 
-/* Headings */
+/* Typography */
 h1,
 h2,
 h3,
@@ -215,6 +62,22 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  color: inherit;
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.dark a {
+  color: var(--color-primary-dark);
+}
+
+a:hover {
+  opacity: 0.8;
 }
 
 /* Smooth Scrolling */
@@ -222,31 +85,21 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Dark Mode Utility Classes */
-.dark [style*="--color-bg-light"] {
-  background-color: var(--color-bg-dark) !important;
-}
-
-.dark [style*="--color-text-primary"] {
-  color: var(--color-text-primary-dark) !important;
-}
-
-.dark [style*="--color-text-secondary"] {
-  color: var(--color-text-secondary-dark) !important;
-}
-
-/* Dark mode untuk komponen dengan inline styles */
+/* DARK MODE VARIABLE MAPPING 
+   This ensures components using var(--color-surface-light) 
+   automatically switch to dark values in dark mode.
+*/
 .dark {
-  /* Override CSS variables untuk dark mode */
-  --color-bg-light: #0f172a;
-  --color-surface-light: #1e293b;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-primary: #818cf8;
-  --color-secondary: #34d399;
+  --color-bg-light: var(--color-bg-dark);
+  --color-surface-light: var(--color-surface-dark);
+  --color-text-primary: var(--color-text-primary-dark);
+  --color-text-secondary: var(--color-text-secondary-dark);
+  --color-border-light: var(--color-border-dark);
+  --color-primary: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary-dark);
 }
 
-/* Keyframe Animations - Slide Effects */
+/* Keyframe Animations */
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -261,4 +114,16 @@ html {
 
 .animate-slide-left {
   animation: slideInLeft 1s ease-out forwards;
+}
+
+/* Additional Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
