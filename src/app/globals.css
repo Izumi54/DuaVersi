@@ -1,7 +1,7 @@
 /* Import Google Fonts - HARUS PALING ATAS! */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 
-/* Import Tailwind CSS */
+/* Import Tailwind CSS - Dark Mode Fixed */
 @import "tailwindcss";
 
 /* Tailwind v4 Theme Configuration */
@@ -11,27 +11,36 @@
   --color-secondary: #059669;
   --color-accent: #0891b2;
 
-  /* Light Mode */
+  /* Light Mode Palette */
   --color-bg-light: #f9fafb;
   --color-surface-light: #ffffff;
   --color-text-primary: #1f2937;
-  --color-text-secondary: #6b7280;
+  --color-text-secondary: #4b5563;
+  --color-border-light: #e5e7eb;
 
-  /* Dark Mode Colors */
+  /* Dark Mode Palette - Deep & Clean */
+  --color-bg-dark: #0f172a;
+  /* Slate 900 */
+  --color-surface-dark: #1e293b;
+  /* Slate 800 */
+  --color-text-primary-dark: #f8fafc;
+  /* Slate 50 */
+  --color-text-secondary-dark: #cbd5e1;
+  /* Slate 300 */
+  --color-border-dark: #334155;
+  /* Slate 700 */
+
+  /* Dark Mode Accents */
   --color-primary-dark: #818cf8;
   --color-secondary-dark: #34d399;
   --color-accent-dark: #22d3ee;
-  --color-bg-dark: #0f172a;
-  --color-surface-dark: #1e293b;
-  --color-text-primary-dark: #f1f5f9;
-  --color-text-secondary-dark: #94a3b8;
 
   /* Font Families */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
 
-/* Base Styles - Light Mode */
+/* Base Styles */
 body {
   background-color: var(--color-bg-light);
   color: var(--color-text-primary);
@@ -45,9 +54,30 @@ body {
   color: var(--color-text-primary-dark);
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
+  color: inherit;
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.dark a {
+  color: var(--color-primary-dark);
+}
+
+a:hover {
+  opacity: 0.8;
 }
 
 /* Smooth Scrolling */
@@ -55,26 +85,45 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Dark Mode Utility Classes */
-.dark [style*="--color-bg-light"] {
-  background-color: var(--color-bg-dark) !important;
-}
-
-.dark [style*="--color-text-primary"] {
-  color: var(--color-text-primary-dark) !important;
-}
-
-.dark [style*="--color-text-secondary"] {
-  color: var(--color-text-secondary-dark) !important;
-}
-
-/* Dark mode untuk komponen dengan inline styles */
+/* DARK MODE VARIABLE MAPPING 
+   This ensures components using var(--color-surface-light) 
+   automatically switch to dark values in dark mode.
+*/
 .dark {
-  /* Override CSS variables untuk dark mode */
-  --color-bg-light: #0f172a;
-  --color-surface-light: #1e293b;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-primary: #818cf8;
-  --color-secondary: #34d399;
+  --color-bg-light: var(--color-bg-dark);
+  --color-surface-light: var(--color-surface-dark);
+  --color-text-primary: var(--color-text-primary-dark);
+  --color-text-secondary: var(--color-text-secondary-dark);
+  --color-border-light: var(--color-border-dark);
+  --color-primary: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary-dark);
+}
+
+/* Keyframe Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-left {
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+/* Additional Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
