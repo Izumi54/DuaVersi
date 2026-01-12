@@ -1,7 +1,7 @@
 /* Import Google Fonts - HARUS PALING ATAS! */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 
-/* Import Tailwind CSS */
+/* Import Tailwind CSS - Dark Mode Fixed */
 @import "tailwindcss";
 
 /* Tailwind v4 Theme Configuration */
