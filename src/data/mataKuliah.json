@@ -8,8 +8,7 @@
         "semesterId": "sem-1",
         "dosen": "Dr. Budi Santoso, M.Kom",
         "deskripsi": "Mata kuliah pengenalan dasar-dasar ilmu komputer, algoritma, dan pemrograman",
-        "prasyarat": null,
-        "jumlahTopik": 12
+        "prasyarat": null
     },
     {
         "id": "matkul-mat101",
@@ -20,8 +19,7 @@
         "semesterId": "sem-1",
         "dosen": "Prof. Dr. Siti Nurhaliza, M.Si",
         "deskripsi": "Konsep dasar kalkulus diferensial dan integral untuk sains dan teknik",
-        "prasyarat": null,
-        "jumlahTopik": 14
+        "prasyarat": null
     },
     {
         "id": "matkul-eng101",
@@ -32,8 +30,7 @@
         "semesterId": "sem-1",
         "dosen": "Dra. Fatimah Zahra, M.Pd",
         "deskripsi": "Bahasa Inggris untuk komunikasi teknis dan akademik",
-        "prasyarat": null,
-        "jumlahTopik": 10
+        "prasyarat": null
     },
     {
         "id": "matkul-cs102",
@@ -44,8 +41,7 @@
         "semesterId": "sem-1",
         "dosen": "Ahmad Dahlan, S.Kom, M.T",
         "deskripsi": "Implementasi dan aplikasi struktur data fundamental dalam pemrograman",
-        "prasyarat": "CS101",
-        "jumlahTopik": 13
+        "prasyarat": "CS101"
     },
     {
         "id": "matkul-cs103",
@@ -56,7 +52,6 @@
         "semesterId": "sem-1",
         "dosen": "Dr. Rizki Pratama, M.Kom",
         "deskripsi": "Konsep database relasional, SQL, dan desain database",
-        "prasyarat": null,
-        "jumlahTopik": 12
+        "prasyarat": null
     }
 ]

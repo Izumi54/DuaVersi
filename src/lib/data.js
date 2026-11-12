@@ -4,12 +4,34 @@
  */
 
 /**
+ * Jumlah selalu DIHITUNG dari data aktual, tidak disimpan manual di JSON.
+ * Dulu semester.json/mataKuliah.json punya field jumlahMataKuliah/jumlahTopik
+ * yang ditulis tangan dan tidak sesuai isi (mis. mengklaim 5, aktual 0).
+ * Sejak Fase 1 plan perbaikan, field itu dihapus dari JSON dan dihitung di sini.
+ */
+function denganJumlahMataKuliah(semester) {
+    const mataKuliah = require('@/data/mataKuliah.json')
+    return {
+        ...semester,
+        jumlahMataKuliah: mataKuliah.filter(mk => mk.semesterId === semester.id).length
+    }
+}
+
+function denganJumlahTopik(mataKuliah) {
+    const topik = require('@/data/topik.json')
+    return {
+        ...mataKuliah,
+        jumlahTopik: topik.filter(t => t.mataKuliahId === mataKuliah.id).length
+    }
+}
+
+/**
  * Ambil semua semester
- * @returns {Array} Daftar semester
+ * @returns {Array} Daftar semester (jumlahMataKuliah dihitung dari data)
  */
 export function ambilSemuaSemester() {
     const semester = require('@/data/semester.json')
-    return semester
+    return semester.map(denganJumlahMataKuliah)
 }
 
 /**
@@ -19,16 +41,17 @@ export function ambilSemuaSemester() {
  */
 export function ambilSemesterById(id) {
     const semester = require('@/data/semester.json')
-    return semester.find(s => s.id === id) || null
+    const ditemukan = semester.find(s => s.id === id)
+    return ditemukan ? denganJumlahMataKuliah(ditemukan) : null
 }
 
 /**
  * Ambil semua mata kuliah
- * @returns {Array} Daftar mata kuliah
+ * @returns {Array} Daftar mata kuliah (jumlahTopik dihitung dari data)
  */
 export function ambilSemuaMataKuliah() {
     const mataKuliah = require('@/data/mataKuliah.json')
-    return mataKuliah
+    return mataKuliah.map(denganJumlahTopik)
 }
 
 /**
@@ -38,7 +61,8 @@ export function ambilSemuaMataKuliah() {
  */
 export function ambilMataKuliahById(id) {
     const mataKuliah = require('@/data/mataKuliah.json')
-    return mataKuliah.find(mk => mk.id === id) || null
+    const ditemukan = mataKuliah.find(mk => mk.id === id)
+    return ditemukan ? denganJumlahTopik(ditemukan) : null
 }
 
 /**
@@ -48,7 +72,7 @@ export function ambilMataKuliahById(id) {
  */
 export function ambilMataKuliahBySemester(semesterId) {
     const mataKuliah = require('@/data/mataKuliah.json')
-    return mataKuliah.filter(mk => mk.semesterId === semesterId)
+    return mataKuliah.filter(mk => mk.semesterId === semesterId).map(denganJumlahTopik)
 }
 
 /**

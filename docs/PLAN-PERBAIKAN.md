@@ -1,6 +1,6 @@
 # Plan Perbaikan DuaVersi
 
-> Status: **BERJALAN — Fase 0 selesai 12 Nov 2026 (±14:56 WIB).** Dokumen ini dibuat 12 Nov 2026 dari hasil analisis
+> Status: **BERJALAN — Fase 0 & Fase 1 selesai 12 Nov 2026.** Dokumen ini dibuat 12 Nov 2026 dari hasil analisis
 > (audit kode + `npm run lint` + `npm run build` + tes dev server), supaya urutan perbaikan
 > jelas dulu sebelum ada kode yang diubah.
 > Eksekusi dikerjakan di branch `perbaikan/fase-1-2`; titik kembali: tag `baseline-sebelum-perbaikan` (= `dc7c77a`).
@@ -53,13 +53,13 @@ Estimasi = sesi kerja fokus, kasar, bukan janji. Urutan fase adalah urutan eksek
 - [x] Catat baseline (dokumen ini) ke repo — commit pertama di branch `perbaikan/fase-1-2`
 - **Selesai bila:** bisa kembali ke kondisi sekarang dalam 1 perintah git. ✅ Terverifikasi: `git worktree add <folder> baseline-sebelum-perbaikan` menghasilkan persis isi `dc7c77a` (diuji 12 Nov 2026, worktree uji lalu dihapus).
 
-### Fase 1 — Kebenaran data (P0 · 1 sesi) — *yang diperbaiki: klaim palsu*
-- [ ] `jumlahMataKuliah` & `jumlahTopik` **dihitung dari data** (`lib/data.js`), field manual di JSON dihapus/dijadikan tidak dipakai UI
-- [ ] Halaman semester/matkul menampilkan angka aktual; status kosong memakai label sesuai keputusan D2
-- [ ] Semua URL placeholder `1example-*` → `tersedia: false` sampai file asli ada (UI sudah punya tampilan "belum tersedia", tinggal dipakai jujur)
-- [ ] Teks Halaman Tentang dikoreksi: Fase 1 roadmap tidak lagi mengklaim "8 semester lengkap"
-- [ ] Script validasi data sederhana (Node): cek ID duplikat, referensi yatim (topik→matkul→semester), dan URL placeholder — jalan dalam 1 perintah
-- **Selesai bila:** tidak ada satu pun angka/teks di UI yang berbeda dari isi JSON; script validasi lulus.
+### Fase 1 — Kebenaran data (P0 · 1 sesi) — *yang diperbaiki: klaim palsu* ✅ SELESAI 12 Nov 2026
+- [x] `jumlahMataKuliah` & `jumlahTopik` **dihitung dari data** (`lib/data.js`), field manual di JSON dihapus/dijadikan tidak dipakai UI
+- [x] Halaman semester/matkul menampilkan angka aktual; status kosong memakai label sesuai keputusan D2
+- [x] Semua URL placeholder `1example-*` → `tersedia: false` sampai file asli ada (UI sudah punya tampilan "belum tersedia", tinggal dipakai jujur)
+- [x] Teks Halaman Tentang dikoreksi: Fase 1 roadmap tidak lagi mengklaim "8 semester lengkap"
+- [x] Script validasi data sederhana (Node): cek ID duplikat, referensi yatim (topik→matkul→semester), dan URL placeholder — jalan dalam 1 perintah
+- **Selesai bila:** tidak ada satu pun angka/teks di UI yang berbeda dari isi JSON; script validasi lulus. ✅ Terverifikasi 12 Nov 2026: `npm run validasi-data` LULUS di data baru (dan GAGAL 37 error saat diuji ke data baseline — script-nya terbukti menangkap masalah lama); dev server: badge Semester 1 = "5 Mata Kuliah", Semester 2 = "0 Mata Kuliah" konsisten dengan empty state-nya, homepage memuat 7 label "Belum tersedia", halaman materi menampilkan panel "Belum Tersedia", Tentang tidak lagi memuat klaim lama. Keputusan terapan: D1 fokus Semester 1, D2 label jujur (rekomendasi plan). Catatan: 0/24 versi file adalah kondisi jujur saat ini — mengisinya adalah Fase 4.
 
 ### Fase 2 — Fondasi teknis (P0 · 1–2 sesi) — *yang diperbaiki: 404, lint, font, dark mode*
 - [ ] Halaman data (semester, mata-kuliah, materi) menjadi **Server Component**; `notFound()` dipanggil saat render, bukan di `useEffect`; tambah `generateStaticParams` untuk rute statis yang datanya JSON

@@ -287,6 +287,12 @@ export default function HomePage() {
                       <div className="w-10 h-10 rounded-xl bg-white/60 backdrop-blur-md text-gray-800 flex items-center justify-center font-bold text-lg shadow-sm group-hover:scale-110 transition-transform">
                         {sem.nomor}
                       </div>
+                      {/* Label jujur (Fase 1): semester tanpa mata kuliah ditandai terbuka, bukan disembunyikan */}
+                      {sem.jumlahMataKuliah === 0 && (
+                        <span className="px-2.5 py-1 rounded-full bg-white/70 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-gray-500 shadow-sm">
+                          Belum tersedia
+                        </span>
+                      )}
                     </div>
 
                     <div>
