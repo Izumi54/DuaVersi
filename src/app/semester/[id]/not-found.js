@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function NotFound() {
     return (
         <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--color-bg-light)' }}>
@@ -12,7 +14,7 @@ export default function NotFound() {
                 <p className="text-lg mb-6" style={{ color: 'var(--color-text-secondary)' }}>
                     Halaman yang kamu cari tidak ditemukan
                 </p>
-                <a
+                <Link
                     href="/"
                     className="inline-block px-6 py-3 rounded-lg font-semibold transition"
                     style={{
@@ -21,7 +23,7 @@ export default function NotFound() {
                     }}
                 >
                     ← Kembali ke Beranda
-                </a>
+                </Link>
             </div>
         </div>
     )

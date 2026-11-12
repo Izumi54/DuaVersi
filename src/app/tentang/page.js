@@ -310,8 +310,8 @@ export default function TentangPage() {
                         </div>
                         <h2 className="text-4xl font-bold mb-6 text-gray-800">Dibuat dengan Hati</h2>
                         <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-                            "Projek ini lahir dari keresahan pribadi akan sulitnya mengakses materi kuliah yang terstruktur.
-                            Harapannya, DuaVersi bisa menjadi teman belajar yang bisa diandalkan kapanpun dibutuhkan."
+                            &quot;Projek ini lahir dari keresahan pribadi akan sulitnya mengakses materi kuliah yang terstruktur.
+                            Harapannya, DuaVersi bisa menjadi teman belajar yang bisa diandalkan kapanpun dibutuhkan.&quot;
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4">
@@ -335,7 +335,7 @@ export default function TentangPage() {
                     <h2 className="text-3xl font-bold mb-8 text-gray-800">Siap untuk mulai?</h2>
                     <div className="flex justify-center gap-4">
                         <Link href="/">
-                            <Tombol variant="primary" size="large" className="px-8 py-4 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+                            <Tombol variant="primary" ukuran="large" className="px-8 py-4 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
                                 Mulai Belajar Sekarang
                             </Tombol>
                         </Link>

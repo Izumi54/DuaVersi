@@ -61,20 +61,20 @@ Estimasi = sesi kerja fokus, kasar, bukan janji. Urutan fase adalah urutan eksek
 - [x] Script validasi data sederhana (Node): cek ID duplikat, referensi yatim (topik→matkul→semester), dan URL placeholder — jalan dalam 1 perintah
 - **Selesai bila:** tidak ada satu pun angka/teks di UI yang berbeda dari isi JSON; script validasi lulus. ✅ Terverifikasi 12 Nov 2026: `npm run validasi-data` LULUS di data baru (dan GAGAL 37 error saat diuji ke data baseline — script-nya terbukti menangkap masalah lama); dev server: badge Semester 1 = "5 Mata Kuliah", Semester 2 = "0 Mata Kuliah" konsisten dengan empty state-nya, homepage memuat 7 label "Belum tersedia", halaman materi menampilkan panel "Belum Tersedia", Tentang tidak lagi memuat klaim lama. Keputusan terapan: D1 fokus Semester 1, D2 label jujur (rekomendasi plan). Catatan: 0/24 versi file adalah kondisi jujur saat ini — mengisinya adalah Fase 4.
 
-### Fase 2 — Fondasi teknis (P0 · 1–2 sesi) — *yang diperbaiki: 404, lint, font, dark mode*
-- [ ] Halaman data (semester, mata-kuliah, materi) menjadi **Server Component**; `notFound()` dipanggil saat render, bukan di `useEffect`; tambah `generateStaticParams` untuk rute statis yang datanya JSON
-- [ ] Metadata per halaman (`generateMetadata`): judul "CS101 — Pengantar Ilmu Komputer · DuaVersi", dst.
-- [ ] `src/lib/data.js`: ganti `require()` berulang dengan `import` JSON sekali di modul
-- [ ] Perbaiki 19 error lint per kelompok: pola setState-di-effect diganti (data statis tidak perlu effect), entities, `<a>` → `<Link>`
-- [ ] Font disatukan: **hapus Geist** dari `layout.js`, Inter + Outfit dimuat via `next/font` (bukan `@import` CSS) — build tidak lagi tergantung fetch font yang tidak dipakai
-- [ ] Dark mode dibetulkan: `@custom-variant dark` di Tailwind v4 agar kelas `dark:` mengikuti class toggle; cegah kedip tema saat load (script kecil di `<head>` membaca localStorage sebelum render); kunjungan pertama yang belum punya preferensi tersimpan mengikuti setting OS, bukan dipaksa light
-- [ ] Samakan prop `Tombol`: satu nama (`ukuran`), perbaiki pemakaian `size=` di homepage & tentang
-- **Selesai bila:** `npm run lint` 0 error · `npm run build` sukses · `/semester/99` dkk balas **404** · toggle dark mode mengubah seluruh halaman secara konsisten · judul tab berbeda per halaman.
+### Fase 2 — Fondasi teknis (P0 · 1–2 sesi) — *yang diperbaiki: 404, lint, font, dark mode* ✅ **SELESAI 12 Nov 2026**
+- [x] Halaman data (semester, mata-kuliah, materi) menjadi **Server Component**; `notFound()` dipanggil saat render, bukan di `useEffect`; tambah `generateStaticParams` untuk rute statis yang datanya JSON
+- [x] Metadata per halaman (`generateMetadata`): judul "CS101 — Pengantar Ilmu Komputer · DuaVersi", dst.
+- [x] `src/lib/data.js`: ganti `require()` berulang dengan `import` JSON sekali di modul
+- [x] Perbaiki 19 error lint per kelompok: pola setState-di-effect diganti (data statis tidak perlu effect), entities, `<a>` → `<Link>`
+- [x] Font disatukan: **hapus Geist** dari `layout.js`, Inter + Outfit dimuat lokal (bukan `@import` CSS) — build tidak lagi tergantung fetch font. **Catatan implementasi:** `next/font` dicoba, tapi tetap fetch Google Fonts saat build dan gagal di VM; font akhirnya di-self-host via paket `@fontsource/inter` + `@fontsource/outfit` (woff2 dari node_modules) — hasil setara/lebih kuat: build sama sekali tidak menyentuh Google Fonts
+- [x] Dark mode dibetulkan: `@custom-variant dark` di Tailwind v4 agar kelas `dark:` mengikuti class toggle; cegah kedip tema saat load (script kecil di `<head>` membaca localStorage sebelum render); kunjungan pertama yang belum punya preferensi tersimpan mengikuti setting OS, bukan dipaksa light
+- [x] Samakan prop `Tombol`: satu nama (`ukuran`), perbaiki pemakaian `size=` di homepage & tentang
+- **Selesai bila:** `npm run lint` 0 error · `npm run build` sukses · `/semester/99` dkk balas **404** · toggle dark mode mengubah seluruh halaman secara konsisten · judul tab berbeda per halaman. ✅ Terverifikasi 12 Nov 2026: lint 0 error/0 warning; build sukses (25 rute statis/SSG); server produksi: `/semester/99`, `/mata-kuliah/ngawur`, `/materi/ngawur` → 404, rute valid → 200; judul tab unik per halaman (mis. "CS101 — Pengantar Ilmu Komputer · DuaVersi"); CSS hasil build memakai varian `.dark` class-based + script tema awal ada di HTML. Toggle dark mode divisualkan ulang belum diuji di browser (Playwright belum terpasang) — logika class + CSS-nya terverifikasi. Bonus lebih awal dari Fase 3: logika bookmark sudah disatukan ke hook `useBookmarks`.
 
 ### Fase 3 — Fitur inti benar-benar bekerja (P1 · 1 sesi)
 - [ ] Pencarian mencari juga **nama + kode mata kuliah** dan nama semester; hasil dikelompokkan (Topik / Mata Kuliah)
 - [ ] Saran cepat & placeholder pencarian **dibangkitkan dari data nyata** (hanya istilah yang pasti ada hasilnya)
-- [ ] Logika bookmark disatukan jadi satu hook `useBookmarks` (sekarang logika yang sama ditulis 3 kali: halaman bookmark, materi, dan tersebar) — dipakai semua halaman
+- [x] Logika bookmark disatukan jadi satu hook `useBookmarks` — **sudah dikerjakan lebih awal di Fase 2** (dipakai halaman bookmark & materi)
 - [ ] Hilangkan `<button>` di dalam `<Link>`/`<a>` (materi, bookmark, header, semester) — ganti pola styling link-sebagai-tombol
 - [ ] Tombol hapus bookmark bisa dijangkau keyboard & sentuh (tidak hover-only): selalu terlihat di sentuh, `focus-visible` jelas
 - [ ] Perbaiki dependensi effect di halaman materi (`isTopicCompleted` tidak stabil → effect jalan tiap render)

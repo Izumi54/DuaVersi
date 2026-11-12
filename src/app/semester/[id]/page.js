@@ -1,32 +1,35 @@
-'use client'
-
-import { useState, useEffect, use } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Kontainer from '@/components/layout/kontainer'
 import Badge from '@/components/ui/badge'
 import Tombol from '@/components/ui/tombol'
-import { ambilSemesterById, ambilMataKuliahBySemester } from '@/lib/data'
+import { ambilSemuaSemester, ambilSemesterById, ambilMataKuliahBySemester } from '@/lib/data'
 
-export default function SemesterDetailPage({ params }) {
-    // React.use() untuk unwrap params di Client Component (Next.js 16)
-    const resolvedParams = use(params)
-    const semesterId = `sem-${resolvedParams.id}`
+export function generateStaticParams() {
+    return ambilSemuaSemester().map((s) => ({ id: String(s.nomor) }))
+}
 
-    // Data fetching (simulated since data is static lib)
+export async function generateMetadata({ params }) {
+    const { id } = await params
+    const semester = ambilSemesterById(`sem-${id}`)
+    if (!semester) return { title: 'Semester Tidak Ditemukan · DuaVersi' }
+    return {
+        title: `${semester.nama} · DuaVersi`,
+        description: `Materi kuliah ${semester.nama}: ${semester.jumlahMataKuliah} mata kuliah tersedia di DuaVersi.`,
+    }
+}
+
+export default async function SemesterDetailPage({ params }) {
+    const { id } = await params
+    const semesterId = `sem-${id}`
+
+    // Server Component: data statis dibaca saat render; notFound() langsung
+    // di sini (bukan di useEffect) agar rute invalid membalas 404 beneran.
     const semester = ambilSemesterById(semesterId)
+    if (!semester) {
+        notFound()
+    }
     const daftarMataKuliah = ambilMataKuliahBySemester(semesterId)
-
-    const [isVisible, setIsVisible] = useState(false)
-
-    useEffect(() => {
-        if (!semester) {
-            notFound()
-        }
-        setIsVisible(true)
-    }, [semester])
-
-    if (!semester) return null
 
     // Warna dinamis berdasarkan semester (looping colors)
     const colors = [
@@ -55,7 +58,7 @@ export default function SemesterDetailPage({ params }) {
             <Kontainer>
                 {/* Header Section */}
                 <div
-                    className={`relative mb-16 p-8 md:p-12 rounded-[2.5rem] overflow-hidden transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
+                    className={`relative mb-16 p-8 md:p-12 rounded-[2.5rem] overflow-hidden anim-muncul bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
                 >
                     {/* Background Gradient Mesh */}
                     <div className={`absolute top-0 right-0 w-96 h-96 bg-gradient-to-br ${theme.bg} opacity-10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2`} />
@@ -173,13 +176,6 @@ export default function SemesterDetailPage({ params }) {
                     </Link>
                 </div>
             </Kontainer>
-
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-            `}</style>
         </div>
     )
 }

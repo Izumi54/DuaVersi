@@ -10,29 +10,23 @@ import { cariMateri } from '@/lib/data'
 
 export default function CariPage() {
     const [keyword, setKeyword] = useState('')
-    const [hasil, setHasil] = useState([])
-    const [sudahCari, setSudahCari] = useState(false)
-    const [isSearching, setIsSearching] = useState(false)
+    const [debouncedKeyword, setDebouncedKeyword] = useState('')
     const resultsRef = useRef(null)
 
+    // Debounce: state diturunkan dari keyword yang sudah berhenti berubah.
+    // setState hanya dipanggil dari callback timer — bukan sinkron di effect —
+    // dan hasil pencarian dihitung saat render (Fase 2, pola react-hooks baru).
     useEffect(() => {
-        if (keyword.trim() === '') {
-            setHasil([])
-            setSudahCari(false)
-            setIsSearching(false)
-            return
-        }
-
-        setIsSearching(true)
         const debounceTimer = setTimeout(() => {
-            const results = cariMateri(keyword)
-            setHasil(results)
-            setSudahCari(true)
-            setIsSearching(false)
+            setDebouncedKeyword(keyword)
         }, 300)
 
         return () => clearTimeout(debounceTimer)
     }, [keyword])
+
+    const sudahCari = debouncedKeyword.trim() !== ''
+    const isSearching = keyword !== debouncedKeyword && keyword.trim() !== ''
+    const hasil = sudahCari ? cariMateri(debouncedKeyword) : []
 
     return (
         <div className="min-h-screen py-20 relative overflow-x-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
@@ -118,7 +112,7 @@ export default function CariPage() {
                             {/* Stats Header */}
                             <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200/50">
                                 <h2 className="text-lg font-semibold text-gray-600">
-                                    Hasil Pencarian: <span className="text-indigo-600">"{keyword}"</span>
+                                    Hasil Pencarian: <span className="text-indigo-600">&quot;{keyword}&quot;</span>
                                 </h2>
                                 <span className="px-3 py-1 rounded-lg bg-indigo-50 text-indigo-600 text-sm font-bold">
                                     {hasil.length} Ditemukan

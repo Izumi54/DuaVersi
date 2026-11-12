@@ -13,7 +13,12 @@ export function useTheme() {
         const loadTheme = () => {
             try {
                 const saved = localStorage.getItem('duaversi_theme')
-                const prefersDark = saved === 'dark'
+                // Preferensi tersimpan menang; kunjungan pertama mengikuti
+                // setting OS (script tema awal di layout sudah menerapkan
+                // class .dark sebelum render, jadi baca dari sana).
+                const prefersDark = saved
+                    ? saved === 'dark'
+                    : document.documentElement.classList.contains('dark')
                 setIsDark(prefersDark)
 
                 // Apply theme ke HTML element

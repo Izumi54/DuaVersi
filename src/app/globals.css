@@ -1,8 +1,11 @@
-/* Import Google Fonts - HARUS PALING ATAS! */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+/* Font Inter + Outfit di-self-host dari paket @fontsource (di-import di layout.js,
+   Fase 2) — build tidak lagi tergantung fetch Google Fonts sama sekali. */
 
-/* Import Tailwind CSS - Dark Mode Fixed */
+/* Import Tailwind CSS */
 @import "tailwindcss";
+
+/* Tailwind v4: kelas dark: mengikuti class .dark di <html> (toggle), bukan media query OS */
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Tailwind v4 Theme Configuration */
 @theme {
@@ -126,4 +129,21 @@ html {
 .dark .glass {
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+/* Animasi masuk halaman (pengganti pola state isVisible di Server Component) */
+@keyframes muncul {
+    from { opacity: 0; transform: translateY(2.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.anim-muncul { animation: muncul 1s ease-out both; }
+
+/* Keyframes global (dulu <style jsx> di halaman semester & mata-kuliah;
+   dipindah ke sini karena halaman itu sekarang Server Component) */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

@@ -122,12 +122,12 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/semester/1">
-                <Tombol variant="primary" size="large" className="w-full sm:w-auto px-8 py-4 text-lg shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all">
+                <Tombol variant="primary" ukuran="large" className="w-full sm:w-auto px-8 py-4 text-lg shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all">
                   Mulai Belajar 🚀
                 </Tombol>
               </Link>
               <Link href="/tentang">
-                <Tombol variant="outline" size="large" className="w-full sm:w-auto px-8 py-4 text-lg hover:bg-white/50">
+                <Tombol variant="outline" ukuran="large" className="w-full sm:w-auto px-8 py-4 text-lg hover:bg-white/50">
                   Pelajari Konsep
                 </Tombol>
               </Link>
@@ -190,7 +190,7 @@ export default function HomePage() {
                   <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 block">Definisi Formal</span>
                   <h3 className="text-2xl font-serif font-bold text-gray-800 mb-4">Pointer dalam C++</h3>
                   <p className="text-lg text-gray-600 leading-relaxed font-serif mb-6">
-                    "Pointer adalah variabel yang menyimpan alamat memori dari variabel lain sebagai nilai referensinya. Operator dereference (*) digunakan untuk mengakses nilai yang disimpan di alamat memori tersebut, sedangkan operator address-of (&) digunakan untuk mendapatkan alamat memori."
+                    &quot;Pointer adalah variabel yang menyimpan alamat memori dari variabel lain sebagai nilai referensinya. Operator dereference (*) digunakan untuk mengakses nilai yang disimpan di alamat memori tersebut, sedangkan operator address-of (&) digunakan untuk mendapatkan alamat memori.&quot;
                   </p>
                   <p className="text-lg text-gray-600 leading-relaxed font-serif mb-6">
                     Dalam pemrograman C++, penggunaan pointer sangat krusial untuk manajemen memori dinamis dan struktur data tingkat lanjut seperti linked list dan tree.
@@ -198,7 +198,7 @@ export default function HomePage() {
                   <div className="p-4 bg-gray-900 rounded-xl overflow-x-auto">
                     <code className="text-sm font-mono text-green-400">
                       int* ptr = &variable;<br />
-                      printf("%d", *ptr);
+                      printf(&quot;%d&quot;, *ptr);
                     </code>
                   </div>
                 </div>
@@ -208,10 +208,10 @@ export default function HomePage() {
                   <span className="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2 block">✨ Penjelasan Santai</span>
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">Pointer itu Petunjuk Jalan! 🗺️</h3>
                   <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                    "Bayangkan <strong className="text-indigo-600">kertas contekan</strong> di laci mejamu. <br /><br />
+                    &quot;Bayangkan <strong className="text-indigo-600">kertas contekan</strong> di laci mejamu. <br /><br />
                     Variabel biasa itu <b>isinya</b> contekan tersebut. <br />
                     Pointer itu cuma <b>kertas petunjuk</b> yang bertuliskan: <br />
-                    <i>'Contekan ada di laci nomer 3'</i>."
+                    <i>&apos;Contekan ada di laci nomer 3&apos;</i>.&quot;
                   </p>
                   <p className="text-lg text-gray-600 leading-relaxed mb-6">
                     Jadi kamu gak perlu bawa laci meja-nya kemana-mana (boros tenaga/memori), cukup bawa kertas petunjuknya aja! Pintar kan? 😎

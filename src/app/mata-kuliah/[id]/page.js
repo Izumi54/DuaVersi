@@ -1,31 +1,38 @@
-'use client'
-
-import { useState, useEffect, use } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Kontainer from '@/components/layout/kontainer'
 import Badge from '@/components/ui/badge'
 import Tombol from '@/components/ui/tombol'
 import MatkulProgress from '@/components/features/matkul-progress'
-import { ambilMataKuliahById, ambilTopikByMataKuliah, ambilSemesterById } from '@/lib/data'
+import { ambilSemuaMataKuliah, ambilMataKuliahById, ambilTopikByMataKuliah, ambilSemesterById } from '@/lib/data'
 
-export default function MataKuliahDetailPage({ params }) {
-    // React.use() untuk unwrap params di Client Component (Next.js 16)
-    const resolvedParams = use(params)
-    const matkul = ambilMataKuliahById(resolvedParams.id)
-    const daftarTopik = ambilTopikByMataKuliah(matkul?.id)
-    const semester = matkul ? ambilSemesterById(matkul.semesterId) : null
+export function generateStaticParams() {
+    return ambilSemuaMataKuliah().map((mk) => ({ id: mk.id }))
+}
 
-    const [isVisible, setIsVisible] = useState(false)
+export async function generateMetadata({ params }) {
+    const { id } = await params
+    const matkul = ambilMataKuliahById(id)
+    if (!matkul) return { title: 'Mata Kuliah Tidak Ditemukan · DuaVersi' }
+    return {
+        title: `${matkul.kode} — ${matkul.nama} · DuaVersi`,
+        description: matkul.deskripsi,
+    }
+}
 
-    useEffect(() => {
-        if (!matkul) {
-            notFound()
-        }
-        setIsVisible(true)
-    }, [matkul])
+export default async function MataKuliahDetailPage({ params }) {
+    const { id } = await params
 
-    if (!matkul || !semester) return null
+    // Server Component: notFound() saat render untuk rute invalid (404 asli).
+    const matkul = ambilMataKuliahById(id)
+    if (!matkul) {
+        notFound()
+    }
+    const daftarTopik = ambilTopikByMataKuliah(matkul.id)
+    const semester = ambilSemesterById(matkul.semesterId)
+    if (!semester) {
+        notFound()
+    }
 
     return (
         <div className="min-h-screen py-20 relative overflow-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
@@ -45,7 +52,7 @@ export default function MataKuliahDetailPage({ params }) {
             <Kontainer>
                 {/* Hero Header Card */}
                 <div
-                    className={`relative mb-12 p-8 md:p-12 rounded-[2.5rem] overflow-hidden transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
+                    className={`relative mb-12 p-8 md:p-12 rounded-[2.5rem] overflow-hidden anim-muncul bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
                 >
                     <div className="relative z-10 flex flex-col lg:flex-row gap-12">
                         {/* Left: Main Info */}
@@ -187,17 +194,6 @@ export default function MataKuliahDetailPage({ params }) {
                 </div>
 
             </Kontainer>
-
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                    from { opacity: 0; transform: translateY(30px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
-            `}</style>
         </div>
     )
 }

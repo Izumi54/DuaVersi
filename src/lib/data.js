@@ -1,7 +1,13 @@
 /**
  * Utility functions untuk data manipulation
  * DuaVersi - Platform Materi Kuliah
+ *
+ * Sejak Fase 2 plan perbaikan: data JSON di-import sekali di level modul,
+ * bukan di-require berulang di setiap fungsi.
  */
+import semesterData from '@/data/semester.json'
+import mataKuliahData from '@/data/mataKuliah.json'
+import topikData from '@/data/topik.json'
 
 /**
  * Jumlah selalu DIHITUNG dari data aktual, tidak disimpan manual di JSON.
@@ -10,7 +16,7 @@
  * Sejak Fase 1 plan perbaikan, field itu dihapus dari JSON dan dihitung di sini.
  */
 function denganJumlahMataKuliah(semester) {
-    const mataKuliah = require('@/data/mataKuliah.json')
+    const mataKuliah = mataKuliahData
     return {
         ...semester,
         jumlahMataKuliah: mataKuliah.filter(mk => mk.semesterId === semester.id).length
@@ -18,7 +24,7 @@ function denganJumlahMataKuliah(semester) {
 }
 
 function denganJumlahTopik(mataKuliah) {
-    const topik = require('@/data/topik.json')
+    const topik = topikData
     return {
         ...mataKuliah,
         jumlahTopik: topik.filter(t => t.mataKuliahId === mataKuliah.id).length
@@ -30,7 +36,7 @@ function denganJumlahTopik(mataKuliah) {
  * @returns {Array} Daftar semester (jumlahMataKuliah dihitung dari data)
  */
 export function ambilSemuaSemester() {
-    const semester = require('@/data/semester.json')
+    const semester = semesterData
     return semester.map(denganJumlahMataKuliah)
 }
 
@@ -40,7 +46,7 @@ export function ambilSemuaSemester() {
  * @returns {Object|null} Data semester atau null
  */
 export function ambilSemesterById(id) {
-    const semester = require('@/data/semester.json')
+    const semester = semesterData
     const ditemukan = semester.find(s => s.id === id)
     return ditemukan ? denganJumlahMataKuliah(ditemukan) : null
 }
@@ -50,7 +56,7 @@ export function ambilSemesterById(id) {
  * @returns {Array} Daftar mata kuliah (jumlahTopik dihitung dari data)
  */
 export function ambilSemuaMataKuliah() {
-    const mataKuliah = require('@/data/mataKuliah.json')
+    const mataKuliah = mataKuliahData
     return mataKuliah.map(denganJumlahTopik)
 }
 
@@ -60,7 +66,7 @@ export function ambilSemuaMataKuliah() {
  * @returns {Object|null} Data mata kuliah atau null
  */
 export function ambilMataKuliahById(id) {
-    const mataKuliah = require('@/data/mataKuliah.json')
+    const mataKuliah = mataKuliahData
     const ditemukan = mataKuliah.find(mk => mk.id === id)
     return ditemukan ? denganJumlahTopik(ditemukan) : null
 }
@@ -71,7 +77,7 @@ export function ambilMataKuliahById(id) {
  * @returns {Array} Daftar mata kuliah dalam semester
  */
 export function ambilMataKuliahBySemester(semesterId) {
-    const mataKuliah = require('@/data/mataKuliah.json')
+    const mataKuliah = mataKuliahData
     return mataKuliah.filter(mk => mk.semesterId === semesterId).map(denganJumlahTopik)
 }
 
@@ -80,7 +86,7 @@ export function ambilMataKuliahBySemester(semesterId) {
  * @returns {Array} Daftar topik
  */
 export function ambilSemuaTopik() {
-    const topik = require('@/data/topik.json')
+    const topik = topikData
     return topik
 }
 
@@ -90,7 +96,7 @@ export function ambilSemuaTopik() {
  * @returns {Object|null} Data topik atau null
  */
 export function ambilTopikById(id) {
-    const topik = require('@/data/topik.json')
+    const topik = topikData
     return topik.find(t => t.id === id) || null
 }
 
@@ -100,7 +106,7 @@ export function ambilTopikById(id) {
  * @returns {Array} Daftar topik dalam mata kuliah
  */
 export function ambilTopikByMataKuliah(mataKuliahId) {
-    const topik = require('@/data/topik.json')
+    const topik = topikData
     return topik.filter(t => t.mataKuliahId === mataKuliahId)
         .sort((a, b) => a.urutan - b.urutan)
 }
@@ -111,8 +117,8 @@ export function ambilTopikByMataKuliah(mataKuliahId) {
  * @returns {Array} Hasil pencarian
  */
 export function cariMateri(keyword) {
-    const topik = require('@/data/topik.json')
-    const mataKuliah = require('@/data/mataKuliah.json')
+    const topik = topikData
+    const mataKuliah = mataKuliahData
 
     const keywordLower = keyword.toLowerCase()
 

@@ -1,41 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Kontainer from '@/components/layout/kontainer'
 import Badge from '@/components/ui/badge'
-import { ambilSemuaTopik, ambilMataKuliahById } from '@/lib/data'
+import { ambilTopikById, ambilMataKuliahById } from '@/lib/data'
+import { useBookmarks } from '@/hooks/useBookmarks'
 
 export default function BookmarkPage() {
-    const [bookmarkedTopiks, setBookmarkedTopiks] = useState([])
-    const [loading, setLoading] = useState(true)
+    const { bookmarkIds, loading, removeBookmark } = useBookmarks()
 
-    useEffect(() => {
-        const savedBookmarks = localStorage.getItem('duaversi_bookmarks')
-        if (savedBookmarks) {
-            const bookmarkIds = JSON.parse(savedBookmarks)
-            const allTopiks = ambilSemuaTopik()
-            const bookmarked = allTopiks.filter(topik => bookmarkIds.includes(topik.id))
-
-            const withMatkul = bookmarked.map(topik => ({
-                ...topik,
-                mataKuliah: ambilMataKuliahById(topik.mataKuliahId)
-            }))
-            setBookmarkedTopiks(withMatkul)
-        }
-        setLoading(false)
-    }, [])
+    // Daftar diturunkan langsung dari bookmarkIds (state hook) — dulu disalin
+    // lewat setState di effect, pola yang dilarang react-hooks (Fase 2).
+    const bookmarkedTopiks = bookmarkIds
+        .map(id => ambilTopikById(id))
+        .filter(Boolean)
+        .map(topik => ({
+            ...topik,
+            mataKuliah: ambilMataKuliahById(topik.mataKuliahId)
+        }))
 
     const handleRemoveBookmark = (e, topikId) => {
         e.preventDefault() // Prevent navigation trigger from parent Link
         e.stopPropagation()
-        setBookmarkedTopiks(prev => prev.filter(t => t.id !== topikId))
-        const savedBookmarks = localStorage.getItem('duaversi_bookmarks')
-        if (savedBookmarks) {
-            const bookmarkIds = JSON.parse(savedBookmarks)
-            const updated = bookmarkIds.filter(id => id !== topikId)
-            localStorage.setItem('duaversi_bookmarks', JSON.stringify(updated))
-        }
+        removeBookmark(topikId)
     }
 
     if (loading) {
