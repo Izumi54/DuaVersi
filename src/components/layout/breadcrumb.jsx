@@ -17,7 +17,7 @@ export default function Breadcrumb({ items = [] }) {
                         className="hover:opacity-70 transition"
                         style={{ color: 'var(--color-text-secondary)' }}
                     >
-                        🏠 Beranda
+                        Beranda
                     </Link>
                 </li>
 

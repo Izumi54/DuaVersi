@@ -12,7 +12,8 @@
   /* Custom Colors - Eye-Friendly */
   --color-primary: #4f46e5;
   --color-secondary: #059669;
-  --color-accent: #0891b2;
+  /* --color-accent (cyan) dihapus 13 Nov 2026 (audit anti-slop #001 no. 17):
+     palet aktif hanya indigo inti + emerald untuk progres, sesuai DESIGN.md. */
 
   /* Light Mode Palette */
   --color-bg-light: #f9fafb;
@@ -36,7 +37,6 @@
   /* Dark Mode Accents */
   --color-primary-dark: #818cf8;
   --color-secondary-dark: #34d399;
-  --color-accent-dark: #22d3ee;
 
   /* Font Families */
   --font-heading: 'Outfit', sans-serif;
@@ -119,48 +119,9 @@ html {
   --color-secondary: var(--color-secondary-dark);
 }
 
-/* Keyframe Animations */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-slide-left {
-  animation: slideInLeft 1s ease-out forwards;
-}
-
-/* Additional Utilities */
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .glass {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-/* Animasi masuk halaman (pengganti pola state isVisible di Server Component) */
-@keyframes muncul {
-    from { opacity: 0; transform: translateY(2.5rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.anim-muncul { animation: muncul 1s ease-out both; }
-
-/* Keyframes global (dulu <style jsx> di halaman semester & mata-kuliah;
-   dipindah ke sini karena halaman itu sekarang Server Component) */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+/* Keyframes & utilitas animasi masuk lama (slideInLeft, fadeInUp, fadeIn,
+   .glass, .anim-muncul) dihapus 13 Nov 2026 (audit anti-slop #001 gelombang 2):
+   tidak ada lagi pemakainya di UI, glass tidak dipakai di satu pun permukaan
+   (no. 7), dan animasi masuk bertentangan dengan dial MOTION 1 (no. 14).
+   Fade hasil pencarian di halaman Cari didefinisikan lokal di halamannya
+   sebagai umpan balik status, bukan animasi masuk halaman. */

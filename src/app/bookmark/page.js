@@ -35,18 +35,9 @@ export default function BookmarkPage() {
     return (
         <div className="min-h-screen py-20 relative overflow-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
 
-            {/* Background Decoration */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 blur-[100px]" style={{ background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)' }} />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-10 blur-[100px]" style={{ background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)' }} />
-            </div>
-
             <Kontainer>
                 {/* Header Section */}
                 <div className="text-center mb-16 relative z-10">
-                    <div className="inline-block p-4 rounded-3xl bg-white/50 backdrop-blur-md shadow-lg mb-6 border border-white/50 animate-bounce">
-                        <span className="text-4xl">❤️</span>
-                    </div>
                     <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}>
                         Perpustakaan Saya
                     </h1>
@@ -59,14 +50,13 @@ export default function BookmarkPage() {
                 <div className="relative z-10 min-h-[400px]">
                     {bookmarkedTopiks.length === 0 ? (
                         // Empty State
-                        <div className="text-center bg-white/40 backdrop-blur-md rounded-[2.5rem] p-12 border border-dashed border-gray-300 max-w-3xl mx-auto opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
-                            <div className="text-8xl mb-6 grayscale opacity-40">📚</div>
+                        <div className="text-center bg-white dark:bg-slate-800 rounded-2xl p-12 border border-dashed border-gray-300 max-w-3xl mx-auto">
                             <h2 className="text-2xl font-bold text-gray-700 mb-4">Belum ada koleksi</h2>
                             <p className="text-gray-500 mb-8 max-w-lg mx-auto">
-                                Kamu belum menyimpan materi apapun tanda hati untuk menyimpannya di sini.
+                                Kamu belum menyimpan materi apa pun. Buka sebuah topik, lalu tekan tombol Bookmark untuk menyimpannya di sini.
                             </p>
-                            <Link href="/" className="inline-block px-8 py-3 rounded-full bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:-translate-y-1">
-                                Mulai Jelajahi Materi ➜
+                            <Link href="/" className="inline-block px-8 py-3 rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition-colors">
+                                Jelajahi Materi
                             </Link>
                         </div>
                     ) : (
@@ -78,11 +68,7 @@ export default function BookmarkPage() {
                                 // dan tombolnya tidak lagi tersembunyi sampai hover.
                                 <div
                                     key={topik.id}
-                                    className="group relative bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-2"
-                                    style={{
-                                        opacity: 0,
-                                        animation: `fadeInUp 0.5s ease-out forwards ${index * 0.1}s`
-                                    }}
+                                    className="group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700"
                                 >
                                     {/* Remove Button — selalu terlihat di sentuh & keyboard (Fase 3):
                                         tampil penuh di layar kecil, baru disembunyikan sampai
@@ -129,9 +115,6 @@ export default function BookmarkPage() {
                                                         </span>
                                                     ))}
                                                 </div>
-                                                <div className="text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
-                                                    ➜
-                                                </div>
                                             </div>
                                         </div>
                                     </Link>
@@ -143,25 +126,14 @@ export default function BookmarkPage() {
 
                 {/* Footer Tip */}
                 {bookmarkedTopiks.length > 0 && (
-                    <div className="mt-12 text-center opacity-0 animate-[fadeIn_0.5s_ease-out_forwards_1s]">
-                        <p className="text-sm text-gray-600 bg-white/30 inline-block px-4 py-2 rounded-full backdrop-blur-sm">
-                            💡 Data tersimpan di browsermu. Login untuk cloud sync segera hadir.
+                    <div className="mt-12 text-center">
+                        <p className="text-sm text-gray-600 bg-gray-100 dark:bg-slate-800 inline-block px-4 py-2 rounded-lg">
+                            Data tersimpan di browsermu. Login untuk cloud sync segera hadir.
                         </p>
                     </div>
                 )}
 
             </Kontainer>
-
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
-            `}</style>
         </div>
     )
 }

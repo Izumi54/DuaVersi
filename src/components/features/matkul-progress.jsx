@@ -39,7 +39,7 @@ export default function MatkulProgressSection({ daftarTopik }) {
                             Selesai:
                         </span>
                         <span className="ml-2 font-bold" style={{ color: 'var(--color-secondary)' }}>
-                            ✅ {completed} topik
+                            {completed} topik selesai
                         </span>
                     </div>
                     <div>

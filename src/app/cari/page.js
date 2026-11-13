@@ -39,26 +39,9 @@ export default function CariPage() {
     return (
         <div className="min-h-screen py-20 relative overflow-x-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
 
-            {/* Background Decoration */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div
-                    className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full opacity-20 blur-[100px]"
-                    style={{ background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)' }}
-                />
-                <div
-                    className="absolute top-[40%] -left-[10%] w-[500px] h-[500px] rounded-full opacity-10 blur-[80px]"
-                    style={{ background: 'radial-gradient(circle, var(--color-secondary) 0%, transparent 70%)' }}
-                />
-            </div>
-
             <Kontainer>
                 {/* Header Section */}
                 <div className="text-center mb-12 relative z-10">
-                    <div
-                        className="inline-block p-4 rounded-3xl bg-white/50 backdrop-blur-md shadow-lg mb-6 border border-white/50 animate-bounce"
-                    >
-                        <span className="text-4xl">🔍</span>
-                    </div>
                     <h1
                         className="text-4xl md:text-6xl font-bold mb-4"
                         style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}
@@ -78,7 +61,7 @@ export default function CariPage() {
                             style={{ background: 'linear-gradient(to right, var(--color-primary), var(--color-secondary))' }}
                         />
                         <div className="relative bg-white rounded-2xl shadow-xl flex items-center p-2">
-                            <span className="pl-4 text-2xl text-gray-400">✨</span>
+                            
                             <Input
                                 type="text"
                                 placeholder={placeholder}
@@ -101,13 +84,9 @@ export default function CariPage() {
                             <button
                                 key={tag}
                                 onClick={() => setKeyword(tag)}
-                                className="px-4 py-2 rounded-full text-sm font-medium transition-all hover:-translate-y-1 hover:shadow-md bg-white/60 hover:bg-white border border-gray-100"
-                                style={{
-                                    animation: `fadeInUp 0.5s ease-out forwards ${idx * 0.1}s`,
-                                    opacity: 0
-                                }}
+                                className="px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 cursor-pointer"
                             >
-                                🔍 {tag}
+                                {tag}
                             </button>
                         ))}
                     </div>
@@ -129,8 +108,7 @@ export default function CariPage() {
 
                             {/* No Results State */}
                             {jumlahHasil === 0 && (
-                                <div className="text-center py-20 bg-white/40 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300">
-                                    <div className="text-6xl mb-4 grayscale opacity-50">🤔</div>
+                                <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-dashed border-gray-300">
                                     <h3 className="text-xl font-bold text-gray-700 mb-2">Belum ketemu nih...</h3>
                                     <p className="text-gray-500">Coba pakai kata kunci lain yang lebih umum ya!</p>
                                 </div>
@@ -146,19 +124,15 @@ export default function CariPage() {
                                         {hasil.mataKuliah.map((mk, index) => (
                                             <Link key={mk.id} href={`/mata-kuliah/${mk.id}`}>
                                                 <div
-                                                    className="group relative bg-white/70 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                                                    className="group relative bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-200 dark:border-slate-700 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700 overflow-hidden"
                                                     style={{
                                                         animation: `slideInLeft 0.5s ease-out forwards ${index * 0.1}s`,
                                                         opacity: 0,
                                                         transform: 'translateX(-20px)'
                                                     }}
                                                 >
-                                                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                                     <div className="flex items-start gap-4">
-                                                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                                            📚
-                                                        </div>
 
                                                         <div className="flex-1 min-w-0">
                                                             <div className="flex items-center gap-2 mb-1">
@@ -181,9 +155,6 @@ export default function CariPage() {
                                                             </p>
                                                         </div>
 
-                                                        <div className="self-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
-                                                            👉
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </Link>
@@ -202,19 +173,15 @@ export default function CariPage() {
                                         {hasil.topik.map((item, index) => (
                                     <Link key={item.id} href={`/materi/${item.id}`}>
                                         <div
-                                            className="group relative bg-white/70 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                                            className="group relative bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-200 dark:border-slate-700 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700 overflow-hidden"
                                             style={{
                                                 animation: `slideInLeft 0.5s ease-out forwards ${index * 0.1}s`,
                                                 opacity: 0,
                                                 transform: 'translateX(-20px)'
                                             }}
                                         >
-                                            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                             <div className="flex items-start gap-4">
-                                                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                                    📄
-                                                </div>
 
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center gap-2 mb-1">
@@ -244,9 +211,6 @@ export default function CariPage() {
                                                     </div>
                                                 </div>
 
-                                                <div className="self-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
-                                                    👉
-                                                </div>
                                             </div>
                                         </div>
                                         </Link>
@@ -260,7 +224,6 @@ export default function CariPage() {
                     {/* Initial Placeholder */}
                     {!sudahCari && (
                         <div className="text-center py-20 opacity-50">
-                            <div className="text-8xl mb-6">📚</div>
                             <h2 className="text-2xl font-bold text-gray-500">Siap menjelajah ilmu?</h2>
                         </div>
                     )}

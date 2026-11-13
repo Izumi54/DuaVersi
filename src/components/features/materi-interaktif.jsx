@@ -86,7 +86,7 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                                 ukuran="large"
                                 onClick={handleToggleBookmark}
                             >
-                                {isBookmarked ? '❤️ Tersimpan' : '🤍 Bookmark'}
+                                {isBookmarked ? 'Tersimpan' : 'Bookmark'}
                             </Tombol>
 
                             {/* Completion Button */}
@@ -95,7 +95,7 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                                 ukuran="large"
                                 onClick={handleToggleCompletion}
                             >
-                                {isCompleted ? '✅ Selesai' : '☑️ Tandai Selesai'}
+                                {isCompleted ? 'Selesai' : 'Tandai Selesai'}
                             </Tombol>
                         </div>
                     </div>
@@ -117,7 +117,7 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div>
                             <h3 className="font-bold mb-1" style={{ color: 'var(--color-text-primary)' }}>
-                                🔄 Pilih Versi Materi
+                                Pilih Versi Materi
                             </h3>
                             <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                                 Pilih antara versi original atau yang mudah dipahami
@@ -182,7 +182,7 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                             >
                                 <div className="flex items-center gap-4">
                                     <Badge variant={versiAktif === 'mentah' ? 'primary' : 'secondary'}>
-                                        {versiAktif === 'mentah' ? '📄 Versi Mentah' : '✨ Versi Simplified'}
+                                        {versiAktif === 'mentah' ? 'Versi Mentah' : 'Versi Simplified'}
                                     </Badge>
                                     <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                                         {materiAktif.tipe.toUpperCase()} • {materiAktif.ukuran} • {materiAktif.jumlahHalaman} halaman
@@ -190,7 +190,7 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                                 </div>
 
                                 <Tombol variant="outline" ukuran="small" href={materiAktif.url}>
-                                    🔗 Buka di Drive
+                                    Buka di Drive
                                 </Tombol>
                             </div>
 
@@ -207,15 +207,14 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                             {/* Download Bar */}
                             <div className="px-6 py-4 flex justify-center gap-4" style={{ borderTop: '1px solid var(--color-bg-light)' }}>
                                 <Tombol variant="primary" ukuran="medium" href={materiAktif.url}>
-                                    📥 Download File
+                                    Download File
                                 </Tombol>
                             </div>
                         </div>
                     ) : (
                         // Not Available
                         <div className="p-12 text-center">
-                            <div className="text-6xl mb-4">😕</div>
-                            <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+                                                        <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
                                 Materi {versiAktif === 'mentah' ? 'Mentah' : 'Simplified'} Belum Tersedia
                             </h3>
                             <p className="text-sm mb-4" style={{ color: 'var(--color-text-secondary)' }}>

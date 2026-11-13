@@ -38,8 +38,9 @@
 - **Batas:** maksimal 2 warna inti + 1 aksen (R-29). Cyan dikeluarkan dari palet aktif;
   gradien pastel berbeda-beda per kartu semester adalah utang desain (audit #001 no. 17),
   dihapus saat nomor itu disetujui, bukan ditambah.
-- **Gradien:** bukan perlakuan warna utama (audit #001 no. 6, belum disetujui). Bila suatu saat
-  dipakai, hanya untuk memisahkan satu tingkat hierarki, dengan alasan tertulis di sini.
+- **Gradien:** bukan perlakuan warna utama (audit #001 no. 6; per gelombang 2 tidak ada lagi
+  `bg-gradient` di UI). Bila suatu saat dipakai, hanya untuk memisahkan satu tingkat
+  hierarki, dengan alasan tertulis di sini.
 
 ## Tipografi
 
@@ -51,14 +52,18 @@
 
 ## Permukaan, radius, gerak
 
-- **Glass/blur:** aksen maksimal 1-2 elemen (R-10). Utang saat ini 24 kemunculan (audit #001
-  no. 7, belum disetujui); arahnya: permukaan baca (kartu materi, panel) solid, kaca hanya
-  untuk elemen melayang yang memang di atas konten (mis. header saat scroll), bila terbukti perlu.
-- **Radius:** skala kecil dan berbeda per jenis elemen (tombol ≠ kartu ≠ lencana), bukan pil
-  untuk semua (utang audit #001 no. 15).
+- **Glass/blur:** tidak dipakai. Per gelombang 2 audit #001 (13 Nov 2026) seluruh permukaan
+  solid (24 kemunculan blur menjadi 0) dan header adalah batang solid bergaris bawah,
+  bukan pil melayang. Kaca hanya boleh kembali bila ada elemen melayang yang benar-benar
+  perlu dan alasannya ditulis di sini dulu.
+- **Radius:** skala kecil dan berbeda per jenis elemen: tombol `rounded-lg`/`md`, kartu dan
+  panel `rounded-2xl`, lencana `rounded-md`. Pil hanya untuk bentuk yang memang pil secara
+  fungsi: sakelar (toggle demo), titik penanda, dan chip tag/metadata.
 - **Shadow:** hanya penanda elevasi nyata (R-12); konten yang diam di halaman duduk rata.
-- **Ikon:** bukan emoji (utang audit #001 no. 8). Bila ikon diperlukan, pakai satu set ikon
-  bergaya konsisten yang relevan dengan isi; bila tidak ada yang relevan, tanpa ikon.
+  Pengecualian terukur per gelombang 2: kotak pencarian di halaman Cari (titik fokus
+  halaman itu) dan hover kartu komponen `Kartu`.
+- **Ikon:** bukan emoji. Bila ikon diperlukan, pakai satu set ikon bergaya konsisten yang
+  relevan dengan isi; bila tidak ada yang relevan, tanpa ikon, label teks yang bekerja.
 
 ## Kejujuran konten (mengikat semua halaman)
 
@@ -68,6 +73,9 @@
 
 ## Status arah vs utang
 
-Arah di atas adalah keputusan mulai 13 Nov 2026. Selisihnya dengan keadaan situs saat ini
-adalah daftar temuan `anti-slop/audit-001-2026-11-13.md`; temuan diperbaiki hanya bila
-nomornya disetujui Izumi, dan setiap perbaikan yang mengubah arah harus memperbarui file ini.
+Arah di atas adalah keputusan mulai 13 Nov 2026. Selisihnya dengan keadaan situs adalah
+daftar temuan `anti-slop/audit-001-2026-11-13.md`. Per 13 Nov 2026 malam, seluruh 20 temuan
+audit #001 sudah diperbaiki dalam dua gelombang (1-5 lalu 6-20) dan diverifikasi di situs
+live; file ini dan laporan di file audit adalah catatan keputusannya. Temuan baru dari audit
+berikutnya tetap hanya diperbaiki bila nomornya disetujui Izumi, dan setiap perbaikan yang
+mengubah arah harus memperbarui file ini.

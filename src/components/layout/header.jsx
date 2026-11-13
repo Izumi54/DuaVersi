@@ -7,7 +7,8 @@ import { useTheme } from '@/hooks/useTheme'
 
 /**
  * Component: Header
- * Floating navbar - Minimal & Professional (Wix Style)
+ * Navbar batang penuh (direvisi audit anti-slop #001 gelombang 2:
+ * bukan lagi pil melayang + shadow; elevasi digantikan garis bawah)
  */
 export default function Header() {
     const pathname = usePathname()
@@ -19,21 +20,21 @@ export default function Header() {
     }
 
     return (
-        <header className="sticky top-0 z-50 pt-4 px-4">
+        <header className="sticky top-0 z-50">
             <nav
-                className="container mx-auto rounded-full shadow-lg border"
+                className="border-b"
                 style={{
                     backgroundColor: 'var(--color-bg-light)',
                     borderColor: 'var(--color-border-light)',
                 }}
             >
-                <div className="px-6 md:px-8 py-5">
+                <div className="container mx-auto px-6 md:px-8 py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo - Left (Circle + Text) */}
                         <Link href="/" className="flex items-center gap-3">
                             {/* Circle with "D" - Dark mode aware */}
                             <div
-                                className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg"
+                                className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg"
                                 style={{
                                     backgroundColor: isDark ? '#FFFFFF' : '#111827',
                                     color: isDark ? '#111827' : '#FFFFFF'
@@ -80,7 +81,7 @@ export default function Header() {
                             {/* Dark Mode Toggle */}
                             <button
                                 onClick={toggleTheme}
-                                className="p-2 rounded-lg transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+                                className="p-2 rounded-lg transition-all hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
                                 style={{ color: 'var(--color-text-secondary)' }}
                                 title={isDark ? 'Light Mode' : 'Dark Mode'}
                             >
@@ -98,7 +99,7 @@ export default function Header() {
                             {/* CTA Button - Dark mode aware (Fase 3: Link bergaya tombol, tanpa <button> di dalam) */}
                             <Link
                                 href="/cari"
-                                className="px-6 py-2.5 rounded-full font-medium text-sm transition-all hover:opacity-90"
+                                className="px-6 py-2.5 rounded-lg font-medium text-sm transition-all hover:opacity-90"
                                 style={{
                                     backgroundColor: isDark ? '#FFFFFF' : '#111827',
                                     color: isDark ? '#111827' : '#FFFFFF'
@@ -110,7 +111,7 @@ export default function Header() {
 
                         {/* Mobile Menu Button */}
                         <button
-                            className="md:hidden p-2 rounded-lg"
+                            className="md:hidden p-2 rounded-lg cursor-pointer"
                             onClick={toggleMobileMenu}
                             style={{ color: 'var(--color-text-primary)' }}
                             aria-label="Toggle menu"
@@ -158,7 +159,7 @@ export default function Header() {
                             <div className="pt-3">
                                 <Link
                                     href="/cari"
-                                    className="block py-2.5 px-4 rounded-full text-sm font-medium text-center transition-all hover:opacity-90"
+                                    className="block py-2.5 px-4 rounded-lg text-sm font-medium text-center transition-all hover:opacity-90"
                                     style={{
                                         backgroundColor: isDark ? '#FFFFFF' : '#111827',
                                         color: isDark ? '#111827' : '#FFFFFF'

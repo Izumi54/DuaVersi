@@ -31,46 +31,25 @@ export default async function SemesterDetailPage({ params }) {
     }
     const daftarMataKuliah = ambilMataKuliahBySemester(semesterId)
 
-    // Warna dinamis berdasarkan semester (looping colors)
-    const colors = [
-        { bg: 'from-indigo-500 to-purple-600', text: 'text-indigo-600', border: 'border-indigo-200' },
-        { bg: 'from-emerald-500 to-teal-600', text: 'text-emerald-600', border: 'border-emerald-200' },
-        { bg: 'from-sky-500 to-blue-600', text: 'text-sky-600', border: 'border-sky-200' },
-        { bg: 'from-orange-500 to-red-600', text: 'text-orange-600', border: 'border-orange-200' },
-        { bg: 'from-pink-500 to-rose-600', text: 'text-pink-600', border: 'border-pink-200' },
-        { bg: 'from-violet-500 to-indigo-600', text: 'text-violet-600', border: 'border-violet-200' },
-        { bg: 'from-teal-500 to-emerald-600', text: 'text-teal-600', border: 'border-teal-200' },
-        { bg: 'from-red-500 to-orange-600', text: 'text-red-600', border: 'border-red-200' },
-    ]
-    const theme = colors[(semester.nomor - 1) % colors.length]
+    // Skema warna tunggal indigo (audit anti-slop #001 no. 17: palet tidak
+    // lagi berganti warna per semester; identitas dari DESIGN.md).
 
     return (
         <div className="min-h-screen py-20 relative overflow-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
 
-            {/* Background Decoration */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div
-                    className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10 blur-[100px]"
-                    style={{ background: `linear-gradient(135deg, var(--color-primary), transparent)` }}
-                />
-            </div>
-
             <Kontainer>
                 {/* Header Section */}
                 <div
-                    className={`relative mb-16 p-8 md:p-12 rounded-[2.5rem] overflow-hidden anim-muncul bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
+                    className="relative mb-16 p-8 md:p-12 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700"
                 >
-                    {/* Background Gradient Mesh */}
-                    <div className={`absolute top-0 right-0 w-96 h-96 bg-gradient-to-br ${theme.bg} opacity-10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2`} />
-
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-                        <div className={`w-32 h-32 md:w-40 md:h-40 flex-shrink-0 rounded-3xl bg-gradient-to-br ${theme.bg} flex items-center justify-center text-white text-6xl md:text-7xl font-bold shadow-lg shadow-indigo-500/20`}>
+                        <div className="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-6xl md:text-7xl font-bold">
                             {semester.nomor}
                         </div>
 
                         <div className="flex-1">
                             <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-4">
-                                <span className={`px-4 py-1.5 rounded-full text-sm font-bold bg-white dark:bg-slate-800 border ${theme.border} dark:border-slate-600 ${theme.text}`}>
+                                <span className="px-4 py-1.5 rounded-full text-sm font-bold bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-300">
                                     Semester {semester.nomor}
                                 </span>
                                 <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700">
@@ -99,8 +78,7 @@ export default async function SemesterDetailPage({ params }) {
                     </div>
 
                     {daftarMataKuliah.length === 0 ? (
-                        <div className="text-center py-20 bg-white/50 dark:bg-slate-800/50 rounded-3xl border border-dashed border-gray-300 dark:border-slate-700">
-                            <div className="text-6xl mb-4 grayscale opacity-50">📚</div>
+                        <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-dashed border-gray-300 dark:border-slate-700">
                             <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300">Belum ada mata kuliah</h3>
                             <p className="text-gray-500 dark:text-gray-400">Materi sedang disiapkan oleh tim kurikulum.</p>
                         </div>
@@ -113,14 +91,8 @@ export default async function SemesterDetailPage({ params }) {
                                     className="group"
                                 >
                                     <div
-                                        className="relative h-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl border border-white/60 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
-                                        style={{
-                                            animation: `fadeInUp 0.6s ease-out forwards ${index * 0.1 + 0.3}s`,
-                                            opacity: 0,
-                                            transform: 'translateY(20px)'
-                                        }}
+                                        className="relative h-full bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-500 transition-colors overflow-hidden"
                                     >
-                                        <div className={`absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b ${theme.bg} opacity-50 group-hover:opacity-100 transition-opacity`} />
 
                                         <div className="flex items-start justify-between mb-6">
                                             <div>
@@ -138,8 +110,8 @@ export default async function SemesterDetailPage({ params }) {
                                                     {matkul.namaInggris}
                                                 </p>
                                             </div>
-                                            <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-700 shadow-sm flex items-center justify-center text-gray-500 dark:text-gray-400 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
-                                                ➜
+                                            <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-gray-400 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
+                                                ›
                                             </div>
                                         </div>
 
@@ -149,13 +121,11 @@ export default async function SemesterDetailPage({ params }) {
 
                                         <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-slate-700/50">
                                             <div className="flex items-center gap-2">
-                                                <span className="text-lg">👨‍🏫</span>
                                                 <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{matkul.dosen}</span>
                                             </div>
 
                                             <div className="flex items-center gap-2">
                                                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50/50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-100 dark:border-indigo-800">
-                                                    <span>📄</span>
                                                     {matkul.jumlahTopik} Topik
                                                 </div>
                                             </div>

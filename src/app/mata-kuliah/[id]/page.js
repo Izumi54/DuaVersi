@@ -37,22 +37,10 @@ export default async function MataKuliahDetailPage({ params }) {
     return (
         <div className="min-h-screen py-20 relative overflow-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
 
-            {/* Background Decoration */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div
-                    className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full opacity-10 blur-[100px]"
-                    style={{ background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)' }}
-                />
-                <div
-                    className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 blur-[100px]"
-                    style={{ background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)' }}
-                />
-            </div>
-
             <Kontainer>
                 {/* Hero Header Card */}
                 <div
-                    className={`relative mb-12 p-8 md:p-12 rounded-[2.5rem] overflow-hidden anim-muncul bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-2xl`}
+                    className="relative mb-12 p-8 md:p-12 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700"
                 >
                     <div className="relative z-10 flex flex-col lg:flex-row gap-12">
                         {/* Left: Main Info */}
@@ -66,7 +54,7 @@ export default async function MataKuliahDetailPage({ params }) {
                                 </span>
                                 <Link href={`/semester/${semester.nomor}`}>
                                     <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer">
-                                        Semester {semester.nomor} ➜
+                                        Semester {semester.nomor} ›
                                     </span>
                                 </Link>
                             </div>
@@ -81,8 +69,7 @@ export default async function MataKuliahDetailPage({ params }) {
                                 {matkul.deskripsi}
                             </p>
 
-                            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-white/60 dark:border-slate-700/50 w-fit">
-                                <span className="text-3xl">👨‍🏫</span>
+                            <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 w-fit">
                                 <div>
                                     <div className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-bold mb-0.5">Dosen Pengampu</div>
                                     <div className="font-semibold text-gray-800 dark:text-gray-200">{matkul.dosen}</div>
@@ -92,7 +79,7 @@ export default async function MataKuliahDetailPage({ params }) {
 
                         {/* Right: Stats Card */}
                         <div className="lg:w-72">
-                            <div className="p-8 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-xl shadow-indigo-500/20">
+                            <div className="p-8 rounded-2xl bg-indigo-950 text-white">
                                 <div className="text-center mb-6">
                                     <div className="text-6xl font-bold mb-2 tracking-tight">{daftarTopik.length}</div>
                                     <div className="text-sm font-medium text-indigo-100 uppercase tracking-wider">Total Topik</div>
@@ -118,7 +105,7 @@ export default async function MataKuliahDetailPage({ params }) {
                 </div>
 
                 {/* Progress Bar (Component) */}
-                <div className="mb-12 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards_0.5s]">
+                <div className="mb-12">
                     <MatkulProgress daftarTopik={daftarTopik} />
                 </div>
 
@@ -129,7 +116,6 @@ export default async function MataKuliahDetailPage({ params }) {
 
                     {daftarTopik.length === 0 ? (
                         <div className="text-center py-20 opacity-50">
-                            <div className="text-6xl mb-4">🚧</div>
                             <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300">Materi Sedang Disusun</h3>
                         </div>
                     ) : (
@@ -138,19 +124,15 @@ export default async function MataKuliahDetailPage({ params }) {
                                 <Link key={topik.id} href={`/materi/${topik.id}`} className="block group">
                                     <div
                                         className={`relative md:flex items-center gap-8 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
-                                        style={{
-                                            opacity: 0,
-                                            animation: `fadeInUp 0.6s ease-out forwards ${0.5 + index * 0.1}s`
-                                        }}
                                     >
                                         {/* Timeline Dot (Center) */}
-                                        <div className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-white dark:bg-slate-700 border-4 border-indigo-500 shadow-lg transform -translate-x-1/2 z-10 transition-transform duration-300 group-hover:scale-150 hidden md:block" />
+                                        <div className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-white dark:bg-slate-700 border-4 border-indigo-500 transform -translate-x-1/2 z-10 hidden md:block" />
 
                                         {/* Card Side */}
                                         <div className="flex-1 ml-20 md:ml-0 md:w-1/2">
-                                            <div className="relative bg-white/60 dark:bg-slate-800/60 backdrop-blur-md p-6 rounded-2xl border border-white/60 dark:border-slate-700/50 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group-hover:border-indigo-200 dark:group-hover:border-indigo-500">
+                                            <div className="relative bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-200 dark:border-slate-700 transition-colors group-hover:border-indigo-200 dark:group-hover:border-indigo-500">
                                                 {/* Number Badge */}
-                                                <div className="absolute -left-12 md:-left-4 md:-top-4 w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold shadow-lg shadow-indigo-500/30 text-lg md:text-base">
+                                                <div className="absolute -left-12 md:-left-4 md:-top-4 w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold text-lg md:text-base">
                                                     {topik.urutan}
                                                 </div>
 
@@ -164,12 +146,12 @@ export default async function MataKuliahDetailPage({ params }) {
                                                 <div className="flex flex-wrap gap-2">
                                                     {topik.materi.mentah.tersedia && (
                                                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded bg-gray-50 dark:bg-slate-700 text-gray-600 dark:text-gray-300 text-xs font-medium border border-gray-200 dark:border-slate-600 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900 group-hover:border-indigo-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
-                                                            📄 {topik.materi.mentah.ukuran}
+                                                            {topik.materi.mentah.ukuran}
                                                         </span>
                                                     )}
                                                     {topik.materi.simplified.tersedia && (
                                                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 text-xs font-medium border border-teal-100 dark:border-teal-800 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/50 transition-colors">
-                                                            ✨ Simplified
+                                                            Simplified
                                                         </span>
                                                     )}
                                                 </div>
