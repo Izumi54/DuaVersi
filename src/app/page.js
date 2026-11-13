@@ -90,34 +90,34 @@ export default function HomePage() {
       <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
         {/* Background Blobs (Optimized CSS Anim) */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 right-[10%] w-72 h-72 bg-purple-500/20 rounded-full blur-[80px] animate-float-slow" />
-          <div className="absolute bottom-20 left-[10%] w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] animate-float-slower" />
+          <div className="absolute top-20 right-[10%] w-72 h-72 bg-purple-500/20 rounded-full blur-[80px]" />
+          <div className="absolute bottom-20 left-[10%] w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px]" />
         </div>
 
         {/* Floating Icons (Decorative) */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute top-[20%] left-[15%] text-4xl opacity-20 animate-bounce-slow" style={{ animationDelay: '0s' }}>💻</span>
-          <span className="absolute top-[30%] right-[20%] text-5xl opacity-20 animate-bounce-slow" style={{ animationDelay: '1s' }}>📚</span>
-          <span className="absolute bottom-[25%] left-[25%] text-3xl opacity-20 animate-bounce-slow" style={{ animationDelay: '2s' }}>⚡</span>
+          <span className="absolute top-[20%] left-[15%] text-4xl opacity-20">💻</span>
+          <span className="absolute top-[30%] right-[20%] text-5xl opacity-20">📚</span>
+          <span className="absolute bottom-[25%] left-[25%] text-3xl opacity-20">⚡</span>
         </div>
 
         <Kontainer>
           <div className={`text-center relative z-10 transition-all duration-1000 transform ${visibleSections.hero ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-indigo-100 shadow-sm mb-8 animate-fade-in-up">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
               <span className="text-sm font-medium text-indigo-600 tracking-wide">E-Learning Generasi Baru</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)' }}>
               Belajar Kuliah <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 animate-gradient-x bg-300%">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-300%">
                 Jadi Lebih Mudah.
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-500 max-w-3xl mx-auto mb-12 leading-relaxed">
               Platform materi Teknik Informatika dengan pendekatan <span className="text-indigo-600 font-bold">Dual-Perspective</span>.
-              Pahami konsep sulit dalam hitungan menit.
+              Satu topik, dua cara penyampaian: versi mentah sesuai bahan kuliah, dan versi simplified dengan bahasa sehari-hari.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -173,7 +173,7 @@ export default function HomePage() {
                   <div className="w-3 h-3 rounded-full bg-yellow-400" />
                   <div className="w-3 h-3 rounded-full bg-green-400" />
                 </div>
-                <div className="flex-1 text-center text-xs font-mono text-gray-400 bg-white py-1.5 rounded-md border border-gray-100">
+                <div className="flex-1 text-center text-xs font-mono text-gray-500 bg-white py-1.5 rounded-md border border-gray-100">
                   duaversi.com/demo/pointer
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function HomePage() {
 
                 {/* Academic Content */}
                 <div className={`absolute inset-0 p-8 md:p-12 overflow-y-auto transition-all duration-500 ease-in-out ${demoMode === 'academic' ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 -translate-x-10 z-0 pointer-events-none'}`}>
-                  <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 block">Definisi Formal</span>
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Definisi Formal</span>
                   <h3 className="text-2xl font-serif font-bold text-gray-800 mb-4">Pointer dalam C++</h3>
                   <p className="text-lg text-gray-600 leading-relaxed font-serif mb-6">
                     &quot;Pointer adalah variabel yang menyimpan alamat memori dari variabel lain sebagai nilai referensinya. Operator dereference (*) digunakan untuk mengakses nilai yang disimpan di alamat memori tersebut, sedangkan operator address-of (&) digunakan untuk mendapatkan alamat memori.&quot;
@@ -230,9 +230,9 @@ export default function HomePage() {
         <Kontainer>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: 'To-The-Point', desc: 'Tanpa basa-basi. Materi disusun ringkas untuk pemahaman instan.', icon: '⚡', color: 'text-yellow-500', bg: 'bg-yellow-50' },
+              { title: 'To-The-Point', desc: 'Tanpa basa-basi. Materi disusun ringkas dan langsung ke inti.', icon: '⚡', color: 'text-yellow-500', bg: 'bg-yellow-50' },
               { title: 'Bahasa Manusia', desc: 'Bye-bye bahasa textbook kaku. Kita pakai analogi sehari-hari.', icon: '🗣️', color: 'text-green-500', bg: 'bg-green-50' },
-              { title: 'Visual Learning', desc: 'Diagram dan ilustrasi yang memanjakan mata dan otak kananmu.', icon: '🎨', color: 'text-purple-500', bg: 'bg-purple-50' }
+              { title: 'Progres Tercatat', desc: 'Topik yang sudah selesai dan bookmark tersimpan di browsermu, jadi kamu tahu sudah sampai mana.', icon: '🎨', color: 'text-purple-500', bg: 'bg-purple-50' }
             ].map((feature, i) => (
               <div
                 key={i}
@@ -324,8 +324,8 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
 
             {/* Glowing Orbs */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-[150px] opacity-40 animate-pulse" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500 rounded-full blur-[150px] opacity-40 animate-pulse delay-700" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-[150px] opacity-40" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500 rounded-full blur-[150px] opacity-40" />
 
             <div className="relative z-10">
               <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white tracking-tight">
@@ -333,7 +333,7 @@ export default function HomePage() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-400">Paling Ambis?</span>
               </h2>
               <p className="text-xl text-indigo-100 mb-12 max-w-2xl mx-auto">
-                Gabung sekarang dan nikmati cara belajar yang belum pernah kamu rasakan sebelumnya di bangku kuliah.
+                Materi dilengkapi bertahap mulai Semester 1. Buka daftar semester, pilih mata kuliah, dan baca topiknya dalam versi yang paling cocok buatmu.
               </p>
 
               <Link href="/cari" className="group relative inline-block px-10 py-5 rounded-full bg-white text-indigo-900 font-bold text-xl shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-10px_rgba(255,255,255,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden">
@@ -347,29 +347,11 @@ export default function HomePage() {
         </Kontainer>
       </section>
 
-      {/* CUSTOM STYLES for Specific Animations */}
+      {/* CUSTOM STYLES — animasi loop dekoratif (float/bounce/gradient bergerak)
+          dihapus 13 Nov 2026 (audit anti-slop #001 no. 4: MOTION 1 di DESIGN.md).
+          Yang tersisa hanya ukuran latar gradien statis untuk teks judul. */}
       <style jsx global>{`
-                @keyframes float-slow {
-                    0%, 100% { transform: translate(0, 0); }
-                    50% { transform: translate(20px, -20px); }
-                }
-                @keyframes float-slower {
-                    0%, 100% { transform: translate(0, 0); }
-                    50% { transform: translate(-30px, 30px); }
-                }
-                @keyframes bounce-slow {
-                    0%, 100% { transform: translateY(0); opacity: 0.2; }
-                    50% { transform: translateY(-20px); opacity: 0.4; }
-                }
-                .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
-                .animate-float-slower { animation: float-slower 12s ease-in-out infinite; }
-                .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
                 .bg-300\% { background-size: 300% 300%; }
-                .animate-gradient-x { animation: gradient-x 8s ease infinite; }
-                @keyframes gradient-x {
-                    0%, 100% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                }
             `}</style>
     </div>
   )

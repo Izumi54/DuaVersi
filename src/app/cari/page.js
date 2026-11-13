@@ -165,7 +165,7 @@ export default function CariPage() {
                                                                 <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">
                                                                     {mk.kode}
                                                                 </span>
-                                                                <span className="text-xs text-gray-400">•</span>
+                                                                <span className="text-xs text-gray-500">•</span>
                                                                 <span className="text-xs font-medium text-gray-500 truncate">
                                                                     {mk.semester ? mk.semester.nama : ''}
                                                                 </span>
@@ -177,7 +177,7 @@ export default function CariPage() {
 
                                                             <p className="text-sm text-gray-600">
                                                                 {mk.jumlahTopik} Topik
-                                                                {mk.jumlahTopik === 0 && ' — Belum tersedia'}
+                                                                {mk.jumlahTopik === 0 && ' (Belum tersedia)'}
                                                             </p>
                                                         </div>
 
@@ -221,7 +221,7 @@ export default function CariPage() {
                                                         <span className="text-xs font-bold px-2 py-0.5 rounded bg-indigo-100 text-indigo-700">
                                                             {item.mataKuliah.kode}
                                                         </span>
-                                                        <span className="text-xs text-gray-400">•</span>
+                                                        <span className="text-xs text-gray-500">•</span>
                                                         <span className="text-xs font-medium text-gray-500 truncate">
                                                             {item.mataKuliah.nama}
                                                         </span>
@@ -261,7 +261,7 @@ export default function CariPage() {
                     {!sudahCari && (
                         <div className="text-center py-20 opacity-50">
                             <div className="text-8xl mb-6">📚</div>
-                            <h2 className="text-2xl font-bold text-gray-400">Siap menjelajah ilmu?</h2>
+                            <h2 className="text-2xl font-bold text-gray-500">Siap menjelajah ilmu?</h2>
                         </div>
                     )}
                 </div>

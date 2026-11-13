@@ -252,7 +252,7 @@ export default function TentangPage() {
                         <div className="absolute left-[50%] top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2" />
 
                         {[
-                            { title: 'Fase 1: Pondasi', desc: 'Peluncuran platform dasar untuk Teknik Informatika. Materi dilengkapi bertahap mulai Semester 1 — satu mata kuliah sampai tuntas, dimulai dari Pengantar Ilmu Komputer.', icon: '🏗️', status: 'In Progress', color: 'bg-yellow-500' },
+                            { title: 'Fase 1: Pondasi', desc: 'Peluncuran platform dasar untuk Teknik Informatika. Materi dilengkapi bertahap mulai Semester 1, satu mata kuliah sampai tuntas, dimulai dari Pengantar Ilmu Komputer.', icon: '🏗️', status: 'In Progress', color: 'bg-yellow-500' },
                             { title: 'Fase 2: Ekosistem', desc: 'Integrasi sistem login & profil, bookmark cloud, ruang diskusi, sistem upload materi, dan analytics pembelajaran.', icon: '🌱', status: 'Future', color: 'bg-blue-500' },
                             { title: 'Fase 3: Ekspansi', desc: 'Kolaborasi antar kampus serta perluasan ke program studi Saintek dan fakultas lainnya.', icon: '🚀', status: 'Future', color: 'bg-blue-500' }
                         ].map((item, i) => (
@@ -275,7 +275,7 @@ export default function TentangPage() {
                                     <div className="p-6 bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-shadow">
                                         <div className="flex items-center gap-2 mb-2">
                                             <span className={`w-2 h-2 rounded-full ${item.color}`} />
-                                            <span className="text-xs font-bold uppercase text-gray-400">{item.status}</span>
+                                            <span className="text-xs font-bold uppercase text-gray-500">{item.status}</span>
                                         </div>
                                         <h3 className="text-xl font-bold mb-2 text-gray-800">{item.title}</h3>
                                         <p className="text-gray-600 text-sm">{item.desc}</p>

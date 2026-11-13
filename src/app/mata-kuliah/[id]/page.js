@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
     const matkul = ambilMataKuliahById(id)
     if (!matkul) return { title: 'Mata Kuliah Tidak Ditemukan · DuaVersi' }
     return {
-        title: `${matkul.kode} — ${matkul.nama} · DuaVersi`,
+        title: `${matkul.kode}: ${matkul.nama} · DuaVersi`,
         description: matkul.deskripsi,
     }
 }
@@ -74,7 +74,7 @@ export default async function MataKuliahDetailPage({ params }) {
                             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-gray-50 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
                                 {matkul.nama}
                             </h1>
-                            <p className="text-xl text-gray-400 dark:text-gray-500 italic font-serif mb-6">
+                            <p className="text-xl text-gray-500 dark:text-gray-400 italic font-serif mb-6">
                                 {matkul.namaInggris}
                             </p>
                             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">

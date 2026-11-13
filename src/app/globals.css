@@ -88,6 +88,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Gerak dikurangi (audit anti-slop #001 no. 4, R-39): pengguna yang meminta
+   reduced motion di OS/browser tidak disuguhi animasi/transisi apa pun.
+   Sesuai dial MOTION 1 di DESIGN.md: gerak hanya untuk status & hover. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* DARK MODE VARIABLE MAPPING 
    This ensures components using var(--color-surface-light) 
    automatically switch to dark values in dark mode.

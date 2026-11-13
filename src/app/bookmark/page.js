@@ -144,7 +144,7 @@ export default function BookmarkPage() {
                 {/* Footer Tip */}
                 {bookmarkedTopiks.length > 0 && (
                     <div className="mt-12 text-center opacity-0 animate-[fadeIn_0.5s_ease-out_forwards_1s]">
-                        <p className="text-sm text-gray-400 bg-white/30 inline-block px-4 py-2 rounded-full backdrop-blur-sm">
+                        <p className="text-sm text-gray-600 bg-white/30 inline-block px-4 py-2 rounded-full backdrop-blur-sm">
                             💡 Data tersimpan di browsermu. Login untuk cloud sync segera hadir.
                         </p>
                     </div>
