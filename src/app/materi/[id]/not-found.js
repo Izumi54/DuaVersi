@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Tombol from '@/components/ui/tombol'
 
 export default function MateriNotFound() {
@@ -9,9 +8,7 @@ export default function MateriNotFound() {
                 <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--color-text-primary)' }}>
                     Materi Tidak Ditemukan
                 </h1>
-                <Link href="/">
-                    <Tombol variant="primary">← Kembali ke Beranda</Tombol>
-                </Link>
+                <Tombol variant="primary" href="/">← Kembali ke Beranda</Tombol>
             </div>
         </div>
     )

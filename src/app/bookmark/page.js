@@ -19,9 +19,7 @@ export default function BookmarkPage() {
             mataKuliah: ambilMataKuliahById(topik.mataKuliahId)
         }))
 
-    const handleRemoveBookmark = (e, topikId) => {
-        e.preventDefault() // Prevent navigation trigger from parent Link
-        e.stopPropagation()
+    const handleRemoveBookmark = (topikId) => {
         removeBookmark(topikId)
     }
 
@@ -67,70 +65,77 @@ export default function BookmarkPage() {
                             <p className="text-gray-500 mb-8 max-w-lg mx-auto">
                                 Kamu belum menyimpan materi apapun tanda hati untuk menyimpannya di sini.
                             </p>
-                            <Link href="/">
-                                <button className="px-8 py-3 rounded-full bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:-translate-y-1">
-                                    Mulai Jelajahi Materi ➜
-                                </button>
+                            <Link href="/" className="inline-block px-8 py-3 rounded-full bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:-translate-y-1">
+                                Mulai Jelajahi Materi ➜
                             </Link>
                         </div>
                     ) : (
                         // Masonry Grid Layout
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {bookmarkedTopiks.map((topik, index) => (
-                                <Link key={topik.id} href={`/materi/${topik.id}`}>
-                                    <div
-                                        className="group relative bg-white/70 backdrop-blur-xl p-6 rounded-3xl border border-white/60 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col"
-                                        style={{
-                                            opacity: 0,
-                                            animation: `fadeInUp 0.5s ease-out forwards ${index * 0.1}s`
-                                        }}
+                                // Kartu bukan lagi <Link> yang membungkus tombol hapus (Fase 3):
+                                // tombol hapus jadi saudara Link, bukan anaknya — HTML valid
+                                // dan tombolnya tidak lagi tersembunyi sampai hover.
+                                <div
+                                    key={topik.id}
+                                    className="group relative bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-2"
+                                    style={{
+                                        opacity: 0,
+                                        animation: `fadeInUp 0.5s ease-out forwards ${index * 0.1}s`
+                                    }}
+                                >
+                                    {/* Remove Button — selalu terlihat di sentuh & keyboard (Fase 3):
+                                        tampil penuh di layar kecil, baru disembunyikan sampai
+                                        hover/fokus di layar besar. */}
+                                    <button
+                                        onClick={() => handleRemoveBookmark(topik.id)}
+                                        className="absolute top-4 right-4 w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-red-500 transition-all hover:bg-red-500 hover:text-white z-10 hover:scale-110"
+                                        title="Hapus dari koleksi"
+                                        aria-label={`Hapus ${topik.judul} dari koleksi`}
                                     >
-                                        {/* Remove Button (Hover Only) */}
-                                        <button
-                                            onClick={(e) => handleRemoveBookmark(e, topik.id)}
-                                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white z-10 hover:scale-110"
-                                            title="Hapus dari koleksi"
-                                        >
-                                            ✕
-                                        </button>
+                                        ✕
+                                    </button>
 
-                                        {/* Header info */}
-                                        <div className="mb-4">
-                                            <div className="flex items-center gap-2 mb-3">
-                                                <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold border border-indigo-100">
-                                                    {topik.mataKuliah.kode}
-                                                </span>
-                                                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                                                <span className="text-xs text-gray-500 font-medium truncate flex-1">
-                                                    {topik.mataKuliah.nama}
-                                                </span>
-                                            </div>
-
-                                            <h3 className="text-lg font-bold text-gray-800 leading-snug mb-2 group-hover:text-indigo-600 transition-colors">
-                                                {topik.judul}
-                                            </h3>
-                                        </div>
-
-                                        {/* Description */}
-                                        <p className="text-sm text-gray-500 line-clamp-3 mb-6 flex-1">
-                                            {topik.deskripsi}
-                                        </p>
-
-                                        {/* Footer Tags */}
-                                        <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
-                                            <div className="flex gap-1.5 flex-wrap">
-                                                {topik.tags.slice(0, 2).map((tag) => (
-                                                    <span key={tag} className="text-[10px] px-2 py-1 rounded-md bg-gray-100 text-gray-500 font-medium group-hover:bg-indigo-50 group-hover:text-indigo-500 transition-colors">
-                                                        #{tag}
+                                    <Link href={`/materi/${topik.id}`} className="block h-full">
+                                        <div className="p-6 h-full flex flex-col">
+                                            {/* Header info */}
+                                            <div className="mb-4">
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold border border-indigo-100">
+                                                        {topik.mataKuliah.kode}
                                                     </span>
-                                                ))}
+                                                    <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                                                    <span className="text-xs text-gray-500 font-medium truncate flex-1">
+                                                        {topik.mataKuliah.nama}
+                                                    </span>
+                                                </div>
+
+                                                <h3 className="text-lg font-bold text-gray-800 leading-snug mb-2 group-hover:text-indigo-600 transition-colors">
+                                                    {topik.judul}
+                                                </h3>
                                             </div>
-                                            <div className="text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
-                                                ➜
+
+                                            {/* Description */}
+                                            <p className="text-sm text-gray-500 line-clamp-3 mb-6 flex-1">
+                                                {topik.deskripsi}
+                                            </p>
+
+                                            {/* Footer Tags */}
+                                            <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                <div className="flex gap-1.5 flex-wrap">
+                                                    {topik.tags.slice(0, 2).map((tag) => (
+                                                        <span key={tag} className="text-[10px] px-2 py-1 rounded-md bg-gray-100 text-gray-500 font-medium group-hover:bg-indigo-50 group-hover:text-indigo-500 transition-colors">
+                                                            #{tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                                <div className="text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
+                                                    ➜
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
+                                    </Link>
+                                </div>
                             ))}
                         </div>
                     )}

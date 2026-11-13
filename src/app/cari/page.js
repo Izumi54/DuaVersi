@@ -6,7 +6,7 @@ import Kontainer from '@/components/layout/kontainer'
 import Kartu, { KartuHeader, KartuBody } from '@/components/ui/kartu'
 import Badge from '@/components/ui/badge'
 import Input from '@/components/ui/input'
-import { cariMateri } from '@/lib/data'
+import { cariMateri, saranPencarian } from '@/lib/data'
 
 export default function CariPage() {
     const [keyword, setKeyword] = useState('')
@@ -26,7 +26,15 @@ export default function CariPage() {
 
     const sudahCari = debouncedKeyword.trim() !== ''
     const isSearching = keyword !== debouncedKeyword && keyword.trim() !== ''
-    const hasil = sudahCari ? cariMateri(debouncedKeyword) : []
+    // Hasil dikelompokkan (Fase 3): Topik + Mata Kuliah — bukan satu daftar topik.
+    const hasil = sudahCari ? cariMateri(debouncedKeyword) : { topik: [], mataKuliah: [] }
+    const jumlahHasil = hasil.topik.length + hasil.mataKuliah.length
+    // Saran cepat + placeholder dibangkitkan dari data nyata (Fase 3):
+    // setiap saran dijamin menghasilkan ≥1 hasil.
+    const saran = saranPencarian()
+    const placeholder = saran.length >= 3
+        ? `Coba cari '${saran[0]}', '${saran[1]}', atau '${saran[2]}'...`
+        : 'Coba cari topik atau mata kuliah...'
 
     return (
         <div className="min-h-screen py-20 relative overflow-x-hidden" style={{ backgroundColor: 'var(--color-bg-light)' }}>
@@ -73,7 +81,7 @@ export default function CariPage() {
                             <span className="pl-4 text-2xl text-gray-400">✨</span>
                             <Input
                                 type="text"
-                                placeholder="Coba cari 'Algoritma', 'Basis Data', atau 'Struktur Data'..."
+                                placeholder={placeholder}
                                 value={keyword}
                                 onChange={(e) => setKeyword(e.target.value)}
                                 className="w-full text-lg border-none focus:ring-0 px-4 py-4 bg-transparent"
@@ -87,9 +95,9 @@ export default function CariPage() {
                         </div>
                     </div>
 
-                    {/* Quick Suggestions Tags */}
+                    {/* Quick Suggestions Tags — dari data nyata (Fase 3) */}
                     <div className="mt-6 flex flex-wrap justify-center gap-2">
-                        {['Algoritma', 'Database', 'Python', 'Jaringan', 'AI', 'Web Design', 'React'].map((tag, idx) => (
+                        {saran.map((tag, idx) => (
                             <button
                                 key={tag}
                                 onClick={() => setKeyword(tag)}
@@ -115,12 +123,12 @@ export default function CariPage() {
                                     Hasil Pencarian: <span className="text-indigo-600">&quot;{keyword}&quot;</span>
                                 </h2>
                                 <span className="px-3 py-1 rounded-lg bg-indigo-50 text-indigo-600 text-sm font-bold">
-                                    {hasil.length} Ditemukan
+                                    {jumlahHasil} Ditemukan
                                 </span>
                             </div>
 
                             {/* No Results State */}
-                            {hasil.length === 0 && (
+                            {jumlahHasil === 0 && (
                                 <div className="text-center py-20 bg-white/40 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300">
                                     <div className="text-6xl mb-4 grayscale opacity-50">🤔</div>
                                     <h3 className="text-xl font-bold text-gray-700 mb-2">Belum ketemu nih...</h3>
@@ -128,9 +136,70 @@ export default function CariPage() {
                                 </div>
                             )}
 
-                            {/* Results Grid */}
-                            <div className="grid gap-4">
-                                {hasil.map((item, index) => (
+                            {/* Hasil dikelompokkan: Mata Kuliah dulu, lalu Topik (Fase 3) */}
+                            {hasil.mataKuliah.length > 0 && (
+                                <div className="mb-10">
+                                    <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
+                                        Mata Kuliah ({hasil.mataKuliah.length})
+                                    </h3>
+                                    <div className="grid gap-4">
+                                        {hasil.mataKuliah.map((mk, index) => (
+                                            <Link key={mk.id} href={`/mata-kuliah/${mk.id}`}>
+                                                <div
+                                                    className="group relative bg-white/70 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                                                    style={{
+                                                        animation: `slideInLeft 0.5s ease-out forwards ${index * 0.1}s`,
+                                                        opacity: 0,
+                                                        transform: 'translateX(-20px)'
+                                                    }}
+                                                >
+                                                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                                                    <div className="flex items-start gap-4">
+                                                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                                            📚
+                                                        </div>
+
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className="flex items-center gap-2 mb-1">
+                                                                <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">
+                                                                    {mk.kode}
+                                                                </span>
+                                                                <span className="text-xs text-gray-400">•</span>
+                                                                <span className="text-xs font-medium text-gray-500 truncate">
+                                                                    {mk.semester ? mk.semester.nama : ''}
+                                                                </span>
+                                                            </div>
+
+                                                            <h3 className="text-lg font-bold text-gray-900 mb-1 truncate group-hover:text-emerald-600 transition-colors">
+                                                                {mk.nama}
+                                                            </h3>
+
+                                                            <p className="text-sm text-gray-600">
+                                                                {mk.jumlahTopik} Topik
+                                                                {mk.jumlahTopik === 0 && ' — Belum tersedia'}
+                                                            </p>
+                                                        </div>
+
+                                                        <div className="self-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
+                                                            👉
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Results Grid — Topik */}
+                            {hasil.topik.length > 0 && (
+                                <div>
+                                    <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
+                                        Topik ({hasil.topik.length})
+                                    </h3>
+                                    <div className="grid gap-4">
+                                        {hasil.topik.map((item, index) => (
                                     <Link key={item.id} href={`/materi/${item.id}`}>
                                         <div
                                             className="group relative bg-white/70 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
@@ -180,9 +249,11 @@ export default function CariPage() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
-                                ))}
-                            </div>
+                                        </Link>
+                                    ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 

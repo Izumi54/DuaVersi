@@ -112,31 +112,92 @@ export function ambilTopikByMataKuliah(mataKuliahId) {
 }
 
 /**
- * Cari materi berdasarkan keyword
+ * Normalisasi kata kunci: huruf kecil + buang spasi ujung.
+ */
+function normalisasiKata(teks) {
+    return (teks || '').toLowerCase().trim()
+}
+
+/**
+ * Cari materi berdasarkan keyword — sejak Fase 3 mencari juga nama + kode
+ * mata kuliah dan nama semester, hasilnya dikelompokkan (Topik / Mata Kuliah).
+ *
+ * - Topik cocok bila judul/deskripsi/tag mengandung kata kunci, ATAU mata
+ *   kuliahnya yang cocok (mis. cari "CS101" menemukan ke-12 topik CS101).
+ * - Mata kuliah cocok bila nama/kode mengandung kata kunci, ATAU semesternya
+ *   yang cocok (mis. cari "Semester 1" menemukan ke-5 matkul Semester 1).
+ * - Mata kuliah tanpa topik tetap muncul di kelompoknya (mis. "Basis Data"
+ *   → CS103, 0 topik) — halaman matkulnya sendiri yang menampilkan
+ *   empty state jujur, bukan hasil pencarian yang disembunyikan.
+ *
  * @param {string} keyword - Kata kunci pencarian
- * @returns {Array} Hasil pencarian
+ * @returns {{ topik: Array, mataKuliah: Array }} Hasil dikelompokkan
  */
 export function cariMateri(keyword) {
-    const topik = topikData
-    const mataKuliah = mataKuliahData
+    const kata = normalisasiKata(keyword)
+    if (!kata) return { topik: [], mataKuliah: [] }
 
-    const keywordLower = keyword.toLowerCase()
+    const semesterCocok = new Set(
+        semesterData
+            .filter(s => normalisasiKata(s.nama).includes(kata))
+            .map(s => s.id)
+    )
+
+    const mataKuliahCocok = mataKuliahData
+        .filter(mk =>
+            normalisasiKata(mk.nama).includes(kata) ||
+            normalisasiKata(mk.kode).includes(kata) ||
+            semesterCocok.has(mk.semesterId)
+        )
+        .map(mk => ({
+            ...denganJumlahTopik(mk),
+            semester: semesterData.find(s => s.id === mk.semesterId) || null
+        }))
+    const idMatkulCocok = new Set(mataKuliahCocok.map(mk => mk.id))
 
     // Cari di topik
-    const hasilTopik = topik.filter(t =>
-        t.judul.toLowerCase().includes(keywordLower) ||
-        t.deskripsi.toLowerCase().includes(keywordLower) ||
-        t.tags.some(tag => tag.toLowerCase().includes(keywordLower))
+    const hasilTopik = topikData.filter(t =>
+        normalisasiKata(t.judul).includes(kata) ||
+        normalisasiKata(t.deskripsi).includes(kata) ||
+        (t.tags || []).some(tag => normalisasiKata(tag).includes(kata)) ||
+        idMatkulCocok.has(t.mataKuliahId)
     )
 
     // Tambahkan info mata kuliah ke hasil
-    return hasilTopik.map(t => {
-        const mk = mataKuliah.find(m => m.id === t.mataKuliahId)
-        return {
-            ...t,
-            mataKuliah: mk
-        }
-    })
+    return {
+        topik: hasilTopik.map(t => {
+            const mk = mataKuliahData.find(m => m.id === t.mataKuliahId)
+            return {
+                ...t,
+                mataKuliah: mk
+            }
+        }),
+        mataKuliah: mataKuliahCocok
+    }
+}
+
+/**
+ * Saran cepat pencarian — dibangkitkan dari data nyata (Fase 3).
+ * Kandidatnya kode lalu nama mata kuliah (nama diurutkan dari yang
+ * terpendek); hanya istilah yang benar-benar menghasilkan ≥1 hasil yang
+ * dipakai. Dulu daftarnya ditulis tangan dan 6 dari 7 saran dijamin
+ * 0 hasil ("Python", "Jaringan", "AI", "Web Design", "React", "Database").
+ *
+ * @returns {Array<string>} Maksimal 7 istilah yang pasti ada hasilnya
+ */
+export function saranPencarian() {
+    const kode = mataKuliahData.map(mk => mk.kode)
+    const nama = mataKuliahData
+        .map(mk => mk.nama)
+        .sort((a, b) => a.length - b.length)
+    const kandidat = [...new Set([...kode, ...nama])]
+
+    return kandidat
+        .filter(istilah => {
+            const hasil = cariMateri(istilah)
+            return hasil.topik.length + hasil.mataKuliah.length > 0
+        })
+        .slice(0, 7)
 }
 
 /**

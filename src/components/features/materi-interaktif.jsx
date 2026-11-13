@@ -189,15 +189,9 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
                                     </span>
                                 </div>
 
-                                <a
-                                    href={materiAktif.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <Tombol variant="outline" ukuran="small">
-                                        🔗 Buka di Drive
-                                    </Tombol>
-                                </a>
+                                <Tombol variant="outline" ukuran="small" href={materiAktif.url}>
+                                    🔗 Buka di Drive
+                                </Tombol>
                             </div>
 
                             {/* PDF Viewer */}
@@ -212,11 +206,9 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
 
                             {/* Download Bar */}
                             <div className="px-6 py-4 flex justify-center gap-4" style={{ borderTop: '1px solid var(--color-bg-light)' }}>
-                                <a href={materiAktif.url} target="_blank" rel="noopener noreferrer">
-                                    <Tombol variant="primary" ukuran="medium">
-                                        📥 Download File
-                                    </Tombol>
-                                </a>
+                                <Tombol variant="primary" ukuran="medium" href={materiAktif.url}>
+                                    📥 Download File
+                                </Tombol>
                             </div>
                         </div>
                     ) : (
@@ -285,11 +277,9 @@ export default function MateriInteraktif({ topik, matkul, semester, prev, next }
 
                 {/* Back Button */}
                 <div>
-                    <Link href={`/mata-kuliah/${matkul.id}`}>
-                        <Tombol variant="outline" ukuran="medium">
-                            ← Kembali ke {matkul.nama}
-                        </Tombol>
-                    </Link>
+                    <Tombol variant="outline" ukuran="medium" href={`/mata-kuliah/${matkul.id}`}>
+                        ← Kembali ke {matkul.nama}
+                    </Tombol>
                 </div>
             </Kontainer>
         </div>

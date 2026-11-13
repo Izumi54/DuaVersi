@@ -1,6 +1,6 @@
 # Plan Perbaikan DuaVersi
 
-> Status: **BERJALAN — Fase 0 & Fase 1 selesai 12 Nov 2026.** Dokumen ini dibuat 12 Nov 2026 dari hasil analisis
+> Status: **BERJALAN — Fase 0, 1, 2 & 3 selesai 12–13 Nov 2026.** Dokumen ini dibuat 12 Nov 2026 dari hasil analisis
 > (audit kode + `npm run lint` + `npm run build` + tes dev server), supaya urutan perbaikan
 > jelas dulu sebelum ada kode yang diubah.
 > Eksekusi dikerjakan di branch `perbaikan/fase-1-2`; titik kembali: tag `baseline-sebelum-perbaikan` (= `dc7c77a`).
@@ -40,7 +40,7 @@ Plan bisa jalan penuh setelah 4 keputusan ini. Rekomendasi Zuga dicantumkan — 
 |---|---|---|---|
 | D1 | Scope konten v1 | (a) Fokus Semester 1 tuntas, semester lain ditandai "segera hadir" · (b) Kejar 8 semester sekaligus | **(a)** — 8 semester sekaligus mengulang kesalahan yang sama: lebar dulu, isi belakangan |
 | D2 | Semester/matkul kosong ditampilkan bagaimana? | (a) Sembunyikan dari grid · (b) Tampilkan dengan label jujur "Belum tersedia" dan tanpa angka palsu | **(b)** — struktur kurikulum tetap terlihat, tapi tidak menipu |
-| D3 | File materi asli | (a) Google Drive milik Izumi (link share publik) · (b) File di-host sendiri di repo/server | **(a)** untuk v1 — paling cepat membuktikan konsep; migrasi bisa kapan saja karena URL ada di data |
+| D3 | File materi asli | (a) Google Drive milik Izumi (link share publik) · (b) File di-host sendiri di repo/server | ~~(a)~~ **DIPUTUSKAN ULANG 13 Nov 2026 oleh Izumi: (b) versi VM — file materi disimpan di VM Zuga** (`~/workspace/duaversi-materi/`, di luar repo, tidak ikut ke GitHub) dan dilayani lewat situs yang dipublish dari VM yang sama (`duaversi.izumi-dev.my.id`). Penyesuaian URL data & rute penyajian file dikerjakan di Fase 4. |
 | D4 | Target deploy setelah beres | (a) Vercel · (b) VM sendiri (izumi-dev.my.id) · (c) Belum deploy, lokal dulu | **(a)** — Next.js paling minim gesekan di Vercel; VM tetap untuk eksperimen |
 
 ## 4. Fase perbaikan
@@ -71,17 +71,17 @@ Estimasi = sesi kerja fokus, kasar, bukan janji. Urutan fase adalah urutan eksek
 - [x] Samakan prop `Tombol`: satu nama (`ukuran`), perbaiki pemakaian `size=` di homepage & tentang
 - **Selesai bila:** `npm run lint` 0 error · `npm run build` sukses · `/semester/99` dkk balas **404** · toggle dark mode mengubah seluruh halaman secara konsisten · judul tab berbeda per halaman. ✅ Terverifikasi 12 Nov 2026: lint 0 error/0 warning; build sukses (25 rute statis/SSG); server produksi: `/semester/99`, `/mata-kuliah/ngawur`, `/materi/ngawur` → 404, rute valid → 200; judul tab unik per halaman (mis. "CS101 — Pengantar Ilmu Komputer · DuaVersi"); CSS hasil build memakai varian `.dark` class-based + script tema awal ada di HTML. Toggle dark mode divisualkan ulang belum diuji di browser (Playwright belum terpasang) — logika class + CSS-nya terverifikasi. Bonus lebih awal dari Fase 3: logika bookmark sudah disatukan ke hook `useBookmarks`.
 
-### Fase 3 — Fitur inti benar-benar bekerja (P1 · 1 sesi)
-- [ ] Pencarian mencari juga **nama + kode mata kuliah** dan nama semester; hasil dikelompokkan (Topik / Mata Kuliah)
-- [ ] Saran cepat & placeholder pencarian **dibangkitkan dari data nyata** (hanya istilah yang pasti ada hasilnya)
+### Fase 3 — Fitur inti benar-benar bekerja (P1 · 1 sesi) ✅ **SELESAI 13 Nov 2026**
+- [x] Pencarian mencari juga **nama + kode mata kuliah** dan nama semester; hasil dikelompokkan (Topik / Mata Kuliah)
+- [x] Saran cepat & placeholder pencarian **dibangkitkan dari data nyata** (hanya istilah yang pasti ada hasilnya)
 - [x] Logika bookmark disatukan jadi satu hook `useBookmarks` — **sudah dikerjakan lebih awal di Fase 2** (dipakai halaman bookmark & materi)
-- [ ] Hilangkan `<button>` di dalam `<Link>`/`<a>` (materi, bookmark, header, semester) — ganti pola styling link-sebagai-tombol
-- [ ] Tombol hapus bookmark bisa dijangkau keyboard & sentuh (tidak hover-only): selalu terlihat di sentuh, `focus-visible` jelas
-- [ ] Perbaiki dependensi effect di halaman materi (`isTopicCompleted` tidak stabil → effect jalan tiap render)
-- **Selesai bila:** cari "Basis Data" & "Struktur Data" menemukan mata kuliahnya · cari "Python" tidak lagi disarankan bila memang tidak ada · bookmark tambah/hapus konsisten dari halaman mana pun · navigasi keyboard penuh bisa mencapai semua tombol.
+- [x] Hilangkan `<button>` di dalam `<Link>`/`<a>` (materi, bookmark, header, semester) — ganti pola styling link-sebagai-tombol
+- [x] Tombol hapus bookmark bisa dijangkau keyboard & sentuh (tidak hover-only): selalu terlihat di sentuh, `focus-visible` jelas
+- [x] Perbaiki dependensi effect di halaman materi (`isTopicCompleted` tidak stabil → effect jalan tiap render)
+- **Selesai bila:** cari "Basis Data" & "Struktur Data" menemukan mata kuliahnya · cari "Python" tidak lagi disarankan bila memang tidak ada · bookmark tambah/hapus konsisten dari halaman mana pun · navigasi keyboard penuh bisa mencapai semua tombol. ✅ Terverifikasi 13 Nov 2026: `npm run uji-pencarian` (baru, `scripts/uji-pencarian.mjs`, mengimpor fungsi asli `src/lib/data.js`) **11/11 lulus** — "Basis Data"→CS103 (0 topik, jujur), "Struktur Data"→CS102, "CS101"→matkul + 12 topik, "Semester 1"→5 matkul, "Python"→0 hasil & tidak disarankan; saran = 7 istilah (CS101, MAT101, ENG101, CS102, CS103, Kalkulus I, Basis Data), placeholder ikut dari data ("Coba cari 'CS101', 'MAT101', atau 'ENG101'..."). `npm run lint` 0 error, `npm run build` sukses (32 rute), `npm run validasi-data` LULUS; server produksi: rute valid → 200, `/semester/99` dkk → 404. **Catatan implementasi:** pola `<button>` di dalam `<Link>` ternyata ada di lebih banyak tempat dari plan (hero + CTA homepage, halaman Tentang, not-found materi, tombol kembali matkul) — semua diperbaiki dengan `Tombol href` baru (merender Link/`<a>` bergaya tombol; link eksternal target `_blank` + `rel` aman) atau Link bergaya tombol langsung. Kartu bookmark direstruktur: tombol hapus jadi saudara Link (bukan anaknya), selalu terlihat di layar kecil + `focus-visible`, `aria-label` per topik. **Sub-item effect materi sudah beres di Fase 2** (tidak ada `useEffect` di `materi-interaktif.jsx`; `isCompleted` diturunkan langsung dari `completedTopics.includes`) — jadi tidak ada yang diubah untuk itu, hanya dicatat di sini. **Belum di-push:** commit lokal di branch `perbaikan/fase-1-2`; push ke GitHub menunggu jaringan/connector (fetch gagal saat pengerjaan, egress background dibatasi).
 
 ### Fase 4 — Konten nyata (P1 · berjalan paralel, milik Izumi + Zuga membantu)
-- [ ] **CS101 tuntas dulu:** 12 topik × 2 versi = 24 file asli di Drive (keputusan D3), URL + ukuran + jumlah halaman diisi dari file sebenarnya
+- [ ] **CS101 tuntas dulu:** 12 topik × 2 versi = 24 file asli disimpan di VM (keputusan D3 versi 13 Nov 2026: `~/workspace/duaversi-materi/`, bukan Drive), URL data diarahkan ke penyajian dari situs sendiri + ukuran + jumlah halaman diisi dari file sebenarnya
 - [ ] Checklist per file: link bisa dibuka tanpa login, preview tampil di iframe, download jalan
 - [ ] Baru setelah CS101 100%: matkul Semester 1 berikutnya, satu per satu — bukan langsung semester lain
 - **Selesai bila (tonggak v1):** seorang mahasiswa bisa membuka CS101, membaca versi simplified, mengunduh versi original — semua dari file asli.

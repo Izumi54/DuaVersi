@@ -167,12 +167,10 @@ export default async function SemesterDetailPage({ params }) {
                     )}
                 </div>
 
-                {/* Back Button */}
+                {/* Back Button (Fase 3: Link bergaya tombol, tanpa <button> di dalam) */}
                 <div className="mt-16 text-center">
-                    <Link href="/">
-                        <button className="px-8 py-3 rounded-full font-medium text-gray-500 hover:text-indigo-600 hover:bg-white/50 transition-all border border-transparent hover:border-indigo-100">
-                            ← Kembali ke Beranda
-                        </button>
+                    <Link href="/" className="inline-block px-8 py-3 rounded-full font-medium text-gray-500 hover:text-indigo-600 hover:bg-white/50 transition-all border border-transparent hover:border-indigo-100">
+                        ← Kembali ke Beranda
                     </Link>
                 </div>
             </Kontainer>

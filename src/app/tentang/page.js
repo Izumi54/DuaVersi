@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
-import Link from 'next/link'
 import Kontainer from '@/components/layout/kontainer'
 import Tombol from '@/components/ui/tombol'
 
@@ -334,11 +333,9 @@ export default function TentangPage() {
                 <Kontainer>
                     <h2 className="text-3xl font-bold mb-8 text-gray-800">Siap untuk mulai?</h2>
                     <div className="flex justify-center gap-4">
-                        <Link href="/">
-                            <Tombol variant="primary" ukuran="large" className="px-8 py-4 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
-                                Mulai Belajar Sekarang
-                            </Tombol>
-                        </Link>
+                        <Tombol variant="primary" ukuran="large" href="/" className="px-8 py-4 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+                            Mulai Belajar Sekarang
+                        </Tombol>
                     </div>
                 </Kontainer>
             </section>

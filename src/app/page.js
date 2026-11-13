@@ -121,16 +121,12 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/semester/1">
-                <Tombol variant="primary" ukuran="large" className="w-full sm:w-auto px-8 py-4 text-lg shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all">
-                  Mulai Belajar 🚀
-                </Tombol>
-              </Link>
-              <Link href="/tentang">
-                <Tombol variant="outline" ukuran="large" className="w-full sm:w-auto px-8 py-4 text-lg hover:bg-white/50">
-                  Pelajari Konsep
-                </Tombol>
-              </Link>
+              <Tombol variant="primary" ukuran="large" href="/semester/1" className="w-full sm:w-auto px-8 py-4 text-lg shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all">
+                Mulai Belajar 🚀
+              </Tombol>
+              <Tombol variant="outline" ukuran="large" href="/tentang" className="w-full sm:w-auto px-8 py-4 text-lg hover:bg-white/50">
+                Pelajari Konsep
+              </Tombol>
             </div>
           </div>
         </Kontainer>
@@ -340,13 +336,11 @@ export default function HomePage() {
                 Gabung sekarang dan nikmati cara belajar yang belum pernah kamu rasakan sebelumnya di bangku kuliah.
               </p>
 
-              <Link href="/cari">
-                <button className="group relative px-10 py-5 rounded-full bg-white text-indigo-900 font-bold text-xl shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-10px_rgba(255,255,255,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden">
-                  <span className="relative z-10 flex items-center gap-3">
-                    Mulai Belajar Gratis
-                    <span className="group-hover:translate-x-1 transition-transform">🚀</span>
-                  </span>
-                </button>
+              <Link href="/cari" className="group relative inline-block px-10 py-5 rounded-full bg-white text-indigo-900 font-bold text-xl shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-10px_rgba(255,255,255,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden">
+                <span className="relative z-10 flex items-center gap-3">
+                  Mulai Belajar Gratis
+                  <span className="group-hover:translate-x-1 transition-transform">🚀</span>
+                </span>
               </Link>
             </div>
           </div>

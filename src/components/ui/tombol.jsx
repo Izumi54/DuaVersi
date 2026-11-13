@@ -1,8 +1,14 @@
+import Link from 'next/link'
 import clsx from 'clsx'
 
 /**
  * Component: Tombol (Button)
  * Reusable button - Modern & Professional
+ *
+ * Sejak Fase 3: bila diberi `href`, Tombol merender sebagai link (<a> /
+ * Next Link) dengan gaya yang sama — supaya tidak ada lagi <button> di
+ * dalam <Link>/<a> (HTML tidak valid + keyboard reader bingung).
+ * Link eksternal (http...) dibuka di tab baru dengan rel aman.
  */
 export default function Tombol({
     children,
@@ -11,6 +17,9 @@ export default function Tombol({
     onClick,
     disabled = false,
     type = 'button',
+    href,
+    target,
+    rel,
     className = ''
 }) {
     const kelasBase = 'font-medium rounded-md transition-all duration-200 inline-flex items-center justify-center'
@@ -41,19 +50,44 @@ export default function Tombol({
         ghost: { color: 'var(--color-text-primary)' }
     }
 
+    const kelas = clsx(
+        kelasBase,
+        kelasVariant[variant],
+        kelasUkuran[ukuran],
+        kelasDisabled,
+        className
+    )
+    const gaya = styleVariant[variant]
+
+    // Link-sebagai-tombol (Fase 3): tanpa <button> bersarang di <a>/<Link>.
+    if (href) {
+        if (href.startsWith('http')) {
+            return (
+                <a
+                    href={href}
+                    target={target || '_blank'}
+                    rel={rel || 'noopener noreferrer'}
+                    className={kelas}
+                    style={gaya}
+                >
+                    {children}
+                </a>
+            )
+        }
+        return (
+            <Link href={href} className={kelas} style={gaya}>
+                {children}
+            </Link>
+        )
+    }
+
     return (
         <button
             type={type}
             onClick={disabled ? undefined : onClick}
             disabled={disabled}
-            className={clsx(
-                kelasBase,
-                kelasVariant[variant],
-                kelasUkuran[ukuran],
-                kelasDisabled,
-                className
-            )}
-            style={styleVariant[variant]}
+            className={kelas}
+            style={gaya}
         >
             {children}
         </button>

@@ -95,17 +95,16 @@ export default function Header() {
                                 )}
                             </button>
 
-                            {/* CTA Button - Dark mode aware */}
-                            <Link href="/cari">
-                                <button
-                                    className="px-6 py-2.5 rounded-full font-medium text-sm transition-all hover:opacity-90"
-                                    style={{
-                                        backgroundColor: isDark ? '#FFFFFF' : '#111827',
-                                        color: isDark ? '#111827' : '#FFFFFF'
-                                    }}
-                                >
-                                    Cari Materi
-                                </button>
+                            {/* CTA Button - Dark mode aware (Fase 3: Link bergaya tombol, tanpa <button> di dalam) */}
+                            <Link
+                                href="/cari"
+                                className="px-6 py-2.5 rounded-full font-medium text-sm transition-all hover:opacity-90"
+                                style={{
+                                    backgroundColor: isDark ? '#FFFFFF' : '#111827',
+                                    color: isDark ? '#111827' : '#FFFFFF'
+                                }}
+                            >
+                                Cari Materi
                             </Link>
                         </div>
 

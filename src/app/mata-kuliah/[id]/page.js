@@ -186,10 +186,8 @@ export default async function MataKuliahDetailPage({ params }) {
                 </div>
 
                 <div className="mt-20 text-center">
-                    <Link href={`/semester/${semester.nomor}`}>
-                        <button className="px-8 py-3 rounded-full font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-indigo-100 dark:hover:border-indigo-800">
-                            ← Kembali ke Semester {semester.nomor}
-                        </button>
+                    <Link href={`/semester/${semester.nomor}`} className="inline-block px-8 py-3 rounded-full font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-indigo-100 dark:hover:border-indigo-800">
+                        ← Kembali ke Semester {semester.nomor}
                     </Link>
                 </div>
 
